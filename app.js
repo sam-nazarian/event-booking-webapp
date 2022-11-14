@@ -12,8 +12,8 @@ const hpp = require('hpp');
 const compression = require('compression');
 
 const AppError = require('./utils/appError');
-
-
+const globalErrorHandler = require('./controllers/errorController');
+// const eventsRouter = require('./routs/eventRoutes');
 
 // proxies redirect & modify incoming requests
 app.enable('trust proxy'); // trusts heroku which acts as a proxy
