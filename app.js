@@ -14,6 +14,7 @@ const compression = require('compression');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const eventsRouter = require('./routs/eventRoutes');
+const participantsRouter = require('./routs/participantRoutes');
 
 // proxies redirect & modify incoming requests
 app.enable('trust proxy'); // trusts heroku which acts as a proxy
@@ -71,10 +72,10 @@ app.use(
 app.use(compression());
 
 app.use('/api/v1/events', eventsRouter);
+app.use('/api/v1/participants', participantsRouter);
 
 /*
 app.use('/', viewRouter); //this middleware only happens in this url, (we call this mounting)
-app.use('/api/v1/participants', userRouter);
 */
 
 app.all('*', (req, res, next) => {

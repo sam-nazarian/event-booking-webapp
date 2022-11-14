@@ -32,6 +32,7 @@ const participantSchema = new mongoose.Schema(
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
     id: false, //stops getting 2 different ids, with names: 'id' & '_id'
+    versionKey: false, //hides __v from events
   }
 );
 
