@@ -70,7 +70,9 @@ const eventSchema = new mongoose.Schema(
   }
 );
 
-//Virtual Populate, creates participants[] on eventSchema
+/**
+ * Virtual Populate, creates participants[] on eventSchema
+ */
 eventSchema.virtual('participants', {
   //_id in localField is called event in participants model
   localField: '_id',

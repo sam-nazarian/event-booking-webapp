@@ -1,6 +1,7 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const Event = require('../models/eventModel'); //Event is a Collection/model
+const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 /**
@@ -30,7 +31,7 @@ exports.uploadEventImages = upload.single('image');
 /**
  * Resize Images, save them to the img folder. Add name of image to req.body.
  */
-exports.resizeEventImages = async (req, res, next) => {
+exports.resizeEventImages = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   //On database the image field is called imageCover
@@ -38,8 +39,10 @@ exports.resizeEventImages = async (req, res, next) => {
   await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
 
   next();
-};
+});
 
 // EVENT ROUTE HANDLERS:
-// exports.getEvent = ; //poopulate participants
-// exports.createEvent = ;
+
+//remember to populate participants
+exports.getEvent = catchAsync(async (req, res, next) => {});
+exports.createEvent = catchAsync(async (req, res, next) => {});
