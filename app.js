@@ -11,6 +11,8 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
 
+const AppError = require('./utils/appError');
+
 
 
 // proxies redirect & modify incoming requests
@@ -72,9 +74,7 @@ app.use(compression());
 
 /*
 app.use('/', viewRouter); //this middleware only happens in this url, (we call this mounting)
-
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/bookings', bookingRouter);
+app.use('/api/v1/participants', userRouter);
 */
 
 app.all('*', (req, res, next) => {
