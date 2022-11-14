@@ -24,9 +24,23 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
 /**
  * For single uploads, Stores images in req.file
- * name of field in html that will hold the file is coverImage & will be only having a single photo
+ * name of field in html that will hold the file is imageCover & will be only having a single photo
  */
-exports.uploadEventImages = upload.single('image');
+exports.uploadEventImages = upload.single('imageCover');
+
+/**
+ * Makes a random string with the given length
+ * @param {number} length the length, random string should be
+ * @returns random string with the given length
+ */
+function randomString(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
 
 /**
  * Resize Images, save them to the img folder. Add name of image to req.body.
@@ -35,7 +49,7 @@ exports.resizeEventImages = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   //On database the image field is called imageCover
-  req.body.imageCover = `event-${req.user.id}-${Date.now()}-cover.jpeg`;
+  req.body.imageCover = `event-${req?.userId || randomString(9)}-${Date.now()}-cover.jpeg`;
   await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
 
   next();
@@ -43,6 +57,36 @@ exports.resizeEventImages = catchAsync(async (req, res, next) => {
 
 // EVENT ROUTE HANDLERS:
 
-//remember to populate participants
-exports.getEvent = catchAsync(async (req, res, next) => {});
-exports.createEvent = catchAsync(async (req, res, next) => {});
+/**
+ * Creates an event based on req.body info in mongoDB database
+ */
+exports.createEvent = catchAsync(async (req, res, next) => {
+  //create automatically saves the document
+  const doc = await Event.create(req.body);
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      data: doc,
+    },
+  });
+});
+
+/**
+ * Displays an event based on the id in the parameter in mongoDB database
+ */
+exports.getEvent = catchAsync(async (req, res, next) => {
+  //find document with the id in event collection
+  const doc = await Event.findById(req.params.id); //.populate('participants');
+
+  if (!doc) {
+    return next(new AppError('No Event found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: doc,
+    },
+  });
+});

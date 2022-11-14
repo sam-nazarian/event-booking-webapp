@@ -35,7 +35,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
     },
     startDate: {
-      type: Date,
+      type: Date, // dd//mm/yyyy
       required: [true, 'An event must have a start date!'],
     },
     startTime: {
@@ -47,6 +47,7 @@ const eventSchema = new mongoose.Schema(
       required: [true, 'An event must have an end time!'],
     },
     // GeoJSON - must have type and coordinates - https://mongoosejs.com/docs/geojson.html
+    /*
     location: {
       type: {
         type: String,
@@ -62,23 +63,27 @@ const eventSchema = new mongoose.Schema(
         required: [true, 'An address is required!'],
       },
     },
+    */
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-    // id: false //stops getting 2 different ids, with names: 'id' & '_id'
+    id: false, //hides id, stops getting 2 different ids, with names: 'id' & '_id'
+    versionKey: false, //hides __v from events
   }
 );
 
 /**
  * Virtual Populate, creates participants[] on eventSchema
  */
+/*
 eventSchema.virtual('participants', {
   //_id in localField is called event in participants model
   localField: '_id',
   ref: 'Participant',
   foreignField: 'event',
 });
+*/
 
 const Event = mongoose.model('Event', eventSchema); //creates the collection
 module.exports = Event;
