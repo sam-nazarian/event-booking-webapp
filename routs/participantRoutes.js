@@ -2,6 +2,6 @@ const express = require('express');
 const participantController = require('../controllers/participantController');
 
 const router = express.Router();
-router.route('/:id').post(participantController.participant);
+router.route('/:id').post(participantController.createParticipant);
 
 module.exports = router;

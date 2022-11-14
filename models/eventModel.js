@@ -35,7 +35,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
     },
     startDate: {
-      type: Date, // dd//mm/yyyy
+      type: Date, // yyyy/mm/dd
       required: [true, 'An event must have a start date!'],
     },
     startTime: {
@@ -76,14 +76,12 @@ const eventSchema = new mongoose.Schema(
 /**
  * Virtual Populate, creates participants[] on eventSchema
  */
-/*
 eventSchema.virtual('participants', {
   //_id in localField is called event in participants model
   localField: '_id',
   ref: 'Participant',
-  foreignField: 'event',
+  foreignField: 'eventId',
 });
-*/
 
 const Event = mongoose.model('Event', eventSchema); //creates the collection
 module.exports = Event;

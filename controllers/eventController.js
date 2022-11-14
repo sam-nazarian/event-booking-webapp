@@ -77,7 +77,7 @@ exports.createEvent = catchAsync(async (req, res, next) => {
  */
 exports.getEvent = catchAsync(async (req, res, next) => {
   //find document with the id in event collection
-  const doc = await Event.findById(req.params.id); //.populate('participants');
+  const doc = await Event.findById(req.params.id).populate('participants');
 
   if (!doc) {
     return next(new AppError('No Event found with that ID', 404));
