@@ -78,6 +78,13 @@
     }
   }
 
+  &__required {
+    color: var(--color-error-primary);
+    margin-left: 0.5rem;
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
   input[type='date']::-webkit-calendar-picker-indicator {
     filter: invert(100%);
     // filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);

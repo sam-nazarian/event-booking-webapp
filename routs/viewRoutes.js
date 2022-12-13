@@ -8,7 +8,7 @@ router.use(authController.isLoggedIn); //adds userId to req
 
 //no base route, base is only being extended
 router.get('/', viewsController.getHomepage);
-router.get('/:id', viewsController.getEvent);
-router.get('/create', viewsController.createEvent); //authController.protect,
+router.get('/create-event', viewsController.createEvent); //authController.protect,
+router.get('/get-event/:id', viewsController.getEvent);
 
 module.exports = router;

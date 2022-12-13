@@ -1,0 +1,43 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Create Event
+  link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
+  link(rel='stylesheet' href='/css/style.css')
+.image-cover
+  svg.image-cover__icon
+    use(xlink:href='/img/sprite.svg#drop-file')
+  p.image-cover__description
+    | Select image cover from computer
+form.form.form-create-event
+  .form__group
+    label.form__label(for='title')
+      | Title
+      span.form__required *
+    input#title.form__input(type='text' placeholder='What are you planning?' name='title' required='')
+  .form__group
+    label.form__label(for='date')
+      | Date
+      span.form__required *
+    input#date.form__input(type='date' placeholder='When does it start?' name='date' required='')
+  .form__start-end-time
+    .form__group
+      label.form__label(for='start-time')
+        | Start Time
+        span.form__required *
+      input#start-time.form__input(type='time' name='start-time' required='')
+    .form__dash
+    .form__group
+      label.form__label(for='end-time')
+        | End Time
+        span.form__required *
+      input#end-time.form__input(type='time' name='end-time' required='')
+  .form__group.u-margin-bottom-medium
+    label.form__label(for='description') Description
+    textarea#description.form__textarea(name='description' placeholder='Describe what you are planning...' spellcheck='false')
+  .btn-wrapper.u-margin-bottom-small
+    button.btn.btn--large Create Event!
+script(src='/js/bundled/index.js')
+
