@@ -1,0 +1,17 @@
+.btn {
+  border: none;
+  cursor: pointer;
+
+  &--large {
+    width: 100%;
+    padding: 0.8rem 0;
+    background: transparent;
+    text-align: center;
+    z-index: 10;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 6.4rem;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 25%);
+    color: var(--color-text-primary);
+  }
+}

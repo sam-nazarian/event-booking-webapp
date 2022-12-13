@@ -1,0 +1,92 @@
+.form {
+  background-color: var(--color-primary);
+
+  &__group {
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  &__label {
+    display: block;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  &__input {
+    width: calc(100% - 3rem); //remove from right to offset left-padding
+    padding: 0 1.5rem 1rem 0;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: var(--color-text-primary);
+    background-color: transparent;
+    border: none;
+    box-shadow: 0 1px 0 var(--color-secondary);
+    transition: all 0.05s ease-in-out;
+    appearance: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 3px 0 var(--color-secondary); //make shadow darker
+    }
+
+    &::placeholder {
+      color: inherit;
+      opacity: 0.25;
+    }
+  }
+
+  &__start-end-time {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    align-items: center;
+  }
+
+  &__dash {
+    height: 1px;
+    width: 2rem;
+    background-color: var(--color-secondary);
+  }
+
+  &__textarea {
+    width: calc(100% - 3rem); //remove from right to offset left-padding
+    height: 15rem;
+    // padding: 0 1.5rem 1rem 1.5rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: var(--color-text-primary);
+    background-color: transparent;
+    border: none;
+    box-shadow: 0 1px 0 var(--color-secondary);
+    transition: all 0.05s ease-in-out;
+    appearance: none;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 3px 0 var(--color-secondary); //make shadow darker
+    }
+
+    &::placeholder {
+      color: inherit;
+      opacity: 0.25;
+    }
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
+    // filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);
+    // filter: contrast(0);
+    // border-radius: 4px;
+    // background-color: var(--color-secondary);
+  }
+
+  input[type='time']::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
+  }
+}

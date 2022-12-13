@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+
+  <link rel="stylesheet" href="/templates/css/style.css">
+</head>
+
+<body>
+
+  <div class="image-cover">
+    <svg class="image-cover__icon">
+      <use xlink:href="/public/img/sprite.svg#drop-file"></use>
+    </svg>
+
+    <p class="image-cover__description">
+      Select image cover from computer
+    </p>
+  </div>
+
+  <form class="form">
+
+    <div class="form__group">
+      <label for="title" class="form__label">Title</label>
+      <input type="text" id="title" class="form__input" placeholder="What are you planning?" name="title" required>
+    </div>
+
+    <div class="form__group">
+      <label for="date" class="form__label">Date</label>
+      <input type="date" id="date" class="form__input" placeholder="When does it start?" name="date" required>
+    </div>
+
+    <div class="form__start-end-time">
+      <div class="form__group">
+        <label for="start-time" class="form__label">Start Time</label>
+        <input type="time" id="start-time" class="form__input" name="start-time" required>
+      </div>
+
+      <div class="form__dash"></div>
+
+      <div class="form__group">
+        <label for="end-time" class="form__label">End Time</label>
+        <input type="time" id="end-time" class="form__input" name="end-time" required>
+      </div>
+    </div>
+
+    <div class="form__group u-margin-bottom-medium">
+      <label for="description" class="form__label">Description</label>
+      <textarea name="description" id="description" class="form__textarea"
+        placeholder="Describe what you are planning..." spellcheck="false"></textarea>
+    </div>
+
+    <div class="btn-wrapper u-margin-bottom-small">
+      <button class="btn btn--large">Create Event!</button>
+    </div>
+
+  </form>
+
+</body>
+
+</html>

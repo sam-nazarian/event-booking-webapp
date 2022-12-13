@@ -1,0 +1,29 @@
+// global definitions / settings
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  /* force inheritence on box-sizing for all elms */
+  box-sizing: inherit;
+}
+
+html {
+  /* 10/16=62.5% */
+  /* .625*16=10 */
+  // defines what 1rem is (1rem = 10px)
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+// selection Pseudo element
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}

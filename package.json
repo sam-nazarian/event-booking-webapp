@@ -4,7 +4,8 @@
   "description": "A web app in which a user can book events or post new events.",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon server.js",
+    "watch:server": "NODE_ENV=development nodemon server.js",
+    "watch:sass" : "sass templates/sass/main.scss templates/css/style.css -w",
     "start:prod": "NODE_ENV=production nodemon server.js"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "multer": "^1.4.5-lts.1",
     "path": "^0.12.7",
     "pug": "^3.0.2",
+    "sass": "^1.56.2",
     "sharp": "^0.31.2",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
