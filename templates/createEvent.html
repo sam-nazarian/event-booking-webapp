@@ -14,6 +14,15 @@
 
 <body>
 
+  <!-- NOTE: -->
+  <!-- the comments that start with class="" mean that another class could be added or removed to the elemet below it. -->
+  <!-- forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active"> -->
+
+  <!-- class="err--active" -->
+  <div class="err">
+    <p class="err__message">A custom err message</p>
+  </div>
+
   <div class="image-cover">
     <svg class="image-cover__icon">
       <use xlink:href="/public/img/sprite.svg#drop-file"></use>
@@ -22,9 +31,13 @@
     <p class="image-cover__description">
       Select image cover from computer
     </p>
+
   </div>
 
   <form class="form form-create-event">
+
+    <input class="form__upload" type="file" accept="image/*" id="photo" name="photo" />
+    <label for="photo">Choose new photo</label>
 
     <div class="form__group">
       <label for="title" class="form__label">Title<span class="form__required">*</span></label>

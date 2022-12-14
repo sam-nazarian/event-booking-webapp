@@ -6,6 +6,12 @@ head
   title Create Event
   link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
   link(rel='stylesheet' href='/css/style.css')
+// NOTE:
+// the comments that start with class="" mean that another class could be added or removed to the elemet below it.
+// forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
+// class="err--active"
+.err
+  p.err__message A custom err message
 .image-cover
   svg.image-cover__icon
     use(xlink:href='/img/sprite.svg#drop-file')
@@ -40,4 +46,3 @@ form.form.form-create-event
   .btn-wrapper.u-margin-bottom-small
     button.btn.btn--large Create Event!
 script(src='/js/bundled/index.js')
-
