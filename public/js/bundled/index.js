@@ -143,24 +143,28 @@
     }
   }
 })({"f2QDv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _alerts = require("./alerts");
 var _createEvent = require("./createEvent");
 var _updateImageCover = require("./updateImageCover");
-var _updateImageCoverDefault = parcelHelpers.interopDefault(_updateImageCover);
 // DOM ELEMENTS
 const formCreateEventEl = document.querySelector("#form-create-event");
-formCreateEventEl.addEventListener("submit", (e)=>{
+const imageCoverUploadEl = document.querySelector("#upload-image-cover");
+if (imageCoverUploadEl) (0, _updateImageCover.previewImage)();
+if (formCreateEventEl) formCreateEventEl.addEventListener("submit", (e)=>{
     e.preventDefault();
+    //recreating multi-part form data
+    const form = new FormData();
+    form.append("imageCover", document.getElementById("upload-image-cover").files[0]);
+    form.append("name", document.getElementById("name").value);
+    form.append("date", document.getElementById("date").value);
+    form.append("startTime", document.getElementById("start-time").value);
+    form.append("endTime", document.getElementById("end-time").value);
+    form.append("description", document.getElementById("description").value);
     // showError('You need to fill everything');
-    console.log("thanks for submitting the event!");
-}); /*
-const imageCoverUploadEl = document.querySelector('#upload-image-cover');
-if (imageCoverUploadEl) {
-}
-*/ 
+    (0, _createEvent.createEvent)(form);
+});
 
-},{"./alerts":"6Mcnf","./createEvent":"gmnSz","./updateImageCover":"lUYKE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Mcnf":[function(require,module,exports) {
+},{"./alerts":"6Mcnf","./createEvent":"gmnSz","./updateImageCover":"lUYKE"}],"6Mcnf":[function(require,module,exports) {
 // Import DOM
 // Error Messages Elms
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -179,7 +183,7 @@ function showError(text) {
     errContainerDom.classList.add("err--active");
     errTimeout = window.setTimeout(()=>{
         errContainerDom.classList.remove("err--active");
-    }, 2000);
+    }, 7000);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
@@ -219,26 +223,21 @@ parcelHelpers.export(exports, "createEvent", ()=>createEvent);
 var _alerts = require("./alerts");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const createEvent = async function(data, type) {
+const createEvent = async function(data) {
     try {
         const res = await (0, _axiosDefault.default)({
             method: "POST",
-            url: "api/v1/events",
+            url: "http://127.0.0.1:8000/api/v1/events",
             data
         });
-    // if (res.data.status === 'success') location.assign('/my-event');
+        console.log(`res`, res);
+    // console.log(res.data.data.data._id);
+    // if (res.data.status === 'success') location.assign(`/my-event/${res.data.data.data._id}`);
     } catch (err) {
-        (0, _alerts.showAlert)("error", err.response.data.message); //accessing message property from server
+        console.log(`ERROR 💥`, err);
+        (0, _alerts.showError)(err.response.data.message); //accessing message property from server
     }
-}; /*
-//res has an object called data, all data's from api are hold there
-if (res.data.status === 'success') {
-  showAlert('success', `${type.toUpperCase()} updated successfully!`);
-
-  // no need to reload as user already changed value to updated value
-  // location.assign('/me');
-}
-*/ 
+};
 
 },{"./alerts":"6Mcnf","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4251,36 +4250,42 @@ function isAxiosError(payload) {
 exports.default = isAxiosError;
 
 },{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUYKE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "previewImage", ()=>previewImage);
 const imageCoverUploadEl = document.querySelector("#upload-image-cover");
 const imageCoverEl = document.querySelector("#image-cover");
 const imageCoverOptionsUploadEl = document.querySelector(".image-cover__options-upload");
 const btnOptionsDeleteImageEl = document.querySelector(".btn__options-delete-image");
 const labelUploadImageCover = document.querySelector("#label-upload-image-cover");
-imageCoverUploadEl.addEventListener("change", function() {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        // Read file once reader has finished loading
-        reader.addEventListener("load", function() {
-            imageCoverOptionsUploadEl.classList.add("u-display-hide");
-            btnOptionsDeleteImageEl.classList.remove("u-display-hide");
-            labelUploadImageCover.setAttribute("for", "");
-            imageCoverEl.classList.add("u-cursor-none");
-            imageCoverEl.style.backgroundImage = `linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url(${this.result}`;
-        });
-    }
-});
-btnOptionsDeleteImageEl.addEventListener("click", function(e) {
-    labelUploadImageCover.setAttribute("for", "upload-image-cover");
-    imageCoverEl.style.backgroundImage = ``;
-    btnOptionsDeleteImageEl.classList.add("u-display-hide");
-    imageCoverOptionsUploadEl.classList.remove("u-display-hide");
-    imageCoverEl.classList.remove("u-cursor-none");
-    // reset the input field so if you removed it you can re-add the same file
-    imageCoverUploadEl.value = "";
-});
+function previewImage() {
+    imageCoverUploadEl.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            // Read file once reader has finished loading
+            reader.addEventListener("load", function() {
+                imageCoverOptionsUploadEl.classList.add("u-display-hide");
+                btnOptionsDeleteImageEl.classList.remove("u-display-hide");
+                labelUploadImageCover.setAttribute("for", "");
+                imageCoverEl.classList.add("u-cursor-none");
+                imageCoverEl.style.backgroundImage = `linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url(${this.result}`;
+            });
+        }
+    });
+    btnOptionsDeleteImageEl.addEventListener("click", function(e) {
+        e.preventDefault();
+        labelUploadImageCover.setAttribute("for", "upload-image-cover");
+        imageCoverEl.style.backgroundImage = ``;
+        btnOptionsDeleteImageEl.classList.add("u-display-hide");
+        imageCoverOptionsUploadEl.classList.remove("u-display-hide");
+        imageCoverEl.classList.remove("u-cursor-none");
+        // reset the input field so if you removed it you can re-add the same file
+        imageCoverUploadEl.value = "";
+    });
+}
 
-},{}]},["f2QDv"], "f2QDv", "parcelRequire1761")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
 
 //# sourceMappingURL=index.js.map

@@ -24,17 +24,17 @@ const eventSchema = new mongoose.Schema(
     },
     organiser: {
       type: String,
-      required: [true, 'An event must have an organiser!'],
+      // required: [true, 'An event must have an organiser!'],
     },
     description: {
       type: String,
       trim: true,
-      required: [true, 'An event must have a description!'],
+      // required: [true, 'An event must have a description!'],
     },
     imageCover: {
       type: String,
     },
-    startDate: {
+    date: {
       type: Date, // yyyy/mm/dd
       required: [true, 'An event must have a start date!'],
     },

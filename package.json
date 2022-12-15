@@ -4,6 +4,7 @@
   "description": "A web app in which a user can book events or post new events.",
   "main": "server.js",
   "scripts": {
+    "watch:all": "npm-run-all --parallel watch:server watch:sass watch:js",
     "watch:server": "NODE_ENV=development nodemon server.js",
     "watch:sass": "sass templates/sass/main.scss public/css/style.css -w",
     "watch:js": "parcel serve ./public/js/index.js --dist-dir ./public/js/bundled --no-hmr",
@@ -43,6 +44,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.27.0"
+    "eslint": "^8.27.0",
+    "npm-run-all": "^4.1.5"
   }
 }

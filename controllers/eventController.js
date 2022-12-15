@@ -50,6 +50,7 @@ exports.createEvent = catchAsync(async (req, res, next) => {
   //create automatically saves the document
   const doc = await Event.create(req.body);
 
+  //TODO CHANGE THIS LATER
   res.status(201).json({
     status: 'success',
     data: {

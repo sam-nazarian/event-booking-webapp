@@ -1,27 +1,21 @@
-import { showAlert } from './alerts';
+import { showError } from './alerts';
 import axios from 'axios';
 
 // type is either 'password' or 'data'
-export const createEvent = async function (data, type) {
+export const createEvent = async function (data) {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'api/v1/events',
+      url: 'http://127.0.0.1:8000/api/v1/events', // ON PRODCUTION CHANGE TO api/v1/events
       data,
     });
 
-    // if (res.data.status === 'success') location.assign('/my-event');
+    console.log(`res`, res);
+    // console.log(res.data.data.data._id);
+
+    // if (res.data.status === 'success') location.assign(`/my-event/${res.data.data.data._id}`);
   } catch (err) {
-    showAlert('error', err.response.data.message); //accessing message property from server
+    console.log(`ERROR 💥`, err);
+    showError(err.response.data.message); //accessing message property from server
   }
 };
-
-/*
-//res has an object called data, all data's from api are hold there
-if (res.data.status === 'success') {
-  showAlert('success', `${type.toUpperCase()} updated successfully!`);
-
-  // no need to reload as user already changed value to updated value
-  // location.assign('/me');
-}
-*/

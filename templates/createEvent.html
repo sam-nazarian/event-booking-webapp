@@ -50,33 +50,35 @@
     </label>
 
     <div class="form__group">
-      <label for="title" class="form__label">Title<span class="form__required">*</span></label>
-      <input type="text" id="title" class="form__input" placeholder="What are you planning?" name="title" required>
+      <label for="name" class="form__label">Event Name<span class="form__required">*</span></label>
+      <input type="text" id="name" class="form__input" placeholder="What are you planning?" name="name"
+        autocomplete="off" required>
     </div>
 
     <div class="form__group">
-      <label for="date" class="form__label">Date<span class="form__required">*</span></label>
-      <input type="date" id="date" class="form__input" placeholder="When does it start?" name="date" required>
+      <label for="date" class="form__label">Start Date<span class="form__required">*</span></label>
+      <input type="date" id="date" class="form__input" placeholder="When does it start?" name="date" autocomplete="off"
+        required>
     </div>
 
     <div class="form__start-end-time">
       <div class="form__group">
         <label for="start-time" class="form__label">Start Time<span class="form__required">*</span></label>
-        <input type="time" id="start-time" class="form__input" name="start-time" required>
+        <input type="time" id="start-time" class="form__input" name="start-time" autocomplete="off" required>
       </div>
 
       <div class="form__dash"></div>
 
       <div class="form__group">
         <label for="end-time" class="form__label">End Time<span class="form__required">*</span></label>
-        <input type="time" id="end-time" class="form__input" name="end-time" required>
+        <input type="time" id="end-time" class="form__input" name="end-time" autocomplete="off" required>
       </div>
     </div>
 
     <div class="form__group u-margin-bottom-medium">
       <label for="description" class="form__label">Description</label>
       <textarea name="description" id="description" class="form__textarea"
-        placeholder="Describe what you are planning..." spellcheck="false"></textarea>
+        placeholder="Provide more information about your event..." spellcheck="false" autocomplete="off"></textarea>
     </div>
 
     <div class="btn-wrapper u-margin-bottom-small">

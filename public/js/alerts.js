@@ -17,5 +17,5 @@ export function showError(text) {
 
   errTimeout = window.setTimeout(() => {
     errContainerDom.classList.remove('err--active');
-  }, 2000);
+  }, 7000);
 }
