@@ -1,20 +1,40 @@
 .image-cover {
+  position: relative;
   background-image: linear-gradient(130.02deg, #0476d0 12.41%, #047dd9 88.27%);
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-  padding: 8rem;
   cursor: pointer;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 40vh;
   margin-bottom: 3rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  &__icon {
+  &__options-upload {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:hover &__options-upload &__upload-icon {
+    transform: scale(1.03);
+  }
+
+  // &:active &__options-upload &__upload-icon {
+  //   transform: scale(0.9);
+  // }
+
+  &__upload-icon {
     height: 8rem;
     width: 8rem;
     margin-bottom: 2rem;
-    transform: translateX(7px); //offset the top right "+" sign on the image
+    // transform: translateX(7px); //offset the top right "+" sign on the image
+    transition: all 0.2s;
   }
 
   &__description {
@@ -26,5 +46,6 @@
     font-size: 1.6rem;
     color: var(--color-text-primary);
     text-align: center;
+    // white-space: nowrap; //make text stay in 1 line
   }
 }

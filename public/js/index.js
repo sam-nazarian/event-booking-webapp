@@ -1,12 +1,19 @@
 import { showError } from './alerts';
 import { createEvent } from './createEvent';
+import uploadImageCoverEl from './updateImageCover';
 
 // DOM ELEMENTS
-const formCreateEvent = document.querySelector('.form-create-event');
-// showError('You need to fill everything');
+const formCreateEventEl = document.querySelector('#form-create-event');
 
-formCreateEvent.addEventListener('submit', (e) => {
+formCreateEventEl.addEventListener('submit', (e) => {
   e.preventDefault();
 
+  // showError('You need to fill everything');
   console.log('thanks for submitting the event!');
 });
+
+/*
+const imageCoverUploadEl = document.querySelector('#upload-image-cover');
+if (imageCoverUploadEl) {
+}
+*/

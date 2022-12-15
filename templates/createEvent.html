@@ -23,21 +23,31 @@
     <p class="err__message">A custom err message</p>
   </div>
 
-  <div class="image-cover">
-    <svg class="image-cover__icon">
-      <use xlink:href="/public/img/sprite.svg#drop-file"></use>
-    </svg>
+  <form class="form" id="form-create-event">
 
-    <p class="image-cover__description">
-      Select image cover from computer
-    </p>
+    <input class="form__upload" type="file" accept="image/*" id="upload-image-cover" name="imageCover" />
+    <label for="upload-image-cover" id="label-upload-image-cover">
+      <div class="image-cover" id="image-cover">
 
-  </div>
+        <div class="image-cover__options-upload">
+          <svg class="image-cover__upload-icon">
+            <use xlink:href="/public/img/sprite.svg#drop-file"></use>
+          </svg>
 
-  <form class="form form-create-event">
+          <p class="image-cover__description">
+            Upload Cover Photo
+          </p>
+        </div>
 
-    <input class="form__upload" type="file" accept="image/*" id="photo" name="photo" />
-    <label for="photo">Choose new photo</label>
+        <div class="image-cover__options-user-info">
+        </div>
+
+        <button class="btn btn__options-delete-image u-display-hide">
+          <img src="/public/img/icons/bin.png" alt="bin icon" class="btn__bin">
+        </button>
+
+      </div>
+    </label>
 
     <div class="form__group">
       <label for="title" class="form__label">Title<span class="form__required">*</span></label>
