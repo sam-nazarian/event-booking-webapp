@@ -74,8 +74,41 @@ body {
   color: var(--color-text-primary);
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 ::selection {
   background-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}
+
+.heading-primary {
+  display: inline-block;
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
+  font-size: 3.6em;
+  padding: 1rem 4rem;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, rgba(4, 118, 208, 0) 0%, rgba(4, 118, 208, 0.5) 100%);
+}
+
+.heading-tertiary {
+  display: inline-block;
+  background: var(--color-tertiary);
+  box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.25);
+  line-height: 1.4;
+  z-index: 10;
+  width: 90vw;
+  padding: 1rem 2rem 1rem 1rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: 0.5px;
   color: var(--color-text-primary);
 }
 
@@ -89,6 +122,10 @@ body {
 
 .u-margin-bottom-large {
   margin-bottom: 6rem !important;
+}
+
+.u-margin-bottom-huge {
+  margin-bottom: 18vh !important;
 }
 
 .u-display-hide {
@@ -198,29 +235,59 @@ body {
 
 .err {
   position: fixed;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  display: grid;
+  top: 5rem;
+  left: -90vw;
+  width: 90vw;
   z-index: 9999;
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-align: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 1.6rem 15rem;
-  -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  background-color: #eb4d4b;
-  color: #fff;
-  display: none;
+  background-color: var(--color-secondary);
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  transition: all 0.5s;
 }
 .err__message {
   font-size: 1.8rem;
-  white-space: nowrap;
+  padding: 2rem 0;
+}
+.err__exclamation-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 1rem;
+  margin-right: 2rem;
 }
 .err--active {
-  display: block;
+  top: 5rem;
+  left: 0;
+}
+
+.event-info__heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(6rem);
+}
+.event-info__date-location {
+  display: grid;
+  grid-template-columns: min-content min-content;
+  gap: 20rem;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  transform: translateY(9rem);
+}
+.event-info__date, .event-info__location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-info__date-icon, .event-info__location-icon {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px;
+}
+.event-info__date, .event-info__location {
+  font-size: 1.6rem;
 }
 
 .form {
@@ -318,6 +385,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 .image-cover__options-upload {
   position: absolute;
@@ -347,6 +415,65 @@ body {
   font-size: 1.6rem;
   color: var(--color-text-primary);
   text-align: center;
+}
+
+.invitation {
+  display: grid;
+  grid-template-columns: min-content 1fr max-content;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 95vw;
+}
+.invitation__url {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 1rem 1rem 1rem 2.5rem;
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: var(--color-text-primary);
+  background-color: #013f6f;
+  border: none;
+  border-radius: 0.2rem;
+}
+.invitation__globe-container {
+  border: solid 0.4rem var(--color-primary);
+  background-image: linear-gradient(155.22deg, #0476d0 -3.82%, #047dd9 104.08%);
+  position: relative;
+  padding: 0.8rem;
+  border-radius: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.invitation__copy-container {
+  border: solid 0.4rem var(--color-primary);
+  background-image: linear-gradient(155.22deg, #0476d0 -3.82%, #047dd9 104.08%);
+  position: relative;
+  padding: 1.4rem;
+  border-radius: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.invitation__globe-icon {
+  width: 3rem;
+  height: 3rem;
+}
+.invitation__copy-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  fill: var(--color-text-primary);
+  transition: all 0.2s;
+}
+.invitation__link:hover .invitation__copy-container .invitation__copy-icon {
+  transform: scale(1.08);
+}
+.invitation__link:active .invitation__copy-container .invitation__copy-icon {
+  transform: scale(1.02);
 }
 
 .loader {

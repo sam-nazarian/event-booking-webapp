@@ -8,6 +8,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
 
   &__options-upload {
     position: absolute;
@@ -24,10 +25,6 @@
   &:hover &__options-upload &__upload-icon {
     transform: scale(1.03);
   }
-
-  // &:active &__options-upload &__upload-icon {
-  //   transform: scale(0.9);
-  // }
 
   &__upload-icon {
     height: 8rem;

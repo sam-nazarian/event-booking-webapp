@@ -1,0 +1,39 @@
+.event-info {
+  &__heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    transform: translateY(6rem);
+  }
+
+  &__date-location {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 20rem;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    transform: translateY(9rem);
+  }
+
+  &__date,
+  &__location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__date-icon,
+  &__location-icon {
+    margin-right: 0.5rem;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__date,
+  &__location {
+    font-size: 1.6rem;
+  }
+}

@@ -1,5 +1,5 @@
 // Import Files
-import { showError } from './alerts';
+import { showError } from '../utilities/alerts';
 import axios from 'axios';
 
 // Import DOM
@@ -17,9 +17,9 @@ export async function createEvent(data) {
 
     // console.log(`res`, res);
     // console.log(res.data.data.data._id);
-    if (res.data.status === 'success') location.assign(`/my-event/${res.data.data.data._id}`);
+    if (res.data.status === 'success') location.assign(`/share-event/${res.data.data.data._id}`);
   } catch (err) {
-    console.log(`ERROR 💥`, err);
+    // console.log(`ERROR 💥`, err);
     showError(err.response.data.message); //accessing message property from server
   }
 }

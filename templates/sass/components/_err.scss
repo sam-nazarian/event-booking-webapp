@@ -1,28 +1,30 @@
 .err {
   position: fixed;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  display: grid;
+  top: 5rem;
+  left: -90vw;
+  width: 90vw;
   z-index: 9999;
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-align: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 1.6rem 15rem;
-  -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  background-color: #eb4d4b;
-  color: #fff;
-  display: none;
+  background-color: var(--color-secondary);
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  transition: all 0.5s;
 
   &__message {
     font-size: 1.8rem;
-    white-space: nowrap; //keep text in 1 line
+    padding: 2rem 0;
+  }
+
+  &__exclamation-icon {
+    width: 25px;
+    height: 25px;
+
+    margin-left: 1rem;
+    margin-right: 2rem;
   }
 
   &--active {
-    display: block;
+    top: 5rem;
+    left: 0;
   }
 }

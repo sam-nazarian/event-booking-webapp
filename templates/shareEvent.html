@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+
+  <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
+  <link rel="stylesheet" href="/public/css/style.css">
+
+</head>
+
+<body>
+
+  <!-- NOTE: -->
+  <!-- the comments that start with class="" mean that another class could be added or removed to the elemet below it. -->
+  <!-- forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active"> -->
+
+  <!-- class="err--active" -->
+  <div class="err">
+    <svg class="err__exclamation-icon">
+      <use xlink:href="/public/img/sprite.svg#exclamation-icon"></use>
+    </svg>
+
+    <p class="err__message">A custom err message</p>
+  </div>
+
+  <!-- add a inline style for background-color -->
+  <div class="image-cover u-cursor-none" id="image-cover"
+    style="background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('')">
+
+    <div class="event-info">
+
+      <div class="event-info__heading">
+        <h1 class="heading-primary">$EVENT NAME$</h1>
+      </div>
+
+      <div class="event-info__date-location">
+
+        <div class="event-info__date">
+          <svg class="event-info__date-icon">
+            <use xlink:href="/public/img/sprite.svg#calendar-icon"></use>
+          </svg>
+          <p class="event-info-date-para">$XX/XX/XX$</p>
+        </div>
+
+        <div class="event-info__location">
+          <svg class="event-info__location-icon">
+            <use xlink:href="/public/img/sprite.svg#location-icon"></use>
+          </svg>
+          <p class="event-info-location-para">$LOCATION$</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <h3 class="heading-tertiary u-margin-bottom-small">
+    Send your invites out, by sharing the following link with your friends
+  </h3>
+
+  <div class="invitation u-margin-bottom-huge">
+
+    <div class="invitation__globe-container">
+      <svg class="invitation__globe-icon">
+        <use xlink:href="/public/img/sprite.svg#globe-icon"></use>
+      </svg>
+    </div>
+
+    <div class="invitation__url">
+      https://URL/event/ID
+    </div>
+
+    <a href="https://URL/event/ID" target="_blank" class="invitation__link">
+      <div class="invitation__copy-container">
+
+        <svg class="invitation__copy-icon">
+          <use xlink:href="/public/img/sprite.svg#copy-icon"></use>
+        </svg>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="btn-wrapper u-margin-bottom-small">
+
+    <!-- class="u-display-hide" -->
+    <button class="btn btn--large" id="visit-share-event">Visit Link Above!</button>
+
+    <!-- class="u-display-hide" -->
+    <div class="loader u-display-hide">
+      <div class="loader__container">
+        <div class="loader__bar loader__bar--1"></div>
+        <div class="loader__bar loader__bar--2"></div>
+        <div class="loader__bar loader__bar--3"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="/public/js/bundled/index.js"></script>
+</body>
+
+</html>

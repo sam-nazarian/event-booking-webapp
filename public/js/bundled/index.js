@@ -143,7 +143,14 @@
     }
   }
 })({"f2QDv":[function(require,module,exports) {
-var _alerts = require("./alerts");
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _index = require("./createEvent/index");
+var _indexDefault = parcelHelpers.interopDefault(_index);
+var _index1 = require("./shareEvent/index");
+var _indexDefault1 = parcelHelpers.interopDefault(_index1);
+
+},{"./createEvent/index":"4RC4p","./shareEvent/index":"i28Dr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4RC4p":[function(require,module,exports) {
+var _alerts = require("../utilities/alerts");
 var _createEvent = require("./createEvent");
 var _updateImageCover = require("./updateImageCover");
 // DOM ELEMENTS
@@ -170,7 +177,7 @@ if (formCreateEventEl) formCreateEventEl.addEventListener("submit", async (e)=>{
     (0, _createEvent.hideSubmitLoader)();
 });
 
-},{"./alerts":"6Mcnf","./createEvent":"gmnSz","./updateImageCover":"lUYKE"}],"6Mcnf":[function(require,module,exports) {
+},{"../utilities/alerts":"jSl5m","./createEvent":"i5krZ","./updateImageCover":"wIFd8"}],"jSl5m":[function(require,module,exports) {
 // Import DOM
 // Error Messages Elms
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -222,7 +229,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"gmnSz":[function(require,module,exports) {
+},{}],"i5krZ":[function(require,module,exports) {
 // Import Files
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -230,7 +237,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createEvent", ()=>createEvent);
 parcelHelpers.export(exports, "addSubmitLoader", ()=>addSubmitLoader);
 parcelHelpers.export(exports, "hideSubmitLoader", ()=>hideSubmitLoader);
-var _alerts = require("./alerts");
+var _alerts = require("../utilities/alerts");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // Import DOM
@@ -245,9 +252,9 @@ async function createEvent(data) {
         });
         // console.log(`res`, res);
         // console.log(res.data.data.data._id);
-        if (res.data.status === "success") location.assign(`/my-event/${res.data.data.data._id}`);
+        if (res.data.status === "success") location.assign(`/share-event/${res.data.data.data._id}`);
     } catch (err) {
-        console.log(`ERROR 💥`, err);
+        // console.log(`ERROR 💥`, err);
         (0, _alerts.showError)(err.response.data.message); //accessing message property from server
     }
 }
@@ -260,7 +267,7 @@ function hideSubmitLoader() {
     btnCreateEventEl.classList.remove("u-display-hide");
 }
 
-},{"./alerts":"6Mcnf","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jo6P5":[function(require,module,exports) {
+},{"../utilities/alerts":"jSl5m","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -4270,7 +4277,7 @@ function isAxiosError(payload) {
 }
 exports.default = isAxiosError;
 
-},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUYKE":[function(require,module,exports) {
+},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"wIFd8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "previewImage", ()=>previewImage);
@@ -4307,6 +4314,10 @@ function previewImage() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i28Dr":[function(require,module,exports) {
+var _alerts = require("../utilities/alerts");
+(0, _alerts.showError)("Copied to clipboard!");
+
+},{"../utilities/alerts":"jSl5m"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
 
 //# sourceMappingURL=index.js.map
