@@ -99,6 +99,36 @@ body {
   cursor: default !important;
 }
 
+@keyframes loader__bar--1-animation {
+  0% {
+    transform: translate3d(-3rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(3rem, 0, 0);
+    opacity: 0.95;
+  }
+}
+@keyframes loader__bar--2-animation {
+  0% {
+    transform: translate3d(-5rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(5rem, 0, 0);
+    opacity: 0.95;
+  }
+}
+@keyframes loader__bar--3-animation {
+  0% {
+    transform: translate3d(-6rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(6rem, 0, 0);
+    opacity: 0.95;
+  }
+}
 .btn-wrapper {
   clip-path: var(--clip-secondary-fixed);
   display: flex;
@@ -317,6 +347,36 @@ body {
   font-size: 1.6rem;
   color: var(--color-text-primary);
   text-align: center;
+}
+
+.loader {
+  padding: 2rem 0;
+}
+.loader__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 10rem;
+  height: 5rem;
+}
+.loader__bar {
+  margin: 0 0 1rem 0;
+  background-color: #fff;
+  height: 1rem;
+  clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+}
+.loader__bar--1 {
+  width: 6rem;
+  animation: loader__bar--1-animation 1s infinite alternate;
+}
+.loader__bar--2 {
+  width: 7rem;
+  animation: loader__bar--2-animation 1s 150ms infinite alternate;
+}
+.loader__bar--3 {
+  width: 5rem;
+  animation: loader__bar--3-animation 1s 220ms infinite alternate;
 }
 
 /*# sourceMappingURL=style.css.map */

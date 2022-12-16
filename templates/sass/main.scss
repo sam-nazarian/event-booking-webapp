@@ -6,6 +6,7 @@
 @import 'base/base';
 @import 'base/typography';
 @import 'base/utilities';
+@import 'base/animations';
 
 // Components
 @import 'components/btn-wrapper';
@@ -13,6 +14,7 @@
 @import 'components/err';
 @import 'components/form';
 @import 'components/image-cover';
+@import 'components/loader';
 
 // Pages
 @import 'pages/createEvent';

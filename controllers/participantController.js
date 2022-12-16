@@ -23,7 +23,7 @@ exports.resizeParticipantImage = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   //as we used buffer in memory it din't add a name to the file
-  req.body.image = `user-${req.userId || 'UNDEFINED-ID'}-${Date.now()}.jpeg`;
+  req.body.image = `user-${req?.userId || req?.cookies?.user || 'UNDEFINED-USERID'}-${Date.now()}.jpeg`;
 
   //image processing
   await sharp(req.file.buffer).resize(500, 500).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/users/${req.body.image}`);

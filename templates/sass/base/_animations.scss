@@ -1,0 +1,32 @@
+@keyframes loader__bar--1-animation {
+  0% {
+    transform: translate3d(-3rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(3rem, 0, 0);
+    opacity: 0.95;
+  }
+}
+
+@keyframes loader__bar--2-animation {
+  0% {
+    transform: translate3d(-5rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(5rem, 0, 0);
+    opacity: 0.95;
+  }
+}
+
+@keyframes loader__bar--3-animation {
+  0% {
+    transform: translate3d(-6rem, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(6rem, 0, 0);
+    opacity: 0.95;
+  }
+}

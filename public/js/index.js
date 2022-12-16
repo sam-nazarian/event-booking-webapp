@@ -1,18 +1,25 @@
 import { showError } from './alerts';
-import { createEvent } from './createEvent';
+import { createEvent, addSubmitLoader, hideSubmitLoader } from './createEvent';
 import { previewImage } from './updateImageCover';
 
 // DOM ELEMENTS
 const formCreateEventEl = document.querySelector('#form-create-event');
 const imageCoverUploadEl = document.querySelector('#upload-image-cover');
+const dateEl = document.getElementById('date');
 
 if (imageCoverUploadEl) {
   previewImage();
 }
 
+if (dateEl) {
+  const todaysDate = new Date().toISOString().split('T')[0];
+  dateEl.setAttribute('min', todaysDate);
+}
+
 if (formCreateEventEl) {
-  formCreateEventEl.addEventListener('submit', (e) => {
+  formCreateEventEl.addEventListener('submit', async (e) => {
     e.preventDefault();
+    addSubmitLoader();
 
     //recreating multi-part form data
     const form = new FormData();
@@ -23,7 +30,7 @@ if (formCreateEventEl) {
     form.append('endTime', document.getElementById('end-time').value);
     form.append('description', document.getElementById('description').value);
 
-    // showError('You need to fill everything');
-    createEvent(form);
+    await createEvent(form);
+    hideSubmitLoader();
   });
 }

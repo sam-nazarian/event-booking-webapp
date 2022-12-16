@@ -1,0 +1,40 @@
+.loader {
+  // width: 100vw;
+  // height: 100vh;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  padding: 2rem 0;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 10rem;
+    height: 5rem;
+  }
+
+  &__bar {
+    margin: 0 0 1rem 0;
+    background-color: #fff;
+    height: 1rem;
+    clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+
+    &--1 {
+      width: 6rem;
+      animation: loader__bar--1-animation 1s infinite alternate;
+    }
+
+    &--2 {
+      width: 7rem;
+      animation: loader__bar--2-animation 1s 150ms infinite alternate;
+    }
+
+    &--3 {
+      width: 5rem;
+      animation: loader__bar--3-animation 1s 220ms infinite alternate;
+    }
+  }
+}

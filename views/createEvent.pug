@@ -12,37 +12,50 @@ head
 // class="err--active"
 .err
   p.err__message A custom err message
-.image-cover
-  svg.image-cover__icon
-    use(xlink:href='/img/sprite.svg#drop-file')
-  p.image-cover__description
-    | Select image cover from computer
-form.form.form-create-event
+form#form-create-event.form
+  input#upload-image-cover.form__upload(type='file' accept='image/*' name='imageCover')
+  label#label-upload-image-cover(for='upload-image-cover')
+    #image-cover.image-cover
+      .image-cover__options-upload
+        svg.image-cover__upload-icon
+          use(xlink:href='/img/sprite.svg#drop-file')
+        p.image-cover__description
+          | Upload Cover Photo
+      .image-cover__options-user-info
+      button.btn.btn__options-delete-image.u-display-hide
+        img.btn__bin(src='/img/icons/bin.png' alt='bin icon')
   .form__group
-    label.form__label(for='title')
-      | Title
+    label.form__label(for='name')
+      | Event Name
       span.form__required *
-    input#title.form__input(type='text' placeholder='What are you planning?' name='title' required='')
+    input#name.form__input(type='text' placeholder='What are you planning?' name='name' autocomplete='off' required='')
   .form__group
     label.form__label(for='date')
-      | Date
+      | Start Date
       span.form__required *
-    input#date.form__input(type='date' placeholder='When does it start?' name='date' required='')
+    input#date.form__input(type='date' placeholder='When does it start?' name='date' autocomplete='off' required='')
   .form__start-end-time
     .form__group
       label.form__label(for='start-time')
         | Start Time
         span.form__required *
-      input#start-time.form__input(type='time' name='start-time' required='')
+      input#start-time.form__input(type='time' name='start-time' autocomplete='off' required='')
     .form__dash
     .form__group
       label.form__label(for='end-time')
         | End Time
         span.form__required *
-      input#end-time.form__input(type='time' name='end-time' required='')
+      input#end-time.form__input(type='time' name='end-time' autocomplete='off' required='')
   .form__group.u-margin-bottom-medium
     label.form__label(for='description') Description
-    textarea#description.form__textarea(name='description' placeholder='Describe what you are planning...' spellcheck='false')
+    textarea#description.form__textarea(name='description' placeholder='Provide more information about your event...' spellcheck='false' autocomplete='off')
   .btn-wrapper.u-margin-bottom-small
-    button.btn.btn--large Create Event!
+    // class="u-display-hide"
+    button#btn-create-event.btn.btn--large Create Event!
+    // class="u-display-hide"
+    .loader.u-display-hide
+      .loader__container
+        .loader__bar.loader__bar--1
+        .loader__bar.loader__bar--2
+        .loader__bar.loader__bar--3
 script(src='/js/bundled/index.js')

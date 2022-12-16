@@ -149,9 +149,15 @@ var _updateImageCover = require("./updateImageCover");
 // DOM ELEMENTS
 const formCreateEventEl = document.querySelector("#form-create-event");
 const imageCoverUploadEl = document.querySelector("#upload-image-cover");
+const dateEl = document.getElementById("date");
 if (imageCoverUploadEl) (0, _updateImageCover.previewImage)();
-if (formCreateEventEl) formCreateEventEl.addEventListener("submit", (e)=>{
+if (dateEl) {
+    const todaysDate = new Date().toISOString().split("T")[0];
+    dateEl.setAttribute("min", todaysDate);
+}
+if (formCreateEventEl) formCreateEventEl.addEventListener("submit", async (e)=>{
     e.preventDefault();
+    (0, _createEvent.addSubmitLoader)();
     //recreating multi-part form data
     const form = new FormData();
     form.append("imageCover", document.getElementById("upload-image-cover").files[0]);
@@ -160,8 +166,8 @@ if (formCreateEventEl) formCreateEventEl.addEventListener("submit", (e)=>{
     form.append("startTime", document.getElementById("start-time").value);
     form.append("endTime", document.getElementById("end-time").value);
     form.append("description", document.getElementById("description").value);
-    // showError('You need to fill everything');
-    (0, _createEvent.createEvent)(form);
+    await (0, _createEvent.createEvent)(form);
+    (0, _createEvent.hideSubmitLoader)();
 });
 
 },{"./alerts":"6Mcnf","./createEvent":"gmnSz","./updateImageCover":"lUYKE"}],"6Mcnf":[function(require,module,exports) {
@@ -217,27 +223,42 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"gmnSz":[function(require,module,exports) {
+// Import Files
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// type is either 'password' or 'data'
 parcelHelpers.export(exports, "createEvent", ()=>createEvent);
+parcelHelpers.export(exports, "addSubmitLoader", ()=>addSubmitLoader);
+parcelHelpers.export(exports, "hideSubmitLoader", ()=>hideSubmitLoader);
 var _alerts = require("./alerts");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const createEvent = async function(data) {
+// Import DOM
+const loaderEl = document.querySelector(".loader");
+const btnCreateEventEl = document.querySelector("#btn-create-event");
+async function createEvent(data) {
     try {
         const res = await (0, _axiosDefault.default)({
             method: "POST",
             url: "http://127.0.0.1:8000/api/v1/events",
             data
         });
-        console.log(`res`, res);
-    // console.log(res.data.data.data._id);
-    // if (res.data.status === 'success') location.assign(`/my-event/${res.data.data.data._id}`);
+        // console.log(`res`, res);
+        // console.log(res.data.data.data._id);
+        if (res.data.status === "success") location.assign(`/my-event/${res.data.data.data._id}`);
     } catch (err) {
         console.log(`ERROR 💥`, err);
         (0, _alerts.showError)(err.response.data.message); //accessing message property from server
     }
-};
+}
+function addSubmitLoader() {
+    btnCreateEventEl.classList.add("u-display-hide");
+    loaderEl.classList.remove("u-display-hide");
+}
+function hideSubmitLoader() {
+    loaderEl.classList.add("u-display-hide");
+    btnCreateEventEl.classList.remove("u-display-hide");
+}
 
 },{"./alerts":"6Mcnf","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
