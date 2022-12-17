@@ -202,6 +202,9 @@ body {
   transform: scale(1.02);
   text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
+.btn--share {
+  text-decoration: none;
+}
 .btn__options-delete-image {
   position: absolute;
   top: 1rem;
@@ -244,6 +247,7 @@ body {
   grid-template-columns: min-content 1fr;
   align-items: center;
   transition: all 0.5s;
+  box-shadow: 6px 4px 9px rgba(0, 0, 0, 0.2);
 }
 .err__message {
   font-size: 1.8rem;
@@ -270,15 +274,16 @@ body {
 .event-info__date-location {
   display: grid;
   grid-template-columns: min-content min-content;
-  gap: 20rem;
+  gap: 20vw;
   justify-content: center;
   justify-items: center;
   align-items: center;
   transform: translateY(9rem);
 }
 .event-info__date, .event-info__location {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-items: center;
   align-items: center;
 }
 .event-info__date-icon, .event-info__location-icon {
@@ -431,7 +436,7 @@ body {
   padding: 1rem 1rem 1rem 2.5rem;
   font-family: var(--font-primary);
   font-weight: 300;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: var(--color-text-primary);
   background-color: #013f6f;
   border: none;
@@ -460,8 +465,8 @@ body {
   align-items: center;
 }
 .invitation__globe-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 3.3rem;
+  height: 3.3rem;
 }
 .invitation__copy-icon {
   width: 3.2rem;
@@ -469,11 +474,17 @@ body {
   fill: var(--color-text-primary);
   transition: all 0.2s;
 }
-.invitation__link:hover .invitation__copy-container .invitation__copy-icon {
+.invitation__btn:hover .invitation__copy-container .invitation__copy-icon {
   transform: scale(1.08);
 }
-.invitation__link:active .invitation__copy-container .invitation__copy-icon {
+.invitation__btn:active .invitation__copy-container .invitation__copy-icon {
   transform: scale(1.02);
+}
+.invitation__btn {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
 
 .loader {
@@ -504,6 +515,12 @@ body {
 .loader__bar--3 {
   width: 5rem;
   animation: loader__bar--3-animation 1s 220ms infinite alternate;
+}
+
+.section-body {
+  display: grid;
+  grid-template-rows: min-content min-content 1fr min-content;
+  min-height: 60vh;
 }
 
 /*# sourceMappingURL=style.css.map */

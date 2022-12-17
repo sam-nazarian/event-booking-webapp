@@ -183,6 +183,7 @@ if (formCreateEventEl) formCreateEventEl.addEventListener("submit", async (e)=>{
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
+ * TODO CHANGE NAME TO showAlert(), CHANGE IT TO ALERT
  * Display err using err-container popup at the top of the page
  * @param {String} text the text that will show on the error popup
  */ parcelHelpers.export(exports, "showError", ()=>showError);
@@ -4315,9 +4316,25 @@ function previewImage() {
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i28Dr":[function(require,module,exports) {
-var _alerts = require("../utilities/alerts");
-(0, _alerts.showError)("Copied to clipboard!");
+// import files
+var _clipboardCopy = require("./clipboardCopy");
+// import DOM
+const invitationBtnEl = document.querySelector(".invitation__btn");
+if (invitationBtnEl) invitationBtnEl.addEventListener("click", ()=>{
+    (0, _clipboardCopy.clipboardCopy)();
+});
 
-},{"../utilities/alerts":"jSl5m"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
+},{"./clipboardCopy":"aJ4gs"}],"aJ4gs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "clipboardCopy", ()=>clipboardCopy);
+var _alerts = require("../utilities/alerts");
+const invitationUrlEl = document.querySelector(".invitation__url");
+function clipboardCopy() {
+    navigator.clipboard.writeText(invitationUrlEl.dataset.url);
+    (0, _alerts.showError)("Copied to clipboard!");
+}
+
+},{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
 
 //# sourceMappingURL=index.js.map

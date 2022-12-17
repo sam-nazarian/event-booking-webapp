@@ -13,14 +13,14 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: [true, 'An event must have a name!'],
       trim: true,
-      maxLength: [40, 'An event name must have less or equal then 40 characters!'],
-      minLength: [4, 'An event name must have more or equal then 4 characters!'],
-      validate: {
-        validator: function (value) {
-          return validator.isAlpha(value, 'en-US', { ignore: ' ' });
-        },
-        message: 'Event name must only contain characters!',
-      },
+      maxLength: [39, 'An event name must have less than 40 characters!'],
+      // minLength: [4, 'An event name must have more or equal then 4 characters!'],
+      // validate: {
+      //   validator: function (value) {
+      //     return validator.isAlpha(value, 'en-US', { ignore: ' ' });
+      //   },
+      //   message: 'Event name must only contain characters!',
+      // },
     },
     organiser: {
       type: String,

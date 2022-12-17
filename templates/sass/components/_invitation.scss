@@ -14,7 +14,7 @@
     padding: 1rem 1rem 1rem 2.5rem;
     font-family: var(--font-primary);
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     color: var(--color-text-primary);
     background-color: #013f6f;
     border: none;
@@ -51,10 +51,8 @@
   }
 
   &__globe-icon {
-    width: 3rem;
-    height: 3rem;
-
-    // padding: 5px;
+    width: 3.3rem;
+    height: 3.3rem;
   }
 
   &__copy-icon {
@@ -65,11 +63,18 @@
     transition: all 0.2s;
   }
 
-  &__link:hover &__copy-container &__copy-icon {
+  &__btn:hover &__copy-container &__copy-icon {
     transform: scale(1.08);
   }
 
-  &__link:active &__copy-container &__copy-icon {
+  &__btn:active &__copy-container &__copy-icon {
     transform: scale(1.02);
+  }
+
+  &__btn {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
   }
 }

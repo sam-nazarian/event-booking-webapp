@@ -9,6 +9,7 @@
   grid-template-columns: min-content 1fr;
   align-items: center;
   transition: all 0.5s;
+  box-shadow: 6px 4px 9px rgba(0, 0, 0, 0.2);
 
   &__message {
     font-size: 1.8rem;

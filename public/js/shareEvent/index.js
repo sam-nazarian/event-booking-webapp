@@ -1,3 +1,11 @@
-import { showError } from '../utilities/alerts';
+// import files
+import { clipboardCopy } from './clipboardCopy';
 
-showError('Copied to clipboard!');
+// import DOM
+const invitationBtnEl = document.querySelector('.invitation__btn');
+
+if (invitationBtnEl) {
+  invitationBtnEl.addEventListener('click', () => {
+    clipboardCopy();
+  });
+}

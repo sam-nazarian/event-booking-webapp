@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Event</title>
+  <title>Share Event</title>
 
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
   <link rel="stylesheet" href="/public/css/style.css">
@@ -59,48 +59,56 @@
 
   </div>
 
-  <h3 class="heading-tertiary u-margin-bottom-small">
-    Send your invites out, by sharing the following link with your friends
-  </h3>
+  <section class="section-body">
 
-  <div class="invitation u-margin-bottom-huge">
+    <h3 class="heading-tertiary u-margin-bottom-small">
+      Send your invites out, by sharing the following link with your friends
+    </h3>
 
-    <div class="invitation__globe-container">
-      <svg class="invitation__globe-icon">
-        <use xlink:href="/public/img/sprite.svg#globe-icon"></use>
-      </svg>
-    </div>
+    <div class="invitation">
 
-    <div class="invitation__url">
-      https://URL/event/ID
-    </div>
-
-    <a href="https://URL/event/ID" target="_blank" class="invitation__link">
-      <div class="invitation__copy-container">
-
-        <svg class="invitation__copy-icon">
-          <use xlink:href="/public/img/sprite.svg#copy-icon"></use>
+      <div class="invitation__globe-container">
+        <svg class="invitation__globe-icon">
+          <use xlink:href="/public/img/sprite.svg#globe-icon"></use>
         </svg>
       </div>
-    </a>
 
-  </div>
-
-  <div class="btn-wrapper u-margin-bottom-small">
-
-    <!-- class="u-display-hide" -->
-    <button class="btn btn--large" id="visit-share-event">Visit Link Above!</button>
-
-    <!-- class="u-display-hide" -->
-    <div class="loader u-display-hide">
-      <div class="loader__container">
-        <div class="loader__bar loader__bar--1"></div>
-        <div class="loader__bar loader__bar--2"></div>
-        <div class="loader__bar loader__bar--3"></div>
+      <div class="invitation__url" data-url="">
+        https://URL/event/ID
       </div>
+
+      <button class="invitation__btn">
+        <div class="invitation__copy-container">
+
+          <svg class="invitation__copy-icon">
+            <use xlink:href="/public/img/sprite.svg#copy-icon"></use>
+          </svg>
+        </div>
+      </button>
+
     </div>
 
-  </div>
+    <div class="empty-space"></div>
+
+    <div class="btn-wrapper u-margin-bottom-small">
+
+      <!-- class="u-display-hide" -->
+      <!-- TODO CHANGE THIS TO A LINK -->
+      <a href="https://URL/event/ID" target="_blank" class="btn btn--large btn--share" id="visit-share-event">Visit Link
+        Above</a>
+
+      <!-- class="u-display-hide" -->
+      <div class="loader u-display-hide">
+        <div class="loader__container">
+          <div class="loader__bar loader__bar--1"></div>
+          <div class="loader__bar loader__bar--2"></div>
+          <div class="loader__bar loader__bar--3"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
 
 
   <script src="/public/js/bundled/index.js"></script>

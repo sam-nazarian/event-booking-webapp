@@ -1,0 +1,56 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title=title
+  link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
+  link(rel='stylesheet' href='/css/style.css')
+// NOTE:
+// the comments that start with class="" mean that another class could be added or removed to the elemet below it.
+// forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
+// class="err--active"
+.err
+  svg.err__exclamation-icon
+    use(xlink:href='/img/sprite.svg#exclamation-icon')
+  p.err__message A custom err message
+// add a inline style for background-color
+#image-cover.image-cover.u-cursor-none(style=`background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('/img/events/${event.imageCover}')`)
+  .event-info
+    .event-info__heading
+      h1.heading-primary= event.name
+    .event-info__date-location
+      .event-info__date
+        svg.event-info__date-icon
+          use(xlink:href='/img/sprite.svg#calendar-icon')
+        p.event-info-date-para= new Date(event.date).toISOString().split('T')[0]
+      .event-info__location
+        svg.event-info__location-icon
+          use(xlink:href='/img/sprite.svg#location-icon')
+        p.event-info-location-para $LOCATION$
+section.section-body
+  h3.heading-tertiary.u-margin-bottom-small
+    | Send your invites out, by sharing the following link with your friends
+  .invitation
+    .invitation__globe-container
+      svg.invitation__globe-icon
+        use(xlink:href='/img/sprite.svg#globe-icon')
+    .invitation__url(data-url=`${hostname}`)=hostname
+    button.invitation__btn
+      .invitation__copy-container
+        svg.invitation__copy-icon
+          use(xlink:href='/img/sprite.svg#copy-icon')
+  .empty-space
+  .btn-wrapper.u-margin-bottom-small
+    // class="u-display-hide"
+    // TODO CHANGE THIS TO A LINK
+    a#visit-share-event.btn.btn--large.btn--share(href=hostname target='_blank')
+      | Visit Link
+      | Above
+    // class="u-display-hide"
+    .loader.u-display-hide
+      .loader__container
+        .loader__bar.loader__bar--1
+        .loader__bar.loader__bar--2
+        .loader__bar.loader__bar--3
+script(src='/js/bundled/index.js')

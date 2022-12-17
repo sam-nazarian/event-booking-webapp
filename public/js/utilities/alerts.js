@@ -7,6 +7,7 @@ const errMessageDom = document.querySelector('.err__message');
 let errTimeout = 0;
 
 /**
+ * TODO CHANGE NAME TO showAlert(), CHANGE IT TO ALERT
  * Display err using err-container popup at the top of the page
  * @param {String} text the text that will show on the error popup
  */

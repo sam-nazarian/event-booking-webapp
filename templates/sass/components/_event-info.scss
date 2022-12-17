@@ -11,7 +11,7 @@
   &__date-location {
     display: grid;
     grid-template-columns: min-content min-content;
-    gap: 20rem;
+    gap: 20vw;
     justify-content: center;
     justify-items: center;
     align-items: center;
@@ -20,8 +20,9 @@
 
   &__date,
   &__location {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-items: center;
     align-items: center;
   }
 

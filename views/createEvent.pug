@@ -11,6 +11,8 @@ head
 // forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
 // class="err--active"
 .err
+  svg.err__exclamation-icon
+    use(xlink:href='/img/sprite.svg#exclamation-icon')
   p.err__message A custom err message
 form#form-create-event.form
   input#upload-image-cover.form__upload(type='file' accept='image/*' name='imageCover')
@@ -18,7 +20,7 @@ form#form-create-event.form
     #image-cover.image-cover
       .image-cover__options-upload
         svg.image-cover__upload-icon
-          use(xlink:href='/img/sprite.svg#drop-file')
+          use(xlink:href='/img/sprite.svg#drop-file-icon')
         p.image-cover__description
           | Upload Cover Photo
       .image-cover__options-user-info
@@ -51,7 +53,7 @@ form#form-create-event.form
     textarea#description.form__textarea(name='description' placeholder='Provide more information about your event...' spellcheck='false' autocomplete='off')
   .btn-wrapper.u-margin-bottom-small
     // class="u-display-hide"
-    button#btn-create-event.btn.btn--large Create Event!
+    button#btn-create-event.btn.btn--large Create Event
     // class="u-display-hide"
     .loader.u-display-hide
       .loader__container
