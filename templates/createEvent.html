@@ -10,6 +10,35 @@
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
   <link rel="stylesheet" href="/public/css/style.css">
 
+
+  <script>
+    let autocomplete;
+
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('address'), {
+          fields: ['geometry', 'name']
+        })
+
+      autocomplete.addListener('place_changed', onPlaceChanged);
+    }
+
+    function onPlaceChanged() {
+      const place = autocomplete.getPlace();
+
+      if (!place.geometry) {
+        // User did not select a prediction; reset the input field
+        document.getElementById('autocomplete').placeholder = 'Where is your event?'
+      } else {
+        // Display details about the valid place
+        console.log(place);
+      }
+
+    }
+  </script>
+
+  <script defer src="/public/js/bundled/index.js"></script>
+
 </head>
 
 <body>
@@ -80,10 +109,16 @@
       </div>
     </div>
 
-    <div class="form__group u-margin-bottom-medium">
+    <div class="form__group u-margin-bottom-large">
       <label for="description" class="form__label">Description</label>
       <textarea name="description" id="description" class="form__textarea"
         placeholder="Provide more information about your event..." spellcheck="false" autocomplete="off"></textarea>
+    </div>
+
+    <div class="form__group">
+      <label for="address" class="form__label">Location Address<span class="form__required">*</span></label>
+      <input type="text" id="address" class="form__input" placeholder="Where is your event?" name="address"
+        autocomplete="off" required>
     </div>
 
     <div class="btn-wrapper u-margin-bottom-small">
@@ -104,7 +139,7 @@
 
   </form>
 
-  <script src="/public/js/bundled/index.js"></script>
+  <!-- <script src="/public/js/bundled/index.js"></script> -->
 </body>
 
 </html>

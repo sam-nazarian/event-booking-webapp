@@ -6,6 +6,7 @@ exports.getHomepage = catchAsync(async (req, res, next) => {});
 exports.createEvent = catchAsync(async (req, res, next) => {
   res.status(200).render('createEvent', {
     title: 'Create Event',
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
   });
 });
 
