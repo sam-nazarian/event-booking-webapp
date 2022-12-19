@@ -8,36 +8,17 @@
   <title>Create Event</title>
 
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
+
+  <!-- Leaflet's Css -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
   <link rel="stylesheet" href="/public/css/style.css">
 
-
-  <script>
-    let autocomplete;
-
-    function initAutocomplete() {
-      autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('address'), {
-          fields: ['geometry', 'name']
-        })
-
-      autocomplete.addListener('place_changed', onPlaceChanged);
-    }
-
-    function onPlaceChanged() {
-      const place = autocomplete.getPlace();
-
-      if (!place.geometry) {
-        // User did not select a prediction; reset the input field
-        document.getElementById('autocomplete').placeholder = 'Where is your event?'
-      } else {
-        // Display details about the valid place
-        console.log(place);
-      }
-
-    }
-  </script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
   <script defer src="/public/js/bundled/index.js"></script>
+
 
 </head>
 
@@ -109,16 +90,18 @@
       </div>
     </div>
 
-    <div class="form__group u-margin-bottom-large">
-      <label for="description" class="form__label">Description</label>
-      <textarea name="description" id="description" class="form__textarea"
-        placeholder="Provide more information about your event..." spellcheck="false" autocomplete="off"></textarea>
-    </div>
-
     <div class="form__group">
       <label for="address" class="form__label">Location Address<span class="form__required">*</span></label>
       <input type="text" id="address" class="form__input" placeholder="Where is your event?" name="address"
         autocomplete="off" required>
+    </div>
+
+    <div id="map" class=""></div>
+
+    <div class="form__group">
+      <label for="description" class="form__label">Description</label>
+      <textarea name="description" id="description" class="form__textarea"
+        placeholder="Provide more information about your event..." spellcheck="false" autocomplete="off"></textarea>
     </div>
 
     <div class="btn-wrapper u-margin-bottom-small">
@@ -139,7 +122,69 @@
 
   </form>
 
-  <!-- <script src="/public/js/bundled/index.js"></script> -->
+  <script>
+    let marker = undefined;
+
+    // USING LEAFLET
+    const map = L.map('map', {
+      scrollWheelZoom: false,
+      dragging: !L.Browser.mobile
+    }).setView([49.883226, -97.155884], 2);
+
+    L.tileLayer(
+      'https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w'
+    ).addTo(map);
+
+    function mapSetView(lat, lng, locationName) {
+
+      // Remove marker
+      if (marker !== undefined) {
+        map.removeLayer(marker);
+      }
+
+      // Create marker
+      marker = L.marker([lat, lng]).addTo(map).bindPopup(`<p>${locationName}</p>`)
+        .openPopup();
+
+      // Center map on location
+      map.setView([lat, lng], 11, {
+        animate: true,
+        pan: {
+          duration: 2,
+        },
+      });
+
+    }
+
+    // USING GOOGLE AUTOCOMPLETE API
+    let autocomplete;
+
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('address'), {
+          fields: ['geometry', 'name']
+        })
+
+      autocomplete.addListener('place_changed', onPlaceChanged);
+    }
+
+    function onPlaceChanged() {
+      const place = autocomplete.getPlace();
+
+      if (!place.geometry) {
+        // User did not select a prediction; reset the input field
+        document.getElementById('autocomplete').placeholder = 'Where is your event?'
+      } else {
+        // Display details about the valid place
+        // console.log(place);
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+        // console.log('lat', lat);
+        // console.log('lng', lng);
+        mapSetView(lat, lng, place.name);
+      }
+    }
+  </script>
 </body>
 
 </html>

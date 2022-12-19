@@ -100,4 +100,9 @@
   input[type='time']::-webkit-calendar-picker-indicator {
     filter: invert(100%);
   }
+
+  // change default input date placeholder
+  // input[type='date']:invalid::-webkit-datetime-edit {
+  //   opacity: 0.25;
+  // }
 }
