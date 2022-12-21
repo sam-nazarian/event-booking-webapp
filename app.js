@@ -32,8 +32,8 @@ app.options('*', cors()); //route is '*'. & the handler is on cors middleware
 // Serving static files (when there's a path in .pug files)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set Security HTTP headers
-app.use(helmet());
+// Set Security HTTP headers (causes issues with importing scripts from websites)
+// app.use(helmet());
 
 // Development Logging
 if (process.env.NODE_ENV === 'development') {

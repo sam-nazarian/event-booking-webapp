@@ -5,7 +5,12 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Create Event
   link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
+  // Leaflet's Css
+  link(rel='stylesheet' href='https://unpkg.com/leaflet@1.9.3/dist/leaflet.css' integrity='sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=' crossorigin='')
   link(rel='stylesheet' href='/css/style.css')
+  script(src='https://unpkg.com/leaflet@1.9.3/dist/leaflet.js' integrity='sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=' crossorigin='')
+  script(defer src='/js/bundled/index.js')
+  script(defer src=`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=initAutocomplete`)
 // NOTE:
 // the comments that start with class="" mean that another class could be added or removed to the elemet below it.
 // forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
@@ -23,7 +28,27 @@ form#form-create-event.form
           use(xlink:href='/img/sprite.svg#drop-file-icon')
         p.image-cover__description
           | Upload Cover Photo
-      .image-cover__options-user-info
+      .event-info.u-display-hide
+        // these html segments will be dynamically updated by JS
+        //
+          <div class="event-info__heading">
+          <h1 class="heading-primary">EVENT NAME</h1>
+          </div>
+        .event-info__date-location
+          //
+            <div class="event-info__date">
+            <svg class="event-info__date-icon">
+            <use xlink:href="/img/sprite.svg#calendar-icon"></use>
+            </svg>
+            <p class="event-info-date-para"></p>
+            </div>
+          //
+            <div class="event-info__location">
+            <svg class="event-info__location-icon">
+            <use xlink:href="/img/sprite.svg#location-icon"></use>
+            </svg>
+            <p class="event-info-location-para"></p>
+            </div>
       button.btn.btn__options-delete-image.u-display-hide
         img.btn__bin(src='/img/icons/bin.png' alt='bin icon')
   .form__group
@@ -48,7 +73,13 @@ form#form-create-event.form
         | End Time
         span.form__required *
       input#end-time.form__input(type='time' name='end-time' autocomplete='off' required='')
-  .form__group.u-margin-bottom-medium
+  .form__group
+    label.form__label(for='address')
+      | Location Address
+      span.form__required *
+    input#address.form__input(type='text' placeholder='Where is your event?' name='address' autocomplete='off' required='')
+  #map
+  .form__group
     label.form__label(for='description') Description
     textarea#description.form__textarea(name='description' placeholder='Provide more information about your event...' spellcheck='false' autocomplete='off')
   .btn-wrapper.u-margin-bottom-small
@@ -60,4 +91,75 @@ form#form-create-event.form
         .loader__bar.loader__bar--1
         .loader__bar.loader__bar--2
         .loader__bar.loader__bar--3
-script(src='/js/bundled/index.js')
+script.
+  // DOM Elms
+  const addressEl = document.querySelector('#address');
+  const eventInfoDateLocationEl = document.querySelector('.event-info__date-location');
+  let marker = undefined;
+  // USING LEAFLET
+  const map = L.map('map', {
+  scrollWheelZoom: false,
+  dragging: !L.Browser.mobile
+  }).setView([49.883226, -97.155884], 2);
+  L.tileLayer(
+  `https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=${MAPBOX_API_KEY}`
+  ).addTo(map);
+  function mapSetView(lat, lng, zoom, locationName) {
+  // Remove marker
+  if (marker !== undefined) {
+  map.removeLayer(marker);
+  }
+  // Create marker
+  if (locationName !== '') {
+  marker = L.marker([lat, lng]).addTo(map).bindPopup(`<p>${locationName}</p>`)
+  .openPopup();
+  }
+  // Center map on location
+  map.setView([lat, lng], zoom, {
+  animate: true,
+  pan: {
+  duration: 2,
+  },
+  });
+  }
+  // USING GOOGLE AUTOCOMPLETE API
+  let autocomplete;
+  function initAutocomplete() {
+  autocomplete = new google.maps.places.Autocomplete(
+  addressEl, {
+  fields: ['geometry', 'name']
+  })
+  autocomplete.addListener('place_changed', onPlaceChanged);
+  }
+  function onPlaceChanged() {
+  const eventInfoLocationEl = document.querySelector('.event-info__location');
+  const place = autocomplete.getPlace();
+  if (!place.geometry) {
+  // User did not select a prediction; reset the input field
+  mapSetView(49.883226, -97.155884, 2, '');
+  if (eventInfoLocationEl) eventInfoLocationEl.remove();
+  } else {
+  // Display details about the valid place
+  const lat = place.geometry.location.lat();
+  const lng = place.geometry.location.lng();
+  mapSetView(lat, lng, 11, place.name);
+  // Update eventInfoLocation automatically
+  if (eventInfoLocationEl) eventInfoLocationEl.remove();
+  const html = `
+  <div class="event-info__location">
+  <svg class="event-info__location-icon">
+  <use xlink:href="/img/sprite.svg#location-icon"></use>
+  </svg>
+  <p class="event-info-location-para">${place.name}</p>
+  </div>
+  `;
+  eventInfoDateLocationEl.insertAdjacentHTML('beforeend', html);
+  }
+  addressEl.addEventListener('input', function () {
+  if (this.value.trim() === '') {
+  const eventInfoLocationEl = document.querySelector('.event-info__location');
+  if (eventInfoLocationEl) eventInfoLocationEl.remove();
+  mapSetView(49.883226, -97.155884, 2, '');
+  }
+  })
+  }

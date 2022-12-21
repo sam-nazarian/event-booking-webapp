@@ -9,12 +9,16 @@
   }
 
   &__date-location {
-    display: grid;
-    grid-template-columns: min-content min-content;
-    gap: 20vw;
-    justify-content: center;
-    justify-items: center;
+    // display: grid;
+    // grid-template-columns: min-content min-content;
+    // gap: 20vw;
+    // justify-content: center;
+    // justify-items: center;
+    // align-items: center;
+    display: flex;
     align-items: center;
+    justify-content: space-evenly;
+
     transform: translateY(9rem);
   }
 

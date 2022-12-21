@@ -19,6 +19,9 @@
 
   <script defer src="/public/js/bundled/index.js"></script>
 
+  <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=initAutocomplete">
+  </script>
 
 </head>
 
@@ -54,7 +57,31 @@
           </p>
         </div>
 
-        <div class="image-cover__options-user-info">
+        <div class="event-info u-display-hide">
+
+          <!-- these html segments will be dynamically updated by JS -->
+          <!-- <div class="event-info__heading">
+            <h1 class="heading-primary">EVENT NAME</h1>
+          </div> -->
+
+          <div class="event-info__date-location">
+
+            <!-- <div class="event-info__date">
+              <svg class="event-info__date-icon">
+                <use xlink:href="/public/img/sprite.svg#calendar-icon"></use>
+              </svg>
+              <p class="event-info-date-para"></p>
+            </div> -->
+
+            <!-- <div class="event-info__location">
+              <svg class="event-info__location-icon">
+                <use xlink:href="/public/img/sprite.svg#location-icon"></use>
+              </svg>
+              <p class="event-info-location-para"></p>
+            </div> -->
+
+          </div>
+
         </div>
 
         <button class="btn btn__options-delete-image u-display-hide">
@@ -123,6 +150,10 @@
   </form>
 
   <script>
+    // DOM Elms
+    const addressEl = document.querySelector('#address');
+    const eventInfoDateLocationEl = document.querySelector('.event-info__date-location');
+
     let marker = undefined;
 
     // USING LEAFLET
@@ -132,22 +163,25 @@
     }).setView([49.883226, -97.155884], 2);
 
     L.tileLayer(
-      'https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w'
+      `https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=${MAPBOX_API_KEY}`
     ).addTo(map);
 
-    function mapSetView(lat, lng, locationName) {
+    function mapSetView(lat, lng, zoom, locationName) {
 
       // Remove marker
       if (marker !== undefined) {
         map.removeLayer(marker);
       }
 
+
       // Create marker
-      marker = L.marker([lat, lng]).addTo(map).bindPopup(`<p>${locationName}</p>`)
-        .openPopup();
+      if (locationName !== '') {
+        marker = L.marker([lat, lng]).addTo(map).bindPopup(`<p>${locationName}</p>`)
+          .openPopup();
+      }
 
       // Center map on location
-      map.setView([lat, lng], 11, {
+      map.setView([lat, lng], zoom, {
         animate: true,
         pan: {
           duration: 2,
@@ -161,7 +195,7 @@
 
     function initAutocomplete() {
       autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('address'), {
+        addressEl, {
           fields: ['geometry', 'name']
         })
 
@@ -169,20 +203,41 @@
     }
 
     function onPlaceChanged() {
+      const eventInfoLocationEl = document.querySelector('.event-info__location');
       const place = autocomplete.getPlace();
 
       if (!place.geometry) {
         // User did not select a prediction; reset the input field
-        document.getElementById('autocomplete').placeholder = 'Where is your event?'
+        mapSetView(49.883226, -97.155884, 2, '');
+        if (eventInfoLocationEl) eventInfoLocationEl.remove();
+
       } else {
         // Display details about the valid place
-        // console.log(place);
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
-        // console.log('lat', lat);
-        // console.log('lng', lng);
-        mapSetView(lat, lng, place.name);
+        mapSetView(lat, lng, 11, place.name);
+
+        // Update eventInfoLocation automatically 
+        if (eventInfoLocationEl) eventInfoLocationEl.remove();
+        const html = `
+              <div class="event-info__location">
+                <svg class="event-info__location-icon">
+                  <use xlink:href="/public/img/sprite.svg#location-icon"></use>
+                </svg>
+                <p class="event-info-location-para">${place.name}</p>
+              </div>
+             `;
+        eventInfoDateLocationEl.insertAdjacentHTML('beforeend', html);
       }
+
+      addressEl.addEventListener('input', function () {
+        if (this.value.trim() === '') {
+          const eventInfoLocationEl = document.querySelector('.event-info__location');
+          if (eventInfoLocationEl) eventInfoLocationEl.remove();
+          mapSetView(49.883226, -97.155884, 2, '');
+        }
+      })
+
     }
   </script>
 </body>

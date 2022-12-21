@@ -274,12 +274,9 @@ body {
   transform: translateY(6rem);
 }
 .event-info__date-location {
-  display: grid;
-  grid-template-columns: min-content min-content;
-  gap: 20vw;
-  justify-content: center;
-  justify-items: center;
+  display: flex;
   align-items: center;
+  justify-content: space-evenly;
   transform: translateY(9rem);
 }
 .event-info__date, .event-info__location {
