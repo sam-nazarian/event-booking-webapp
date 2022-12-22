@@ -120,7 +120,7 @@
     <div class="form__group">
       <label for="address" class="form__label">Location Address<span class="form__required">*</span></label>
       <input type="text" id="address" class="form__input" placeholder="Where is your event?" name="address"
-        autocomplete="off" required>
+        autocomplete="off" data-address-description="" data-lat="" data-lng="" required>
     </div>
 
     <div id="map" class=""></div>
@@ -203,6 +203,7 @@
     }
 
     function onPlaceChanged() {
+
       const eventInfoLocationEl = document.querySelector('.event-info__location');
       const place = autocomplete.getPlace();
 
@@ -228,6 +229,11 @@
               </div>
              `;
         eventInfoDateLocationEl.insertAdjacentHTML('beforeend', html);
+
+        // Update html data-set to allow JS to read the addressDescription & coordinates
+        addressEl.dataset.addressDescription = place.name;
+        addressEl.dataset.lat = lat;
+        addressEl.dataset.lng = lng;
       }
 
       addressEl.addEventListener('input', function () {

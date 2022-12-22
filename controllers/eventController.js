@@ -47,6 +47,9 @@ exports.resizeEventImages = catchAsync(async (req, res, next) => {
  * Creates an event based on req.body info in mongoDB database
  */
 exports.createEvent = catchAsync(async (req, res, next) => {
+  // convert coordinates from String to Number
+  req.body.location.coordinates = req.body.location.coordinates.map((coordinate) => parseFloat(coordinate));
+
   //create automatically saves the document
   const doc = await Event.create(req.body);
 

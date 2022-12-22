@@ -47,23 +47,25 @@ const eventSchema = new mongoose.Schema(
       required: [true, 'An event must have an end time!'],
     },
     // GeoJSON - must have type and coordinates - https://mongoosejs.com/docs/geojson.html
-    /*
     location: {
+      // location must have type & coordinates
       type: {
         type: String,
         enum: ['Point'],
-        required: [true, 'An address TYPE is required!'],
+        default: 'Point',
       },
+      // [Longitude, Latitude]
       coordinates: {
         type: [Number],
-        required: [true, 'An address COORDINATE is required!'],
-      }, //must have coordinates
-      fullAddress: {
+      },
+      addressDescription: {
+        type: String,
+      },
+      addressFull: {
         type: String,
         required: [true, 'An address is required!'],
       },
     },
-    */
   },
   {
     toJSON: { virtuals: true },
@@ -72,6 +74,8 @@ const eventSchema = new mongoose.Schema(
     versionKey: false, //hides __v from events
   }
 );
+
+eventSchema.index({ loc: '2dsphere' });
 
 /**
  * Virtual Populate, creates participants[] on eventSchema

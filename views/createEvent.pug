@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Create Event
+  title= title 
   link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
   // Leaflet's Css
   link(rel='stylesheet' href='https://unpkg.com/leaflet@1.9.3/dist/leaflet.css' integrity='sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=' crossorigin='')
@@ -77,7 +77,8 @@ form#form-create-event.form
     label.form__label(for='address')
       | Location Address
       span.form__required *
-    input#address.form__input(type='text' placeholder='Where is your event?' name='address' autocomplete='off' required='')
+    input#address.form__input(type='text' placeholder='Where is your event?' name='address' autocomplete='off' data-address-description='' data-lat='' data-lng='' required='')
+
   #map
   .form__group
     label.form__label(for='description') Description
@@ -91,7 +92,11 @@ form#form-create-event.form
         .loader__bar.loader__bar--1
         .loader__bar.loader__bar--2
         .loader__bar.loader__bar--3
+//- - const x = 'the x says HELLO!';
 script.
+  // Rendering the server side js variable as JSON string so the client can interpret the value of the variable
+  const MAPBOX_API_KEY = !{JSON.stringify(MAPBOX_API_KEY)}
+   
   // DOM Elms
   const addressEl = document.querySelector('#address');
   const eventInfoDateLocationEl = document.querySelector('.event-info__date-location');
@@ -154,6 +159,10 @@ script.
   </div>
   `;
   eventInfoDateLocationEl.insertAdjacentHTML('beforeend', html);
+  // Update html data-set to allow JS to read the addressDescription & coordinates
+  addressEl.dataset.addressDescription = place.name;
+  addressEl.dataset.lat = lat;
+  addressEl.dataset.lng = lng;
   }
   addressEl.addEventListener('input', function () {
   if (this.value.trim() === '') {
