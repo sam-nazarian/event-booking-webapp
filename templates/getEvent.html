@@ -5,11 +5,169 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>$EVENT NAME</title>
+  <title>Share Event</title>
+
+  <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
+  <link rel="stylesheet" href="/public/css/style.css">
+
 </head>
 
 <body>
 
+  <!-- NOTE: -->
+  <!-- the comments that start with class="" mean that another class could be added or removed to the elemet below it. -->
+  <!-- forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active"> -->
+
+  <!-- class="err--active" -->
+  <div class="err">
+    <svg class="err__exclamation-icon">
+      <use xlink:href="/public/img/sprite.svg#exclamation-icon"></use>
+    </svg>
+
+    <p class="err__message">A custom err message</p>
+  </div>
+
+  <!-- add a inline style for background-color -->
+  <div class="image-cover u-cursor-none" id="image-cover"
+    style="background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('')">
+
+    <div class="event-info">
+
+      <div class="event-info__heading">
+        <h1 class="heading-primary">$EVENT NAME$</h1>
+      </div>
+
+      <div class="event-info__date-location">
+
+        <div class="event-info__date">
+          <svg class="event-info__date-icon">
+            <use xlink:href="/public/img/sprite.svg#calendar-icon"></use>
+          </svg>
+          <p class="event-info-date-para">$XX/XX/XX$</p>
+        </div>
+
+        <div class="event-info__location">
+          <svg class="event-info__location-icon">
+            <use xlink:href="/public/img/sprite.svg#location-icon"></use>
+          </svg>
+          <p class="event-info-location-para">$LOCATION$</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="quick-facts">
+    <h2 class="heading-secondary">Quick Facts</h2>
+
+    <div class="quick-facts__item">
+
+      <div class="quick-facts__heading">
+
+        <div class="quick-facts__location-icon">
+          <svg>
+            <use xlink:href="/public/img/sprite.svg#time-icon"></use>
+          </svg>
+        </div>
+        <span class="quick-facts__item-type">Time</span>
+      </div>
+
+      <div class="quick-facts__item-value">9:00AM &mdash; 2:00PM</div>
+    </div>
+
+    <div class="quick-facts__item">
+
+      <div class="quick-facts__heading">
+
+        <div class="quick-facts__location-icon">
+          <svg>
+            <use xlink:href="/public/img/sprite.svg#check-icon"></use>
+          </svg>
+        </div>
+        <span class="quick-facts__item-type">Going</span>
+      </div>
+
+      <div class="quick-facts__item-value">0 people</div>
+    </div>
+
+    <div class="quick-facts__item">
+
+      <div class="quick-facts__heading">
+
+        <div class="quick-facts__location-icon">
+          <svg>
+            <use xlink:href="/public/img/sprite.svg#cross-icon"></use>
+          </svg>
+        </div>
+        <span class="quick-facts__item-type">Not Going</span>
+      </div>
+
+      <div class="quick-facts__item-value">0 people</div>
+    </div>
+
+  </div>
+
+
+  <div class="invite">
+
+    <div class="invite__description">
+      <div class="invite__description-box">
+        <h3 class="invite__title">Respond to your invite</h3>
+      </div>
+    </div>
+
+    <div class="invite__confirm-wrapper">
+
+      <div class="invite__confirm-btn" id="invite__confirm-btn">
+
+        <div class="invite__confirm-content">
+          <div class="invite__icon-container">
+            <svg>
+              <use xlink:href="/public/img/sprite.svg#check-icon"></use>
+            </svg>
+          </div>
+          <span class="invite__text">confirm</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="invite__decline-wrapper">
+
+      <div class="invite__decline-btn" id="invite__decline-btn">
+
+        <div class="invite__decline-content">
+
+          <div class="invite__icon-container">
+            <svg>
+              <use xlink:href="/public/img/sprite.svg#cross-icon"></use>
+            </svg>
+          </div>
+          <span class="invite__text">confirm</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="invite__arrow-btn" id="invite__arrow-btn">
+
+      <div class="invite__arrow-icon-container">
+        <svg>
+          <use xlink:href="/public/img/sprite.svg#arrow-icon"></use>
+        </svg>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="/public/js/bundled/index.js"></script>
 </body>
 
 </html>

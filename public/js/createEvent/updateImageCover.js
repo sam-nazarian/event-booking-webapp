@@ -68,13 +68,15 @@ function dynamicEventInfoUpdate(inputEl, classBeingAdded, parentEl, htmlFunc) {
   });
 }
 
-// using the function in the inline script in the html
-dynamicEventInfoUpdate(nameEl, 'event-info__heading', eventInfoEl, (inputEl) => {
-  return `<div class="event-info__heading"> <h1 class="heading-primary">${inputEl.value}</h1> </div>`;
-});
+// Function below will only run if the user is on /create-event path
+export function updateDateNameEventInfo() {
+  // using the function in the inline script in the html
+  dynamicEventInfoUpdate(nameEl, 'event-info__heading', eventInfoEl, (inputEl) => {
+    return `<div class="event-info__heading"> <h1 class="heading-primary">${inputEl.value}</h1> </div>`;
+  });
 
-dynamicEventInfoUpdate(dateEl, 'event-info__date', eventInfoDateLocationEl, (inputEl) => {
-  return `
+  dynamicEventInfoUpdate(dateEl, 'event-info__date', eventInfoDateLocationEl, (inputEl) => {
+    return `
     <div class="event-info__date">
       <svg class="event-info__date-icon">
         <use xlink:href="/img/sprite.svg#calendar-icon"></use>
@@ -82,4 +84,5 @@ dynamicEventInfoUpdate(dateEl, 'event-info__date', eventInfoDateLocationEl, (inp
       <p class="event-info-date-para">${inputEl.value}</p>
     </div>
 `;
-});
+  });
+}

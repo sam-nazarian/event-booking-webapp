@@ -1,6 +1,6 @@
 import { showError } from '../utilities/alerts';
 import { createEvent, addSubmitLoader, hideSubmitLoader } from './createEvent';
-import { previewImage } from './updateImageCover';
+import { previewImage, updateDateNameEventInfo } from './updateImageCover';
 
 // DOM ELEMENTS
 const formCreateEventEl = document.querySelector('#form-create-event');
@@ -9,6 +9,7 @@ const dateEl = document.getElementById('date');
 
 if (imageCoverUploadEl) {
   previewImage();
+  updateDateNameEventInfo();
 }
 
 if (dateEl) {

@@ -148,8 +148,10 @@ var _index = require("./createEvent/index");
 var _indexDefault = parcelHelpers.interopDefault(_index);
 var _index1 = require("./shareEvent/index");
 var _indexDefault1 = parcelHelpers.interopDefault(_index1);
+var _index2 = require("./getEvent/index");
+var _indexDefault2 = parcelHelpers.interopDefault(_index2);
 
-},{"./createEvent/index":"4RC4p","./shareEvent/index":"i28Dr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4RC4p":[function(require,module,exports) {
+},{"./createEvent/index":"4RC4p","./shareEvent/index":"i28Dr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./getEvent/index":"a78JO"}],"4RC4p":[function(require,module,exports) {
 var _alerts = require("../utilities/alerts");
 var _createEvent = require("./createEvent");
 var _updateImageCover = require("./updateImageCover");
@@ -157,7 +159,10 @@ var _updateImageCover = require("./updateImageCover");
 const formCreateEventEl = document.querySelector("#form-create-event");
 const imageCoverUploadEl = document.querySelector("#upload-image-cover");
 const dateEl = document.getElementById("date");
-if (imageCoverUploadEl) (0, _updateImageCover.previewImage)();
+if (imageCoverUploadEl) {
+    (0, _updateImageCover.previewImage)();
+    (0, _updateImageCover.updateDateNameEventInfo)();
+}
 if (dateEl) {
     const todaysDate = new Date().toISOString().split("T")[0];
     dateEl.setAttribute("min", todaysDate);
@@ -4289,6 +4294,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // DOM ELMS FOR PREVIEWIMAGE
 parcelHelpers.export(exports, "previewImage", ()=>previewImage);
+// Function below will only run if the user is on /create-event path
+parcelHelpers.export(exports, "updateDateNameEventInfo", ()=>updateDateNameEventInfo);
 const imageCoverUploadEl = document.querySelector("#upload-image-cover");
 const imageCoverEl = document.querySelector("#image-cover");
 const imageCoverOptionsUploadEl = document.querySelector(".image-cover__options-upload");
@@ -4346,12 +4353,13 @@ function previewImage() {
         }
     });
 }
-// using the function in the inline script in the html
-dynamicEventInfoUpdate(nameEl, "event-info__heading", eventInfoEl, (inputEl)=>{
-    return `<div class="event-info__heading"> <h1 class="heading-primary">${inputEl.value}</h1> </div>`;
-});
-dynamicEventInfoUpdate(dateEl, "event-info__date", eventInfoDateLocationEl, (inputEl)=>{
-    return `
+function updateDateNameEventInfo() {
+    // using the function in the inline script in the html
+    dynamicEventInfoUpdate(nameEl, "event-info__heading", eventInfoEl, (inputEl)=>{
+        return `<div class="event-info__heading"> <h1 class="heading-primary">${inputEl.value}</h1> </div>`;
+    });
+    dynamicEventInfoUpdate(dateEl, "event-info__date", eventInfoDateLocationEl, (inputEl)=>{
+        return `
     <div class="event-info__date">
       <svg class="event-info__date-icon">
         <use xlink:href="/img/sprite.svg#calendar-icon"></use>
@@ -4359,7 +4367,8 @@ dynamicEventInfoUpdate(dateEl, "event-info__date", eventInfoDateLocationEl, (inp
       <p class="event-info-date-para">${inputEl.value}</p>
     </div>
 `;
-});
+    });
+}
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i28Dr":[function(require,module,exports) {
 // import files
@@ -4381,6 +4390,13 @@ function clipboardCopy() {
     (0, _alerts.showError)("Copied to clipboard!");
 }
 
-},{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
+},{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a78JO":[function(require,module,exports) {
+const inviteEl = document.querySelector(".invite");
+const inviteArrowBtnEl = document.querySelector("#invite__arrow-btn");
+inviteArrowBtnEl.addEventListener("click", ()=>{
+    inviteEl.classList.toggle("invite--hide");
+});
+
+},{}]},["f2QDv"], "f2QDv", "parcelRequire1761")
 
 //# sourceMappingURL=index.js.map

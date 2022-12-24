@@ -28,7 +28,7 @@ exports.getEvent = catchAsync(async (req, res, next) => {
   const event = await Event.findById(req.params.id).populate('participants').select('-__v');
 
   // 2) Build & Render template using tour data from 1
-  res.status(200).render('event', {
+  res.status(200).render('getEvent', {
     title: event.name,
     event,
   });

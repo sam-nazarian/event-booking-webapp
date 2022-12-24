@@ -27,7 +27,7 @@ head
       .event-info__location
         svg.event-info__location-icon
           use(xlink:href='/img/sprite.svg#location-icon')
-        p.event-info-location-para $LOCATION$
+        p.event-info-location-para=event.location.addressDescription
 section.section-body
   h3.heading-tertiary.u-margin-bottom-small
     | Send your invites out, by sharing the following link with your friends
