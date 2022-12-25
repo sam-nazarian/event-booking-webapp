@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Share Event</title>
+  <title>$EVENT NAME$</title>
 
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
   <link rel="stylesheet" href="/public/css/style.css">
@@ -110,6 +110,7 @@
   </div>
 
 
+  <!-- class="invite__hide" -->
   <div class="invite">
 
     <div class="invite__description">
@@ -146,7 +147,7 @@
               <use xlink:href="/public/img/sprite.svg#cross-icon"></use>
             </svg>
           </div>
-          <span class="invite__text">confirm</span>
+          <span class="invite__text">decline</span>
 
         </div>
 
@@ -166,6 +167,53 @@
 
   </div>
 
+  <div class="arrow-open arrow-open--hide">
+    <svg>
+      <use xlink:href="/public/img/sprite.svg#arrow-icon"></use>
+    </svg>
+  </div>
+
+  <div class="overlay">
+
+    <div class="create-participant">
+
+      <form class="create-participant__form">
+
+        <div class="create-participant__heading">
+          <h5 class="create-participant__title">Welcome!</h5>
+          <p class="create-participant__text">Add your name and a profile picture, to respond to your invite!</p>
+        </div>
+
+        <div class="create-participant__person-card">
+
+          <input class="form__upload" type="file" accept="image/*" id="upload-profile-picture" name="profilePicture" />
+
+          <label for="upload-profile-picture" id="label-profile-picture">
+            <div class="create-participant__profile"></div>
+          </label>
+
+          <input type="text" class="create-participant__name-input" id="create-participant__name" name="fname"
+            placeholder="What is your name..." autocomplete="off" required>
+        </div>
+
+        <div class="create-participant__button-container">
+
+          <button class="create-participant__cancel">
+            Go back
+          </button>
+
+          <button class="create-participant__submit">
+            Done!
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </div>
+
+  </div>
 
   <script src="/public/js/bundled/index.js"></script>
 </body>

@@ -7,34 +7,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   width: 100vw;
   max-width: 47rem;
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 
   &--hide {
     transform: translateX(-47rem);
-  }
-
-  &--hide &__arrow-btn {
-    transform: translateX(10rem);
-
-    align-items: flex-start;
-    justify-content: flex-start;
-    clip-path: polygon(0 0, 100% 0, 0% 100%);
-
-    transition: all 0.2s 0.3s ease-out;
-  }
-
-  &--hide &__arrow-btn &__arrow-icon-container {
-    // transform: rotate(0);
-    // transition: all 0.2s;
-    // background-color: red;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-
-    // svg {
-    //   width: 28px;
-    //   height: 28px;
-    // }
   }
 
   // INVITE-RESPOND__DESCRIPTION
@@ -165,8 +141,6 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 80%);
 
     transform: translateY(-1px);
-
-    // transition: all 0.2s 0.3s ease-out;
   }
 
   &__arrow-icon-container {
@@ -185,17 +159,5 @@
 
   &__arrow-btn:hover &__arrow-icon-container {
     transform: rotate(180deg) scale(1.1);
-  }
-
-  &__arrow-btn {
-    // transform: translateX(10rem);
-
-    align-items: flex-start;
-    justify-content: flex-start;
-    clip-path: polygon(0 0, 100% 0, 0% 100%);
-    padding-top: 2rem;
-    padding-bottom: 4rem;
-
-    transition: all 0.2s 0.3s ease-out;
   }
 }

@@ -1,0 +1,156 @@
+.create-participant {
+  background-color: var(--color-primary);
+  width: 55rem;
+
+  //HEADING
+  &__heading {
+    position: relative;
+    display: inline-block;
+    background: var(--color-tertiary);
+    box-shadow: 4px 2px 2px rgb(0 0 0 / 25%);
+    line-height: 1.4;
+    margin-bottom: 6rem;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 1rem 2rem 1rem 1rem;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    color: var(--color-text-primary);
+  }
+
+  &__text {
+    margin: 0;
+    padding: 0 1.5rem 1rem 1.5rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    font-size: 2.2rem;
+    color: var(--color-text-primary);
+  }
+
+  // PERSON CARD
+  &__person-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6rem;
+  }
+
+  &__profile {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-image: url(/public/img/icons/add-photo.jpg), linear-gradient(130.02deg, #0476d0 12.41%, #047dd9 88.27%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+
+    z-index: 10;
+    position: relative;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+
+  &__name-input {
+    background-color: var(--color-primary-light);
+    padding: 1rem 1.5rem 1rem 3rem;
+    margin-left: -2rem;
+    border-radius: 2px;
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    border: none;
+    width: 60%;
+    color: var(--color-text-primary);
+
+    &:focus {
+      outline: none;
+      // transform: scaleX(1.03);
+      box-shadow: 0 4px 0 var(--color-secondary);
+    }
+
+    &::placeholder {
+      color: inherit;
+      opacity: 0.25;
+    }
+  }
+
+  &__button-container {
+    // filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+    clip-path: var(--clip-tertiary-fixed);
+    background: linear-gradient(112.82deg, #0364af 7.85%, #0d8ff2 96.54%);
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+    min-height: 9rem;
+    width: 100%;
+    margin-bottom: -3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  &__submit {
+    background: #035696;
+    color: var(--color-text-primary);
+    border: none;
+    border-radius: 2px;
+    font-size: 2.6rem;
+    font-weight: 700;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    padding: 0.8rem 0;
+
+    margin-right: 3rem;
+
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #075088;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      background-color: #064677;
+    }
+  }
+
+  &__cancel {
+    margin-left: 3rem;
+    border: none;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    font-size: 2.6rem;
+    color: var(--color-text-primary);
+    background: #0964aa;
+    border-radius: 2px;
+    padding: 0.8rem 0;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #085a99;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      background-color: #064677; //one level darker
+    }
+  }
+}
+
+// TODO STOP SCROLLING WHEN THE BROWSER IS THERE
+html,
+body {
+  overflow: hidden;
+}

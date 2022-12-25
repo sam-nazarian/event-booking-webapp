@@ -9,8 +9,10 @@
 @import 'base/animations';
 
 // Components
+@import 'components/arrow-open';
 @import 'components/btn-wrapper';
 @import 'components/btn';
+@import 'components/create-participant';
 @import 'components/err';
 @import 'components/event-info';
 @import 'components/form';
@@ -20,6 +22,7 @@
 @import 'components/loader';
 @import 'components/autocomplete';
 @import 'components/map';
+@import 'components/overlay';
 @import 'components/quick-facts';
 
 // Pages
