@@ -47,8 +47,12 @@ exports.resizeEventImages = catchAsync(async (req, res, next) => {
  * Creates an event based on req.body info in mongoDB database
  */
 exports.createEvent = catchAsync(async (req, res, next) => {
-  // convert coordinates from String to Number
-  req.body.location.coordinates = req.body.location.coordinates.map((coordinate) => parseFloat(coordinate));
+  if (req.body.location.coordinates) {
+    // convert coordinates from String to Number
+    req.body.location.coordinates = req.body.location.coordinates.map((coordinate) => parseFloat(coordinate));
+  } else {
+    return next(new AppError('You must select a valid address from the location address dropdown', 400));
+  }
 
   //create automatically saves the document
   const doc = await Event.create(req.body);

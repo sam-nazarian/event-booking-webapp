@@ -57,6 +57,7 @@ const eventSchema = new mongoose.Schema(
       // [Longitude, Latitude]
       coordinates: {
         type: [Number],
+        required: [true, 'You must select a valid location from the location address dropdown.'],
       },
       addressDescription: {
         type: String,

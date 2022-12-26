@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- class="u-disable-scrolling" -->
 <html lang="en">
 
 <head>
@@ -8,11 +9,19 @@
   <title>$EVENT NAME$</title>
 
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
+
+  <!-- INDEX CSS -->
   <link rel="stylesheet" href="/public/css/style.css">
+
+  <!-- LEAFLET's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
 </head>
 
-<body>
+<!-- class="u-disable-scrolling" -->
+
+<body id="get-event-page">
 
   <!-- NOTE: -->
   <!-- the comments that start with class="" mean that another class could be added or removed to the elemet below it. -->
@@ -66,7 +75,7 @@
 
       <div class="quick-facts__heading">
 
-        <div class="quick-facts__location-icon">
+        <div class="quick-facts__icon-container">
           <svg>
             <use xlink:href="/public/img/sprite.svg#time-icon"></use>
           </svg>
@@ -81,12 +90,12 @@
 
       <div class="quick-facts__heading">
 
-        <div class="quick-facts__location-icon">
+        <div class="quick-facts__icon-container">
           <svg>
             <use xlink:href="/public/img/sprite.svg#check-icon"></use>
           </svg>
         </div>
-        <span class="quick-facts__item-type">Going</span>
+        <span class="quick-facts__item-type">Attending</span>
       </div>
 
       <div class="quick-facts__item-value">0 people</div>
@@ -96,12 +105,12 @@
 
       <div class="quick-facts__heading">
 
-        <div class="quick-facts__location-icon">
+        <div class="quick-facts__icon-container">
           <svg>
             <use xlink:href="/public/img/sprite.svg#cross-icon"></use>
           </svg>
         </div>
-        <span class="quick-facts__item-type">Not Going</span>
+        <span class="quick-facts__item-type">Not Attending</span>
       </div>
 
       <div class="quick-facts__item-value">0 people</div>
@@ -109,6 +118,56 @@
 
   </div>
 
+  <div class="event-description">
+    <p class="event-description__text">The Chess rule when touching a piece is listed below:</p>
+    <p class="event-description__text">This is otherwise known as the touch move rule. Going by this rule, you will have
+      to move the piece you actually touch. This is a rule to look out for, especially if you are a beginner. You cannot
+      keep fiddling with your pieces and moves in a tournament. Hence, there is no undoing a careless move so be careful
+      which piece you touch.</p>
+    <p class="event-description__text">However, if you touch a piece by mistake while reaching out for another piece,
+      your opponent cannot instigate this rule.</p>
+  </div>
+
+  <div class="map-container u-margin-bottom-large">
+    <div id="map" class="map map--get-event"></div>
+  </div>
+
+
+  <div class="participant">
+    <h2 class="heading-secondary u-margin-bottom-tiny">Participants</h2>
+
+    <div class="participant__container">
+
+      <div class="participant__attending">
+
+        <div class="participant__heading">
+          <div class="participant__icon-container">
+            <svg>
+              <use xlink:href="/public/img/sprite.svg#check-icon"></use>
+            </svg>
+          </div>
+          <span class="participant__item-type">Attending</span>
+        </div>
+
+      </div>
+
+      <div class="participant__not-attending">
+
+        <div class="participant__heading">
+          <div class="participant__icon-container">
+            <svg>
+              <use xlink:href="/public/img/sprite.svg#cross-icon"></use>
+            </svg>
+          </div>
+          <span class="participant__item-type">Not Attending</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
   <!-- class="invite__hide" -->
   <div class="invite">
@@ -215,6 +274,11 @@
 
   </div>
 
+  <!-- LEAFLET's JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <!-- INDEX JS -->
   <script src="/public/js/bundled/index.js"></script>
 </body>
 

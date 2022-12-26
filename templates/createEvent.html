@@ -9,16 +9,21 @@
 
   <link rel="shortcut icon" type="image/png" href="/public/img/favicon/favicon.png" />
 
-  <!-- Leaflet's Css -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <!-- INDEX CSS -->
   <link rel="stylesheet" href="/public/css/style.css">
 
+  <!-- LEAFLET's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+  <!-- LEAFLET's JS -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
+  <!-- INDEX JS -->
   <script defer src="/public/js/bundled/index.js"></script>
 
+  <!-- GOOGLE PLACE'S API -->
   <script defer
     src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=initAutocomplete">
   </script>
@@ -123,7 +128,7 @@
         autocomplete="off" data-address-description="" data-lat="" data-lng="" required>
     </div>
 
-    <div id="map" class=""></div>
+    <div id="map"></div>
 
     <div class="form__group">
       <label for="description" class="form__label">Description</label>

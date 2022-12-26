@@ -1,0 +1,17 @@
+.event-description {
+  margin: 0 auto;
+  width: 85vw;
+  max-width: 100rem;
+  margin-bottom: 6rem;
+
+  text-align: justify;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+
+  &__text:not(:last-of-type) {
+    margin-bottom: 1.7rem;
+  }
+}

@@ -2,7 +2,7 @@
   position: relative;
   width: 85vw; //if width <40rem then width will be 85vw
   max-width: 40rem;
-  margin: -9vh auto 0 auto;
+  margin: -9vh auto 4rem auto;
   background-color: var(--color-primary);
   box-shadow: 4px 1px 2px #0a1b29;
   z-index: 5;
@@ -27,7 +27,7 @@
     letter-spacing: 0.5px;
   }
 
-  &__location-icon {
+  &__icon-container {
     display: flex;
     align-items: center;
     justify-content: center;

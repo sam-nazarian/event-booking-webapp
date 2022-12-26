@@ -32,8 +32,12 @@ if (formCreateEventEl) {
     form.append('description', document.getElementById('description').value);
 
     const addressEl = document.getElementById('address');
-    form.append('location[coordinates][0]', addressEl.dataset.lng);
-    form.append('location[coordinates][1]', addressEl.dataset.lat);
+
+    if (addressEl.dataset.lng && addressEl.dataset.lat) {
+      form.append('location[coordinates][0]', addressEl.dataset.lng);
+      form.append('location[coordinates][1]', addressEl.dataset.lat);
+    }
+
     form.append('location[addressDescription]', addressEl.dataset.addressDescription);
     form.append('location[addressFull]', addressEl.value);
 

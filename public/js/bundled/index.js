@@ -179,8 +179,10 @@ if (formCreateEventEl) formCreateEventEl.addEventListener("submit", async (e)=>{
     form.append("endTime", document.getElementById("end-time").value);
     form.append("description", document.getElementById("description").value);
     const addressEl = document.getElementById("address");
-    form.append("location[coordinates][0]", addressEl.dataset.lng);
-    form.append("location[coordinates][1]", addressEl.dataset.lat);
+    if (addressEl.dataset.lng && addressEl.dataset.lat) {
+        form.append("location[coordinates][0]", addressEl.dataset.lng);
+        form.append("location[coordinates][1]", addressEl.dataset.lat);
+    }
     form.append("location[addressDescription]", addressEl.dataset.addressDescription);
     form.append("location[addressFull]", addressEl.value);
     await (0, _createEvent.createEvent)(form);
@@ -4392,44 +4394,94 @@ function clipboardCopy() {
 
 },{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a78JO":[function(require,module,exports) {
 var _alerts = require("../utilities/alerts");
-// Opening & closing the invite
-const inviteEl = document.querySelector(".invite");
-const inviteArrowBtnEl = document.querySelector("#invite__arrow-btn");
-const arrowOpenEl = document.querySelector(".arrow-open");
-inviteArrowBtnEl.addEventListener("click", ()=>{
-    inviteEl.classList.toggle("invite--hide");
-    arrowOpenEl.classList.toggle("arrow-open--hide");
-});
-arrowOpenEl.addEventListener("click", ()=>{
-    inviteEl.classList.toggle("invite--hide");
-    arrowOpenEl.classList.toggle("arrow-open--hide");
-});
+var _config = require("../utilities/config");
+const getEventPageEl = document.querySelector("#get-event-page");
+const root = document.getElementsByTagName("html")[0];
+// Create participant component
 const createParticipantSubmitEl = document.querySelector(".create-participant__submit");
 const createParticipantCancelEL = document.querySelector(".create-participant__cancel");
 const overlayEl = document.querySelector(".overlay");
-createParticipantSubmitEl.addEventListener("click", (e)=>{
-    e.preventDefault();
-    (0, _alerts.showError)("Functionality not implemented!");
-// overlayEl.classList.add('u-display-hide');
-});
-createParticipantCancelEL.addEventListener("click", (e)=>{
-    e.preventDefault();
-    overlayEl.classList.add("u-display-hide");
-});
-overlayEl.addEventListener("click", (e)=>{
-    if (e.target.classList.contains("overlay")) overlayEl.classList.add("u-display-hide");
-});
+// Confirm or decline btns - Invite-respond component
 const inviteConfirmBtnEl = document.querySelector("#invite__confirm-btn");
 const inviteDeclineBtnEl = document.querySelector("#invite__decline-btn");
-inviteConfirmBtnEl.addEventListener("click", (e)=>{
-    e.preventDefault();
-    overlayEl.classList.remove("u-display-hide");
-});
-inviteDeclineBtnEl.addEventListener("click", (e)=>{
-    e.preventDefault();
-    overlayEl.classList.remove("u-display-hide");
-});
+// Opening & closing the invite - Invite-respond component
+const inviteEl = document.querySelector(".invite");
+const inviteArrowBtnEl = document.querySelector("#invite__arrow-btn");
+const arrowOpenEl = document.querySelector(".arrow-open");
+function addEventListeners() {
+    // Event listeners for create participant component
+    createParticipantSubmitEl.addEventListener("click", (e)=>{
+        e.preventDefault();
+        (0, _alerts.showError)("Functionality not implemented!");
+    // document.body.classList.remove('u-disable-scrolling');
+    // root.classList.remove('u-disable-scrolling');
+    });
+    createParticipantCancelEL.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.add("u-display-hide");
+        document.body.classList.remove("u-disable-scrolling");
+        root.classList.remove("u-disable-scrolling");
+    });
+    overlayEl.addEventListener("click", (e)=>{
+        if (e.target.classList.contains("overlay")) {
+            overlayEl.classList.add("u-display-hide");
+            document.body.classList.remove("u-disable-scrolling");
+            root.classList.remove("u-disable-scrolling");
+        }
+    });
+    // Event listeners Invite-respond component
+    inviteConfirmBtnEl.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.remove("u-display-hide");
+        document.body.classList.add("u-disable-scrolling");
+        root.classList.add("u-disable-scrolling");
+    });
+    inviteDeclineBtnEl.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.remove("u-display-hide");
+        document.body.classList.add("u-disable-scrolling");
+        root.classList.add("u-disable-scrolling");
+    });
+    // Close/open of Event listeners Invite-respond component
+    inviteArrowBtnEl.addEventListener("click", ()=>{
+        inviteEl.classList.toggle("invite--hide");
+        arrowOpenEl.classList.toggle("arrow-open--hide");
+    });
+    arrowOpenEl.addEventListener("click", ()=>{
+        inviteEl.classList.toggle("invite--hide");
+        arrowOpenEl.classList.toggle("arrow-open--hide");
+    });
+}
+function addMap() {
+    const map = L.map("map", {
+        scrollWheelZoom: false,
+        dragging: !L.Browser.mobile
+    }).setView([
+        49.883226,
+        -97.155884
+    ], 2);
+    L.tileLayer(`https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=${(0, _config.MAPBOX_API_KEY)}`).addTo(map);
+    map.setView([
+        49.883226,
+        -97.155884
+    ], 2, {
+        animate: true,
+        pan: {
+            duration: 2
+        }
+    });
+}
+if (getEventPageEl) {
+    addEventListeners();
+    addMap();
+}
 
-},{"../utilities/alerts":"jSl5m"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
+},{"../utilities/alerts":"jSl5m","../utilities/config":"5MSsZ"}],"5MSsZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MAPBOX_API_KEY", ()=>MAPBOX_API_KEY);
+const MAPBOX_API_KEY = "pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f2QDv"], "f2QDv", "parcelRequire1761")
 
 //# sourceMappingURL=index.js.map
