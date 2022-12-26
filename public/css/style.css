@@ -409,18 +409,13 @@ body {
   background-color: #064677;
 }
 
-html,
-body {
-  overflow: hidden;
-}
-
 .err {
   position: fixed;
   display: grid;
   top: 5rem;
   left: -90vw;
   width: 90vw;
-  z-index: 9999;
+  z-index: 9999999999999;
   background-color: var(--color-secondary);
   grid-template-columns: min-content 1fr;
   align-items: center;
@@ -672,7 +667,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100vw;
   max-width: 47rem;
-  transition: all 0.2s ease-out;
+  transition: all 0.2s 0.1s ease-out;
 }
 .invite--hide {
   transform: translateX(-47rem);
