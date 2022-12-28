@@ -1,5 +1,5 @@
 .participant {
-  margin-bottom: 12rem;
+  margin-bottom: 14rem;
 
   &__container {
     display: grid;
@@ -8,8 +8,13 @@
     justify-items: center;
   }
 
-  &__attending {
+  &__attending,
+  &__not-attending {
     align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   &__heading {

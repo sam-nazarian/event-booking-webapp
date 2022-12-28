@@ -331,11 +331,7 @@ body {
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
-  background-image: url(/public/img/icons/add-photo.jpg), linear-gradient(130.02deg, #0476d0 12.41%, #047dd9 88.27%);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  object-fit: cover;
   cursor: pointer;
   z-index: 10;
   position: relative;
@@ -940,9 +936,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.participant-item:not(:last-of-type) {
   margin-bottom: 2rem;
 }
 .participant-item__profile-picture {
+  position: relative;
   z-index: 10;
   object-fit: cover;
   border-radius: 50%;
@@ -965,7 +964,7 @@ body {
 }
 
 .participant {
-  margin-bottom: 12rem;
+  margin-bottom: 14rem;
 }
 .participant__container {
   display: grid;
@@ -973,8 +972,12 @@ body {
   align-items: center;
   justify-items: center;
 }
-.participant__attending {
+.participant__attending, .participant__not-attending {
   align-self: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .participant__heading {
   display: flex;

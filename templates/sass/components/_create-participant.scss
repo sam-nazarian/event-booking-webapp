@@ -43,17 +43,11 @@
     width: 7rem;
     height: 7rem;
     border-radius: 50%;
-    background-image: url(/public/img/icons/add-photo.jpg), linear-gradient(130.02deg, #0476d0 12.41%, #047dd9 88.27%);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
+    object-fit: cover;
     cursor: pointer;
-
     z-index: 10;
     position: relative;
     transition: all 0.2s;
-
     &:hover {
       transform: scale(1.04);
     }
