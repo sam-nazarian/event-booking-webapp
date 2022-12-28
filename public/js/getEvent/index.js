@@ -48,7 +48,7 @@ function addEventListeners() {
     e.preventDefault();
     overlayEl.classList.remove('u-display-hide');
 
-    document.body.classList.add('u-disable-scrolling');
+    // document.body.classList.add('u-disable-scrolling'); //causes page to reload
     root.classList.add('u-disable-scrolling');
   });
 
@@ -56,7 +56,7 @@ function addEventListeners() {
     e.preventDefault();
     overlayEl.classList.remove('u-display-hide');
 
-    document.body.classList.add('u-disable-scrolling');
+    // document.body.classList.add('u-disable-scrolling'); //causes page to reload
     root.classList.add('u-disable-scrolling');
   });
 

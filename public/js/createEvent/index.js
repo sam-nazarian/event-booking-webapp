@@ -39,7 +39,7 @@ if (formCreateEventEl) {
     }
 
     form.append('location[addressDescription]', addressEl.dataset.addressDescription);
-    form.append('location[addressFull]', addressEl.value);
+    form.append('location[addressFull]', addressEl.dataset.addressFull);
 
     await createEvent(form);
     hideSubmitLoader();

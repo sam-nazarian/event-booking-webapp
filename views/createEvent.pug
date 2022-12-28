@@ -50,7 +50,7 @@ form#form-create-event.form
             <p class="event-info-location-para"></p>
             </div>
       button.btn.btn__options-delete-image.u-display-hide
-        img.btn__bin(src='/img/icons/bin.png' alt='bin icon')
+        img.btn__bin(src='/img/icons/bin-icon.png' alt='bin icon')
   .form__group
     label.form__label(for='name')
       | Event Name
@@ -96,7 +96,7 @@ form#form-create-event.form
 script.
   // Rendering the server side js variable as JSON string so the client can interpret the value of the variable
   const MAPBOX_API_KEY = !{JSON.stringify(MAPBOX_API_KEY)}
-   
+
   // DOM Elms
   const addressEl = document.querySelector('#address');
   const eventInfoDateLocationEl = document.querySelector('.event-info__date-location');
@@ -147,7 +147,7 @@ script.
   // Display details about the valid place
   const lat = place.geometry.location.lat();
   const lng = place.geometry.location.lng();
-  mapSetView(lat, lng, 11, place.name);
+  mapSetView(lat, lng, 11, addressEl.value);
   // Update eventInfoLocation automatically
   if (eventInfoLocationEl) eventInfoLocationEl.remove();
   const html = `
@@ -161,6 +161,7 @@ script.
   eventInfoDateLocationEl.insertAdjacentHTML('beforeend', html);
   // Update html data-set to allow JS to read the addressDescription & coordinates
   addressEl.dataset.addressDescription = place.name;
+  addressEl.dataset.addressFull = addressEl.value;
   addressEl.dataset.lat = lat;
   addressEl.dataset.lng = lng;
   }

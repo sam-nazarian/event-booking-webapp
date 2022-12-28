@@ -90,7 +90,7 @@
         </div>
 
         <button class="btn btn__options-delete-image u-display-hide">
-          <img src="/public/img/icons/bin.png" alt="bin icon" class="btn__bin">
+          <img src="/public/img/icons/bin-icon.png" alt="bin icon" class="btn__bin">
         </button>
 
       </div>
@@ -125,7 +125,7 @@
     <div class="form__group">
       <label for="address" class="form__label">Location Address<span class="form__required">*</span></label>
       <input type="text" id="address" class="form__input" placeholder="Where is your event?" name="address"
-        autocomplete="off" data-address-description="" data-lat="" data-lng="" required>
+        autocomplete="off" data-address-description="" data-lat="" data-lng="" addressFull="" required>
     </div>
 
     <div id="map"></div>
@@ -155,6 +155,9 @@
   </form>
 
   <script>
+    // Rendering the server side js variable as JSON string so the client can interpret the value of the variable
+    // const MAPBOX_API_KEY = !{JSON.stringify(MAPBOX_API_KEY)}
+
     // DOM Elms
     const addressEl = document.querySelector('#address');
     const eventInfoDateLocationEl = document.querySelector('.event-info__date-location');
@@ -177,7 +180,6 @@
       if (marker !== undefined) {
         map.removeLayer(marker);
       }
-
 
       // Create marker
       if (locationName !== '') {
@@ -221,7 +223,7 @@
         // Display details about the valid place
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
-        mapSetView(lat, lng, 11, place.name);
+        mapSetView(lat, lng, 11, addressEl.value);
 
         // Update eventInfoLocation automatically 
         if (eventInfoLocationEl) eventInfoLocationEl.remove();
@@ -237,6 +239,7 @@
 
         // Update html data-set to allow JS to read the addressDescription & coordinates
         addressEl.dataset.addressDescription = place.name;
+        addressEl.dataset.addressFull = addressEl.value;
         addressEl.dataset.lat = lat;
         addressEl.dataset.lng = lng;
       }

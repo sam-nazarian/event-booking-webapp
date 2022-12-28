@@ -1,7 +1,151 @@
 doctype html
-html
-  head
-    link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
-
-body  
-  h2.heading-secondary This is GET EVENT!
+// class="u-disable-scrolling"
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title $EVENT NAME$
+  link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
+  // INDEX CSS
+  link(rel='stylesheet' href='/css/style.css')
+  // LEAFLET's CSS
+  link(rel='stylesheet' href='https://unpkg.com/leaflet@1.9.3/dist/leaflet.css' integrity='sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=' crossorigin='')
+// class="u-disable-scrolling"
+// NOTE:
+// the comments that start with class="" mean that another class could be added or removed to the elemet below it.
+// forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
+// class="err--active"
+body#get-event-page
+  .err
+    svg.err__exclamation-icon
+      use(xlink:href='/img/sprite.svg#exclamation-icon')
+    p.err__message A custom err message
+  // add a inline style for background-color
+  #image-cover.image-cover.u-cursor-none(style="background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('')")
+    .event-info
+      .event-info__heading
+        h1.heading-primary $EVENT NAME$
+      .event-info__date-location
+        .event-info__date
+          svg.event-info__date-icon
+            use(xlink:href='/img/sprite.svg#calendar-icon')
+          p.event-info-date-para $XX/XX/XX$
+        .event-info__location
+          svg.event-info__location-icon
+            use(xlink:href='/img/sprite.svg#location-icon')
+          p.event-info-location-para $LOCATION$
+  .quick-facts
+    h2.heading-secondary Quick Facts
+    .quick-facts__item
+      .quick-facts__heading
+        .quick-facts__icon-container
+          svg
+            use(xlink:href='/img/sprite.svg#time-icon')
+        span.quick-facts__item-type Time
+      .quick-facts__item-value 9:00AM &mdash; 2:00PM
+    .quick-facts__item
+      .quick-facts__heading
+        .quick-facts__icon-container
+          svg
+            use(xlink:href='/img/sprite.svg#check-icon')
+        span.quick-facts__item-type Attending
+      .quick-facts__item-value 0 people
+    .quick-facts__item
+      .quick-facts__heading
+        .quick-facts__icon-container
+          svg
+            use(xlink:href='/img/sprite.svg#cross-icon')
+        span.quick-facts__item-type Not Attending
+      .quick-facts__item-value 0 people
+  .event-description
+    p.event-description__text The Chess rule when touching a piece is listed below:
+    p.event-description__text
+      | This is otherwise known as the touch move rule. Going by this rule, you will have
+      | to move the piece you actually touch. This is a rule to look out for, especially if you are a beginner. You cannot
+      | keep fiddling with your pieces and moves in a tournament. Hence, there is no undoing a careless move so be careful
+      | which piece you touch.
+    p.event-description__text
+      | However, if you touch a piece by mistake while reaching out for another piece,
+      | your opponent cannot instigate this rule.
+  .map-container.u-margin-bottom-large
+    #map.map.map--get-event
+  .participant
+    h2.heading-secondary.u-margin-bottom-tiny Participants
+    .participant__container
+      .participant__attending
+        .participant__heading
+          .participant__icon-container
+            svg
+              use(xlink:href='/img/sprite.svg#check-icon')
+          span.participant__item-type Attending
+        .participant-item
+          img.participant-item__profile-picture(src='/img/users/default.jpeg' alt='$USER-NAME$')
+          span.participant-item__value
+            | Saman Fathnazarian
+        .participant-item
+          img.participant-item__profile-picture(src='/img/users/saman-user.jpg' alt='$USER-NAME$')
+          span.participant-item__value
+            | Saman
+      .participant__not-attending
+        .participant__heading
+          .participant__icon-container
+            svg
+              use(xlink:href='/img/sprite.svg#cross-icon')
+          span.participant__item-type Not Attending
+        .participant-item
+          img.participant-item__profile-picture(src='/img/users/user-UNDEFINED-ID-1668500784018.jpeg' alt='$USER-NAME$')
+          span.participant-item__value
+            | Liam
+        .participant-item
+          img.participant-item__profile-picture(src='/img/users/default.jpeg' alt='$USER-NAME$')
+          span.participant-item__value
+            | Oliver Schwarzenegger
+  .discussion
+    h2.heading-secondary Discussion
+  // class="invite__hide"
+  .invite
+    .invite__description
+      .invite__description-box
+        h3.invite__title Respond to your invite
+    .invite__confirm-wrapper
+      #invite__confirm-btn.invite__confirm-btn
+        .invite__confirm-content
+          .invite__icon-container
+            svg
+              use(xlink:href='/img/sprite.svg#check-icon')
+          span.invite__text confirm
+    .invite__decline-wrapper
+      #invite__decline-btn.invite__decline-btn
+        .invite__decline-content
+          .invite__icon-container
+            svg
+              use(xlink:href='/img/sprite.svg#cross-icon')
+          span.invite__text decline
+    #invite__arrow-btn.invite__arrow-btn
+      .invite__arrow-icon-container
+        svg
+          use(xlink:href='/img/sprite.svg#arrow-icon')
+  .arrow-open.arrow-open--hide
+    svg
+      use(xlink:href='/img/sprite.svg#arrow-icon')
+  // class="u-display-hide"
+  .overlay.u-display-hide
+    .create-participant
+      form.create-participant__form
+        .create-participant__heading
+          h5.create-participant__title Welcome!
+          p.create-participant__text Add your name and a profile picture, to respond to your invite!
+        .create-participant__person-card
+          input#upload-profile-picture.form__upload(type='file' accept='image/*' name='profilePicture')
+          label#label-profile-picture(for='upload-profile-picture')
+            img.create-participant__profile(src='/img/icons/add-photo-icon.jpg' alt='Profile picture')
+          input#create-participant__name.create-participant__name-input(type='text' name='fname' placeholder='What is your name...' autocomplete='off' required='')
+        .create-participant__button-container
+          button.create-participant__cancel
+            | Go back
+          button.create-participant__submit
+            | Done!
+  // LEAFLET's JS
+  script(src='https://unpkg.com/leaflet@1.9.3/dist/leaflet.js' integrity='sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=' crossorigin='')
+  // INDEX JS
+  script(src='/js/bundled/index.js')

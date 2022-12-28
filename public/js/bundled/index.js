@@ -184,7 +184,7 @@ if (formCreateEventEl) formCreateEventEl.addEventListener("submit", async (e)=>{
         form.append("location[coordinates][1]", addressEl.dataset.lat);
     }
     form.append("location[addressDescription]", addressEl.dataset.addressDescription);
-    form.append("location[addressFull]", addressEl.value);
+    form.append("location[addressFull]", addressEl.dataset.addressFull);
     await (0, _createEvent.createEvent)(form);
     (0, _createEvent.hideSubmitLoader)();
 });
@@ -4433,13 +4433,13 @@ function addEventListeners() {
     inviteConfirmBtnEl.addEventListener("click", (e)=>{
         e.preventDefault();
         overlayEl.classList.remove("u-display-hide");
-        document.body.classList.add("u-disable-scrolling");
+        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
         root.classList.add("u-disable-scrolling");
     });
     inviteDeclineBtnEl.addEventListener("click", (e)=>{
         e.preventDefault();
         overlayEl.classList.remove("u-display-hide");
-        document.body.classList.add("u-disable-scrolling");
+        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
         root.classList.add("u-disable-scrolling");
     });
     // Close/open of Event listeners Invite-respond component
