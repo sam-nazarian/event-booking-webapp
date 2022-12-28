@@ -215,10 +215,7 @@
       const place = autocomplete.getPlace();
 
       if (!place.geometry) {
-        // User did not select a prediction; reset the input field
-        mapSetView(49.883226, -97.155884, 2, '');
-        if (eventInfoLocationEl) eventInfoLocationEl.remove();
-
+        // User did not select a prediction
       } else {
         // Display details about the valid place
         const lat = place.geometry.location.lat();
@@ -249,6 +246,10 @@
           const eventInfoLocationEl = document.querySelector('.event-info__location');
           if (eventInfoLocationEl) eventInfoLocationEl.remove();
           mapSetView(49.883226, -97.155884, 2, '');
+          addressEl.dataset.addressDescription = ''
+          addressEl.dataset.addressFull = '';
+          addressEl.dataset.lat = '';
+          addressEl.dataset.lng = '';
         }
       })
 

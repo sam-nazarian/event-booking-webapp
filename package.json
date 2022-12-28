@@ -8,7 +8,7 @@
     "watch:server": "NODE_ENV=development nodemon server.js",
     "watch:sass": "sass templates/sass/main.scss public/css/style.css -w",
     "watch:js": "parcel serve ./public/js/index.js --dist-dir ./public/js/bundled --no-hmr",
-    "build:svg": "svg-sprite-generate -d /public/img/svg -o /public/img/sprite.svg",
+    "build:svg": "svg-sprite-generate -d ./public/img/svg -o ./public/img/sprite.svg",
     "build:server": "NODE_ENV=production nodemon server.js",
     "build:js": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled"
   },
