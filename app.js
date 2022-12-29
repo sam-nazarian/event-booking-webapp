@@ -78,7 +78,7 @@ app.use('/', viewRouter);
 
 app.all('*', (req, res, next) => {
   //next with a parameter is an error
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`We know it’s scary, but ${req.originalUrl} can’t be found. Perhaps it was just a bad dream?`, 404));
 });
 
 app.use(globalErrorHandler);

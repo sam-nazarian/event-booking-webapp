@@ -1,10 +1,14 @@
 const AppError = require('../utils/appError');
 
+//mongoDB when invalid id or value was sent (usually the case with Ids)
 const handleCastErrorDB = (err) => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
+  if (err.path === '_id') err.path = 'ID'; //formatting id name
+
+  const message = `Invalid ${err.path}: ${err.value}`;
   return new AppError(message, 400);
 };
 
+//mongoDB duplicate value error
 const handleDuplicateFieldsDB = (err) => {
   // const value = err.message.match(/"(.*?)"/)[1]; //selecting duplicate value name between quotes, value is array selecting 1st el
   const value = err.keyValue.name;
@@ -12,16 +16,25 @@ const handleDuplicateFieldsDB = (err) => {
   return new AppError(message, 400);
 };
 
+//mongoDB validation fails
 const handleValidationErrorDB = (err) => {
-  const message = `Please correct the following errors: ${err.message}`;
+  const errors = Object.values(err.errors).map((el) => el.message);
+  const message = `Invalid input data: ${errors.join('. ')}`;
   return new AppError(message, 400);
+
+  // another way to due the same thing using err.message instead, however the error becomes longer
+  // const message = `Please correct the following errors: ${err.message}`;
+  // return new AppError(message, 400);
 };
 
+// when the user has an invalid token which is caused by the user modifying the token
+// happens when JWT verify fails in authController.protect
 const handleJWTError = () => {
-  const message = `Invalid token. Pleas log in again!`;
+  const message = `Invalid token. Please log in again!`;
   return new AppError(message, 401);
 };
 
+// if verification of token in authController.protect fails due to token being expired
 const handleJWTExpiredError = () => {
   const message = 'Your token has expired! Please log in again.';
   return new AppError(message, 401);
@@ -83,8 +96,6 @@ const sendErrorProd = (err, req, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  // console.log(err.stack);
-
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
