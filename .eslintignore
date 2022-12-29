@@ -1,1 +1,4 @@
 /public/js/
+/templates/sass/
+*.scss
+*.css

@@ -139,7 +139,7 @@ body#get-event-page
           input#upload-profile-picture.form__upload(type='file' accept='image/*' name='profilePicture')
           label#label-profile-picture(for='upload-profile-picture')
             img.create-participant__profile(src='/img/icons/add-photo-icon.jpg' alt='Profile picture')
-          input#create-participant__name.create-participant__name-input(type='text' name='fname' placeholder='What is your name...' autocomplete='off' required='')
+          input#create-participant__name.create-participant__name-input(type='text' name='fname' placeholder='What is your name...' autocomplete='off' spellcheck='false' required)
         .create-participant__button-container
           button.create-participant__cancel
             | Go back

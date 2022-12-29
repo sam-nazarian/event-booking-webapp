@@ -24,14 +24,14 @@
   }
 
   &:hover &__options-upload &__upload-icon {
-    transform: scale(1.03);
+    transform: translateX(7px) scale(1.03);
   }
 
   &__upload-icon {
     height: 8rem;
     width: 8rem;
     margin-bottom: 2rem;
-    // transform: translateX(7px); //offset the top right "+" sign on the image
+    transform: translateX(7px); //offset the top right "+" sign on the icon
     transition: all 0.2s;
   }
 
@@ -39,10 +39,8 @@
     padding: 0.5rem 2rem;
     border-radius: 24px;
     background-color: var(--color-primary-light);
-    font-family: var(--font-primary);
     font-weight: 400;
     font-size: 1.6rem;
-    color: var(--color-text-primary);
     text-align: center;
     // white-space: nowrap; //make text stay in 1 line
   }

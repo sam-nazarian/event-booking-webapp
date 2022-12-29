@@ -1,4 +1,4 @@
-const errorPageEl = document.querySelector('.error-page');
+const errorPageEl = document.querySelector('#error-page');
 
 if (errorPageEl) {
   let yetiTL,

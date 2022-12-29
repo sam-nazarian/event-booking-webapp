@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 :root {
   --color-primary: #022c4d;
   --color-primary-light: #035696;
@@ -74,6 +75,7 @@ body {
   box-sizing: border-box;
   background-color: var(--color-primary);
   color: var(--color-text-primary);
+  font-family: var(--font-primary);
 }
 
 html,
@@ -89,7 +91,6 @@ body {
 
 .heading-primary {
   display: inline-block;
-  font-family: var(--font-primary);
   color: var(--color-text-primary);
   text-transform: uppercase;
   text-align: center;
@@ -103,7 +104,6 @@ body {
   margin: 0;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
-  font-family: var(--font-primary);
   font-size: 2.4rem;
   font-weight: 500;
   color: transparent;
@@ -121,7 +121,6 @@ body {
   z-index: 10;
   width: 90vw;
   padding: 1rem 2rem 1rem 1rem;
-  font-family: var(--font-primary);
   font-weight: 700;
   font-size: 2.8rem;
   letter-spacing: 0.5px;
@@ -242,7 +241,6 @@ body {
   background: transparent;
   text-align: center;
   z-index: 10;
-  font-family: var(--font-primary);
   font-weight: 700;
   font-size: 6.4rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
@@ -307,7 +305,6 @@ body {
 .create-participant__title {
   margin: 0;
   padding: 1rem 2rem 1rem 1rem;
-  font-family: var(--font-primary);
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: 0.5px;
@@ -316,7 +313,6 @@ body {
 .create-participant__text {
   margin: 0;
   padding: 0 1.5rem 1rem 1.5rem;
-  font-family: var(--font-primary);
   font-weight: 300;
   font-size: 2.2rem;
   color: var(--color-text-primary);
@@ -345,10 +341,10 @@ body {
   padding: 1rem 1.5rem 1rem 3rem;
   margin-left: -2rem;
   border-radius: 2px;
-  font-family: var(--font-primary);
+  font-family: inherit;
   font-weight: 400;
   font-size: 2rem;
-  color: var(--color-text-primary);
+  color: inherit;
   border: none;
   width: 60%;
 }
@@ -379,7 +375,6 @@ body {
   border-radius: 2px;
   font-size: 2.6rem;
   font-weight: 700;
-  font-family: var(--font-primary);
   cursor: pointer;
   padding: 0.8rem 0;
   margin-right: 3rem;
@@ -395,7 +390,6 @@ body {
 .create-participant__cancel {
   margin-left: 3rem;
   border: none;
-  font-family: var(--font-primary);
   font-weight: 300;
   font-size: 2.6rem;
   color: var(--color-text-primary);
@@ -421,7 +415,7 @@ body {
   position: fixed;
   display: grid;
   top: 5rem;
-  left: -90vw;
+  left: -95vw;
   width: 90vw;
   z-index: 9999999999999;
   background-color: var(--color-secondary);
@@ -453,8 +447,6 @@ body {
   text-align: justify;
   font-size: 1.8rem;
   font-weight: 300;
-  color: var(--color-text-primary);
-  font-family: var(--font-primary);
   line-height: 1.6;
 }
 .event-description__text:not(:last-of-type) {
@@ -498,29 +490,30 @@ body {
 }
 .form__label {
   display: block;
-  font-family: var(--font-primary);
+  font-family: inherit;
+  color: inherit;
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: 0.5px;
-  color: var(--color-text-primary);
   margin-bottom: 0.75rem;
 }
 .form__input {
   width: calc(100% - 3rem);
   padding: 0 1.5rem 1rem 0;
-  font-family: var(--font-primary);
+  font-family: inherit;
+  color: inherit;
   font-weight: 300;
   font-size: 1.8rem;
-  color: var(--color-text-primary);
   background-color: transparent;
   border: none;
-  box-shadow: 0 1px 0 var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
   transition: all 0.05s ease-in-out;
   appearance: none;
 }
 .form__input:focus {
   outline: none;
-  box-shadow: 0 3px 0 var(--color-secondary);
+  border-bottom: 3px solid var(--color-secondary);
+  margin-bottom: -2px;
 }
 .form__input::placeholder {
   color: inherit;
@@ -542,21 +535,22 @@ body {
 .form__textarea {
   width: calc(100% - 3rem);
   height: 15rem;
-  font-family: var(--font-primary);
+  font-family: inherit;
+  color: inherit;
   font-weight: 300;
   font-size: 1.8rem;
   line-height: 1.6;
-  color: var(--color-text-primary);
   background-color: transparent;
   border: none;
-  box-shadow: 0 1px 0 var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
   transition: all 0.05s ease-in-out;
   appearance: none;
   resize: none;
 }
 .form__textarea:focus {
   outline: none;
-  box-shadow: 0 3px 0 var(--color-secondary);
+  border-bottom: 3px solid var(--color-secondary);
+  margin-bottom: -2px;
 }
 .form__textarea::placeholder {
   color: inherit;
@@ -599,22 +593,21 @@ body {
   align-items: center;
 }
 .image-cover:hover .image-cover__options-upload .image-cover__upload-icon {
-  transform: scale(1.03);
+  transform: translateX(7px) scale(1.03);
 }
 .image-cover__upload-icon {
   height: 8rem;
   width: 8rem;
   margin-bottom: 2rem;
+  transform: translateX(7px);
   transition: all 0.2s;
 }
 .image-cover__description {
   padding: 0.5rem 2rem;
   border-radius: 24px;
   background-color: var(--color-primary-light);
-  font-family: var(--font-primary);
   font-weight: 400;
   font-size: 1.6rem;
-  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -630,10 +623,8 @@ body {
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 1rem 1rem 1rem 2.5rem;
-  font-family: var(--font-primary);
   font-weight: 300;
   font-size: 1.8rem;
-  color: var(--color-text-primary);
   background-color: #013f6f;
   border: none;
   border-radius: 0.2rem;
@@ -700,11 +691,9 @@ body {
 .invite__title {
   margin: 0;
   padding: 1rem 2rem 1rem 1rem;
-  font-family: var(--font-primary);
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: 0.5px;
-  color: var(--color-text-primary);
 }
 .invite__description {
   grid-row: 1/2;
@@ -756,10 +745,8 @@ body {
   padding: 0.5rem 2rem;
   border-radius: 24px;
   background-color: var(--color-primary-light);
-  font-family: var(--font-primary);
   font-weight: 400;
   font-size: 1.4rem;
-  color: var(--color-text-primary);
   text-transform: uppercase;
 }
 .invite__confirm-btn:hover .invite__confirm-content .invite__icon-container {
@@ -849,6 +836,7 @@ body {
 }
 
 .pac-container {
+  font-family: var(--font-primary);
   border-top: 1px solid var(--color-secondary);
   background-color: var(--color-primary);
   border-radius: 0px 2px;
@@ -959,8 +947,6 @@ body {
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1;
-  font-family: var(--font-primary);
-  color: var(--color-text-primary);
 }
 
 .participant {
@@ -1048,6 +1034,42 @@ body {
   font-weight: 300;
 }
 
+/* <= 450px */
+@media (max-width: 28.125em) {
+  html {
+    font-size: 56.25%;
+  }
+  .form__group {
+    padding-left: 2rem;
+  }
+  .form__input {
+    width: calc(100% - 2rem);
+  }
+  .form__end-time {
+    padding-left: 1.5rem;
+  }
+  .form__start-time {
+    width: calc(100% + 0.5rem);
+  }
+  #map {
+    margin: 0 2rem;
+  }
+}
+/* <= 300px */
+@media (max-width: 18.75em) {
+  html {
+    font-size: 50%;
+  }
+  .form__group {
+    padding-left: 1rem;
+  }
+  .form__input {
+    width: calc(100% - 1rem);
+  }
+  #map {
+    margin: 0 1rem;
+  }
+}
 .section-body {
   display: grid;
   grid-template-rows: min-content min-content 1fr min-content;
