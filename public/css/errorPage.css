@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900');
-
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
 html {
   font-size: 62.5%;
 }
@@ -12,7 +11,6 @@ html {
   -webkit-font-smoothing: antialiased;
   background-color: #09334f;
   position: relative;
-
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -41,34 +39,63 @@ html {
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
-  padding-top: 67vh;
-
+  padding-top: 35rem;
   position: relative;
   z-index: 10;
-  font-family: 'Source Sans Pro', sans-serif;
-  color: #051d2c;
+  font-family: "Source Sans Pro", sans-serif;
+  color: #4581a5;
 }
-
 .content h3 {
-  margin: 0 0 .8rem;
+  margin: 0 0 0.8rem;
   font-size: 2.2rem;
   font-weight: 900;
   line-height: 1;
-
   padding: 0 1rem;
 }
-
 .content p {
   font-size: 1.4rem;
   font-weight: normal;
   line-height: 1.4;
-  color: #051d2c;
-
+  color: #5f93b3;
   margin: 0;
   padding: 0 3rem;
-  /* text-align: right; */
 }
-
 .content p span {
   text-decoration: line-through;
 }
+
+@media (max-width: 34.375em) {
+  .content {
+    padding-top: 32rem;
+  }
+  .content h3 {
+    font-size: 1.8rem;
+  }
+  .content p {
+    font-size: 1.2rem;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 27.5em) {
+  .content {
+    padding-top: 31rem;
+  }
+}
+@media (max-width: 20em) {
+  .content {
+    padding-top: 27rem;
+  }
+  .content h3 {
+    font-size: 1.7rem;
+  }
+  .content p {
+    font-size: 1.1rem;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 0 1rem;
+  }
+}
+
+/*# sourceMappingURL=errorPage.css.map */

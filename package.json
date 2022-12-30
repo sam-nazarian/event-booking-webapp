@@ -4,10 +4,15 @@
   "description": "A web app in which a user can book events or post new events.",
   "main": "server.js",
   "scripts": {
-    "watch:all": "npm-run-all --parallel watch:server watch:sass watch:js",
+    "watch:all": "npm-run-all --parallel watch:server watch:js watch:sass-main watch:sass-create-event-page watch:sass-get-event-page watch:sass-error-page watch:sass-share-event-page",
     "watch:server": "NODE_ENV=development nodemon server.js",
-    "watch:sass": "sass templates/sass/main.scss public/css/style.css -w",
     "watch:js": "parcel serve ./public/js/index.js --dist-dir ./public/js/bundled --no-hmr",
+    "watch:sass-main": "sass templates/sass/main.scss public/css/main.css -w",
+    "watch:sass-create-event-page": "sass templates/sass/pages/createEventPage.scss public/css/createEventPage.css -w",
+    "watch:sass-error-page": "sass templates/sass/pages/errorPage.scss public/css/errorPage.css -w",
+    "watch:sass-get-event-page": "sass templates/sass/pages/getEventPage.scss public/css/getEventPage.css -w",
+    "watch:sass-share-event-page": "sass templates/sass/pages/shareEventPage.scss public/css/shareEventPage.css -w",
+
     "build:svg": "svg-sprite-generate -d ./public/img/svg -o ./public/img/sprite.svg",
     "build:server": "NODE_ENV=production nodemon server.js",
     "build:js": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled"

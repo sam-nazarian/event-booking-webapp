@@ -1,0 +1,49 @@
+@media (max-width: 30em) {
+  .heading-primary {
+    padding: 1rem 1.5rem;
+  }
+}
+/* <= 450px */
+@media (max-width: 28.125em) {
+  html {
+    font-size: 56.25%;
+  }
+  .form__group {
+    padding-left: 2rem;
+  }
+  .form__input {
+    width: calc(100% - 2rem);
+  }
+  .form__end-time {
+    padding-left: 1.5rem;
+  }
+  .form__start-time {
+    width: calc(100% + 0.5rem);
+  }
+  #map {
+    margin: 0 2rem;
+  }
+}
+/* <= 306px */
+@media (max-width: 19.125em) {
+  html {
+    font-size: 50%;
+  }
+  .form__group {
+    padding-left: 1rem;
+  }
+  .form__input {
+    width: calc(100% - 1rem);
+  }
+  .event-info__date-location {
+    flex-direction: column;
+  }
+  .event-info__date {
+    margin-bottom: 1.4rem;
+  }
+  #map {
+    margin: 0 1rem;
+  }
+}
+
+/*# sourceMappingURL=createEventPage.css.map */

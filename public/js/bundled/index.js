@@ -4390,6 +4390,7 @@ parcelHelpers.export(exports, "clipboardCopy", ()=>clipboardCopy);
 var _alerts = require("../utilities/alerts");
 const invitationUrlEl = document.querySelector(".invitation__url");
 function clipboardCopy() {
+    console.log(invitationUrlEl);
     navigator.clipboard.writeText(invitationUrlEl.dataset.url);
     (0, _alerts.showError)("Copied to clipboard!");
 }

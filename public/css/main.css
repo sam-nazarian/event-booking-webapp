@@ -626,8 +626,12 @@ body {
   font-weight: 300;
   font-size: 1.8rem;
   background-color: #013f6f;
+  color: inherit;
   border: none;
   border-radius: 0.2rem;
+}
+.invitation__url:focus {
+  outline: none;
 }
 .invitation__globe-container {
   border: solid 0.4rem var(--color-primary);
@@ -1034,46 +1038,4 @@ body {
   font-weight: 300;
 }
 
-/* <= 450px */
-@media (max-width: 28.125em) {
-  html {
-    font-size: 56.25%;
-  }
-  .form__group {
-    padding-left: 2rem;
-  }
-  .form__input {
-    width: calc(100% - 2rem);
-  }
-  .form__end-time {
-    padding-left: 1.5rem;
-  }
-  .form__start-time {
-    width: calc(100% + 0.5rem);
-  }
-  #map {
-    margin: 0 2rem;
-  }
-}
-/* <= 300px */
-@media (max-width: 18.75em) {
-  html {
-    font-size: 50%;
-  }
-  .form__group {
-    padding-left: 1rem;
-  }
-  .form__input {
-    width: calc(100% - 1rem);
-  }
-  #map {
-    margin: 0 1rem;
-  }
-}
-.section-body {
-  display: grid;
-  grid-template-rows: min-content min-content 1fr min-content;
-  min-height: 60vh;
-}
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=main.css.map */

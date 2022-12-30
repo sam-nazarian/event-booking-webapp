@@ -1,0 +1,56 @@
+.section-body {
+  display: grid;
+  grid-template-rows: min-content min-content 1fr min-content;
+
+  min-height: calc(100vh - 40vh); //subtract height of background-cover
+}
+
+// <= 670px
+@media (max-width: 41.875em) {
+  html {
+    // Make font size 9px as 9/16=0.5625
+    font-size: 56.25%;
+  }
+
+  .heading-tertiary {
+    font-size: 2.2rem;
+  }
+
+  .btn--large {
+    font-size: 5.4rem;
+  }
+}
+
+// <= 480px
+@media (max-width: 30em) {
+  html {
+    font-size: 50%; // Make font size 8px as 8/16=0.5
+  }
+
+  .heading-primary {
+    padding: 1rem 1.5rem;
+  }
+
+  .heading-tertiary {
+    font-size: 2rem;
+    padding: 1rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+// <= 306px
+@media (max-width: 19.125em) {
+  .heading-tertiary {
+    font-size: 1.8rem;
+  }
+
+  .event-info {
+    &__date-location {
+      flex-direction: column;
+    }
+
+    &__date {
+      margin-bottom: 1.4rem;
+    }
+  }
+}

@@ -5,7 +5,8 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title=title
   link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
-  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/main.css')
+  link(rel='stylesheet' href='/css/shareEventPage.css')
 body#share-event-page
   // NOTE:
   // the comments that start with class="" mean that another class could be added or removed to the elemet below it.
@@ -36,7 +37,7 @@ body#share-event-page
       .invitation__globe-container
         svg.invitation__globe-icon
           use(xlink:href='/img/sprite.svg#globe-icon')
-      .invitation__url(data-url=`${hostname}`)=hostname
+      input.invitation__url(type='text' data-url=`${hostname}` value=`${hostname}` readonly)
       button.invitation__btn
         .invitation__copy-container
           svg.invitation__copy-icon

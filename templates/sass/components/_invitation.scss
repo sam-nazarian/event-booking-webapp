@@ -15,9 +15,14 @@
     font-weight: 300;
     font-size: 1.8rem;
     background-color: #013f6f;
+    color: inherit;
     border: none;
     border-radius: 0.2rem;
     // transition: all 0.05s ease-in-out;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__globe-container {

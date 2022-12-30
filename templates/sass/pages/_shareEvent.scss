@@ -1,8 +1,0 @@
-@if #share-event-page {
-  .section-body {
-    display: grid;
-    grid-template-rows: min-content min-content 1fr min-content;
-
-    min-height: calc(100vh - 40vh); //subtract height of background-cover
-  }
-}
