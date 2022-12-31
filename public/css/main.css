@@ -445,7 +445,7 @@ body {
   max-width: 100rem;
   margin-bottom: 6rem;
   text-align: justify;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.6;
 }
@@ -1003,7 +1003,6 @@ body {
   background-color: var(--color-primary);
   box-shadow: 4px 1px 2px #0a1b29;
   z-index: 5;
-  font-size: 1.6rem;
 }
 .quick-facts__item {
   display: grid;
@@ -1020,6 +1019,7 @@ body {
   justify-content: flex-start;
   font-weight: 700;
   letter-spacing: 0.5px;
+  font-size: 1.6rem;
 }
 .quick-facts__icon-container {
   display: flex;
@@ -1036,6 +1036,7 @@ body {
 }
 .quick-facts__item-value {
   font-weight: 300;
+  font-size: 1.4rem;
 }
 
 /*# sourceMappingURL=main.css.map */

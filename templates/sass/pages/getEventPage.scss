@@ -1,0 +1,114 @@
+// <= 839px
+@media (max-width: 52.4166666667em) {
+  .event-description {
+    text-align: left;
+  }
+
+  .u-margin-bottom-tiny {
+    margin-bottom: 5rem !important;
+  }
+
+  .participant {
+    // margin-bottom: 18rem;
+    &__container {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .arrow-open {
+    width: 12rem;
+    padding: 1.5rem 3rem 4rem 1.5rem;
+  }
+}
+
+// <= 580px
+@media (max-width: 36.25em) {
+  .create-participant {
+    width: 95vw;
+  }
+
+  .create-participant {
+    &__name-input {
+      width: 75%;
+    }
+  }
+}
+
+// <= 480px
+@media (max-width: 30em) {
+  html {
+    // Make font size 9px as 9/16=0.5625
+    font-size: 56.25%;
+  }
+
+  .heading-primary {
+    padding: 1rem 1.5rem;
+  }
+
+  .quick-facts {
+    width: 90vw;
+    &__item {
+      padding: 1.5rem 1rem 0 1rem;
+    }
+  }
+
+  .event-description {
+    width: 92vw;
+  }
+
+  .map-container {
+    width: 95vw;
+
+    #map {
+      margin: 0;
+    }
+  }
+
+  .arrow-open {
+    width: 11rem;
+    padding: 1.5rem 3rem 4rem 1rem;
+  }
+}
+
+// <= 380px
+@media (max-width: 23.75em) {
+  html {
+    // Make font size 8px as 8/16=0.5
+    font-size: 50%;
+  }
+
+  .quick-facts {
+    &__heading {
+      font-size: 1.4rem;
+    }
+    &__item-value {
+      font-size: 1.3rem;
+    }
+  }
+
+  .create-participant {
+    &__text {
+      font-size: 2rem;
+
+      padding: 0 1.5rem 1rem 1rem;
+    }
+
+    &__title {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+// <= 320px
+@media (max-width: 20em) {
+  .create-participant {
+    &__text {
+      font-size: 1.8rem;
+    }
+
+    &__title {
+      font-size: 1.7rem;
+    }
+  }
+}

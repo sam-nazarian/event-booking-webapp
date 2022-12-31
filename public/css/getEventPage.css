@@ -1,3 +1,79 @@
-
+@media (max-width: 52.4166666667em) {
+  .event-description {
+    text-align: left;
+  }
+  .u-margin-bottom-tiny {
+    margin-bottom: 5rem !important;
+  }
+  .participant__container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .arrow-open {
+    width: 12rem;
+    padding: 1.5rem 3rem 4rem 1.5rem;
+  }
+}
+@media (max-width: 36.25em) {
+  .create-participant {
+    width: 95vw;
+  }
+  .create-participant__name-input {
+    width: 75%;
+  }
+}
+@media (max-width: 30em) {
+  html {
+    font-size: 56.25%;
+  }
+  .heading-primary {
+    padding: 1rem 1.5rem;
+  }
+  .quick-facts {
+    width: 90vw;
+  }
+  .quick-facts__item {
+    padding: 1.5rem 1rem 0 1rem;
+  }
+  .event-description {
+    width: 92vw;
+  }
+  .map-container {
+    width: 95vw;
+  }
+  .map-container #map {
+    margin: 0;
+  }
+  .arrow-open {
+    width: 11rem;
+    padding: 1.5rem 3rem 4rem 1rem;
+  }
+}
+@media (max-width: 23.75em) {
+  html {
+    font-size: 50%;
+  }
+  .quick-facts__heading {
+    font-size: 1.4rem;
+  }
+  .quick-facts__item-value {
+    font-size: 1.3rem;
+  }
+  .create-participant__text {
+    font-size: 2rem;
+    padding: 0 1.5rem 1rem 1rem;
+  }
+  .create-participant__title {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 20em) {
+  .create-participant__text {
+    font-size: 1.8rem;
+  }
+  .create-participant__title {
+    font-size: 1.7rem;
+  }
+}
 
 /*# sourceMappingURL=getEventPage.css.map */
