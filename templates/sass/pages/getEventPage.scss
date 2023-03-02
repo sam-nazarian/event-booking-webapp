@@ -37,10 +37,10 @@
 
 // <= 480px
 @media (max-width: 30em) {
-  html {
-    // Make font size 9px as 9/16=0.5625
-    font-size: 56.25%;
-  }
+  // html {
+  // Make font size 9px as 9.5/16=0.59375
+  // font-size: 60%;
+  // }
 
   .heading-primary {
     padding: 1rem 1.5rem;
@@ -73,9 +73,17 @@
 
 // <= 380px
 @media (max-width: 23.75em) {
-  html {
-    // Make font size 8px as 8/16=0.5
-    font-size: 50%;
+  // html {
+  // Make font size 8px as 9/16=0.5625
+  // font-size: 56.25%;
+  // }
+
+  .invite {
+    width: 94vw;
+  }
+
+  .heading-primary {
+    font-size: 2.8rem;
   }
 
   .quick-facts {
@@ -102,6 +110,11 @@
 
 // <= 320px
 @media (max-width: 20em) {
+  html {
+    // Make font size 8px as 9/16=0.5625
+    font-size: 56.25%;
+  }
+
   .create-participant {
     &__text {
       font-size: 1.8rem;
