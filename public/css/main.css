@@ -955,7 +955,7 @@ body {
 }
 
 .participant {
-  margin-bottom: 14rem;
+  margin-bottom: 6rem;
 }
 .participant__container {
   display: grid;
@@ -968,7 +968,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .participant__heading {
   display: flex;

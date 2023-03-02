@@ -50,19 +50,23 @@ body#get-event-page(data-event-id=event._id)
           svg
             use(xlink:href='/img/sprite.svg#check-icon')
         span.quick-facts__item-type Attending
-      .quick-facts__item-value=`${event.participants.filter(participant => participant.attending).length} people`
+      .quick-facts__item-value
+        span#attending-total=event.participants.filter(participant => participant.attending).length
+        |  people
     .quick-facts__item
       .quick-facts__heading
         .quick-facts__icon-container
           svg
             use(xlink:href='/img/sprite.svg#cross-icon')
         span.quick-facts__item-type Not Attending
-      .quick-facts__item-value=`${event.participants.filter(participant => !participant.attending).length} people`
+      .quick-facts__item-value
+        span#not-attending-total=event.participants.filter(participant => !participant.attending).length
+        |  people
   .event-description
     each paragraph in event.description.split('\n')
       p.event-description__text= paragraph
   .map-container.u-margin-bottom-large
-    #map.map.map--get-event(data-lng=event.location.coordinates[0] data-lat=event.location.coordinates[1] data-address-description=event.location.addressDescription)
+    #map.map.map--get-event(data-lng=event.location.coordinates[0] data-lat=event.location.coordinates[1] data-address-description=event.location.addressFull)
   .participant
     h2.heading-secondary.u-margin-bottom-tiny Participants
     .participant__container

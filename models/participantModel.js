@@ -24,7 +24,7 @@ const participantSchema = new mongoose.Schema(
       required: [true, 'Participant must belong to an event!'],
     },
     userId: {
-      type: Number,
+      type: String,
       required: [true, 'Participant must belong to a user!'],
     },
   },

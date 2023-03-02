@@ -262,7 +262,7 @@ async function createEvent(data) {
     try {
         const res = await (0, _axiosDefault.default)({
             method: "POST",
-            url: "http://10.0.0.171:8000/api/v1/events",
+            url: "/api/v1/events",
             data
         });
         // console.log(`res`, res);
@@ -4470,6 +4470,7 @@ parcelHelpers.export(exports, "previewImage", ()=>previewImage) // imageCoverOpt
 ;
 const labelProfilePictureEl = document.querySelector("#upload-profile-picture");
 const profilePictureEl = document.querySelector(".create-participant__profile");
+const participantContainerEl = document.querySelector(".participant__container");
 function previewImage() {
     labelProfilePictureEl.addEventListener("change", function() {
         const file = this.files[0];
@@ -4479,6 +4480,7 @@ function previewImage() {
             // Read file once reader has finished loading
             reader.addEventListener("load", function() {
                 profilePictureEl.src = this.result;
+                participantContainerEl.setAttribute("data-profile-picture", this.result);
             });
         }
     });
@@ -4557,43 +4559,59 @@ function addInitialEventListeners() {
         }
     });
 }
+const participantContainerEl = document.querySelector(".participant__container");
+const participantAttendingEl = document.querySelector(".participant__attending");
+const participantNotAttendingEl = document.querySelector(".participant__not-attending");
+const attendingTotalEl = document.querySelector("#attending-total");
+const notAttendingTotalEl = document.querySelector("#not-attending-total");
+const addParticipantUI = function(attending = true, formName) {
+    // Hide Respond Buttons
+    // hide overlay
+    overlayEl.classList.add("u-display-hide");
+    // enable scrolling
+    document.body.classList.remove("u-disable-scrolling");
+    root.classList.remove("u-disable-scrolling");
+    // hide invite button
+    inviteEl.classList.add("u-display-hide");
+    // Add Attending
+    if (attending) {
+        participantAttendingEl.insertAdjacentHTML("beforeend", `<div class="participant-item"><img class="participant-item__profile-picture" src="${participantContainerEl.dataset.profilePicture ? participantContainerEl.dataset.profilePicture : "default.jpeg"}" alt=${formName}><span class="participant-item__value">${formName}</span></div>`);
+        // Add 1 To The Attending Total
+        attendingTotalEl.innerHTML = Number(attendingTotalEl.textContent) + 1;
+    } else {
+        participantNotAttendingEl.insertAdjacentHTML("beforeend", `<div class="participant-item"><img class="participant-item__profile-picture" src="${participantContainerEl.dataset.profilePicture ? participantContainerEl.dataset.profilePicture : "/img/users/default.jpeg"}" alt=${formName}><span class="participant-item__value">${formName}</span></div>`);
+        // Add 1 To The Not Attending Total
+        notAttendingTotalEl.innerHTML = Number(notAttendingTotalEl.textContent) + 1;
+    }
+    // Scroll To Participants Container
+    participantContainerEl.scrollIntoView({
+        behavior: "smooth"
+    });
+};
+const formNameEl = document.querySelector("#create-participant__name");
 /* Send http request to server to create a participant */ async function httpCreateParticipant(attending = true) {
     const form = new FormData();
     form.append("picture", document.querySelector("#upload-profile-picture").files[0]);
-    form.append("name", document.querySelector("#create-participant__name").value);
+    form.append("name", formNameEl.value);
     form.append("attending", attending.toString());
     try {
+        // HIDE RESPOND FORM & ADD UPDATED HTML TO DOM
+        // optimist approach first showing the result then doing the fetch (to increase speed)
+        addParticipantUI(attending, formNameEl.value);
         const res = await (0, _axiosDefault.default)({
             method: "POST",
-            url: `http://10.0.0.171:8000/api/v1/participants/${document.body.dataset.eventId}`,
+            url: `/api/v1/participants/${document.body.dataset.eventId}`,
             data: form
         });
-    // HIDE RESPOND FORM & ADD UPDATED HTML TO DOM
+        (0, _alerts.showError)("Invitation saved. Thank you for your response!");
     // console.log(`res`, res);
     // console.log(res.data.data.data._id);
     // if (res.data.status === 'success') location.assign(`/share-event/${res.data.data.data._id}`);
     } catch (err) {
-        // console.log(`ERROR 💥`, err);
+        console.log(`ERROR 💥`, err);
         (0, _alerts.showError)(err.response.data.message); //accessing message property from server
     }
-} // createParticipantFormEl.addEventListener('submit', async (e) => {
- //   e.preventDefault();
- //   //recreating multi-part form data
- //   const form = new FormData();
- //   form.append('imageCover', document.getElementById('upload-image-cover').files[0]);
- //   form.append('name', document.getElementById('name').value);
- //   form.append('date', document.getElementById('date').value);
- //   form.append('startTime', document.getElementById('start-time').value);
- //   form.append('endTime', document.getElementById('end-time').value);
- //   form.append('description', document.getElementById('description').value);
- //   const addressEl = document.getElementById('address');
- //   if (addressEl.dataset.lng && addressEl.dataset.lat) {
- //     form.append('location[coordinates][0]', addressEl.dataset.lng);
- //     form.append('location[coordinates][1]', addressEl.dataset.lat);
- //   }
- //   form.append('location[addressDescription]', addressEl.dataset.addressDescription);
- //   form.append('location[addressFull]', addressEl.dataset.addressFull);
- //   await createEvent(form);
+}
 
 },{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","axios":"jo6P5"}],"c8E5S":[function(require,module,exports) {
 const errorPageEl = document.querySelector("#error-page");

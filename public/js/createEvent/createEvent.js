@@ -11,7 +11,7 @@ export async function createEvent(data) {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://10.0.0.171:8000/api/v1/events', // ON PRODCUTION CHANGE TO api/v1/events
+      url: '/api/v1/events', // ON PRODCUTION CHANGE TO api/v1/events
       data,
     });
 

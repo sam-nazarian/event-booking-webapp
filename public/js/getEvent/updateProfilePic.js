@@ -1,5 +1,6 @@
 const labelProfilePictureEl = document.querySelector('#upload-profile-picture');
 const profilePictureEl = document.querySelector('.create-participant__profile');
+const participantContainerEl = document.querySelector('.participant__container');
 
 export function previewImage() {
   labelProfilePictureEl.addEventListener('change', function () {
@@ -12,6 +13,7 @@ export function previewImage() {
       // Read file once reader has finished loading
       reader.addEventListener('load', function () {
         profilePictureEl.src = this.result;
+        participantContainerEl.setAttribute('data-profile-picture', this.result);
       });
     }
   });

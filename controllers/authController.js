@@ -9,6 +9,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
   //we need cookie-parser to get cookies from the browser, but not to write cookies
   if (req.cookies.user) {
     //authenticate users send by cookies & not only via authorization header
+
     req.userId = req.cookies.user;
     return next(); //exit function
   }
