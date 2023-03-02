@@ -34,9 +34,8 @@ exports.uploadEventImages = upload.single('imageCover');
 exports.resizeEventImages = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  //On database the image field is called imageCover
+  // On database the image field is called imageCover
   req.body.imageCover = `event-${req?.userId || req?.cookies?.user || 'UNDEFINED-USERID'}-${Date.now()}-cover.jpeg`;
-  await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
 
   next();
 });
@@ -56,6 +55,11 @@ exports.createEvent = catchAsync(async (req, res, next) => {
 
   //create automatically saves the document
   const doc = await Event.create(req.body);
+
+  // Image saving & processing
+  if (req.file) {
+    await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
+  }
 
   res.status(201).json({
     status: 'success',

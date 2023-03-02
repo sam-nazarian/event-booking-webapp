@@ -36,7 +36,7 @@ const participantSchema = new mongoose.Schema(
   }
 );
 
-participantSchema.index({ eventId: 1, userId: 1 }, { unique: true }); //combination of eventId & userId must be unique
+// participantSchema.index({ eventId: 1, userId: 1 }, { unique: true }); //combination of eventId & userId must be unique
 
 const Participant = mongoose.model('Participant', participantSchema);
 

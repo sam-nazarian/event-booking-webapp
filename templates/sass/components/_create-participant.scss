@@ -46,6 +46,7 @@
     z-index: 10;
     position: relative;
     transition: all 0.2s;
+    border: solid 3px var(--color-primary);
     &:hover {
       transform: scale(1.04);
     }

@@ -4,7 +4,7 @@ head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title $EVENT NAME$
+  title= event.name
   link(rel='shortcut icon' type='image/png' href='/img/favicon/favicon.png')
   // INDEX CSS
   link(rel='stylesheet' href='/css/main.css')
@@ -16,25 +16,25 @@ head
 // the comments that start with class="" mean that another class could be added or removed to the elemet below it.
 // forexample err--active could be added to the div element below it, to make the error container active eg. <div class="err err--active">
 // class="err--active"
-body#get-event-page
+body#get-event-page(data-event-id=event._id)
   .err
     svg.err__exclamation-icon
       use(xlink:href='/img/sprite.svg#exclamation-icon')
     p.err__message A custom err message
   // add a inline style for background-color
-  #image-cover.image-cover.u-cursor-none(style="background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('')")
+  #image-cover.image-cover.u-cursor-none(style=`background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('/img/events/${event.imageCover}')`)
     .event-info
       .event-info__heading
-        h1.heading-primary $EVENT NAME$
+        h1.heading-primary= event.name
       .event-info__date-location
         .event-info__date
           svg.event-info__date-icon
             use(xlink:href='/img/sprite.svg#calendar-icon')
-          p.event-info-date-para $XX/XX/XX$
+          p.event-info-date-para= new Date(event.date).toISOString().split('T')[0]
         .event-info__location
           svg.event-info__location-icon
             use(xlink:href='/img/sprite.svg#location-icon')
-          p.event-info-location-para $LOCATION$
+          p.event-info-location-para= event.location.addressDescription
   .quick-facts
     h2.heading-secondary Quick Facts
     .quick-facts__item
@@ -43,33 +43,26 @@ body#get-event-page
           svg
             use(xlink:href='/img/sprite.svg#time-icon')
         span.quick-facts__item-type Time
-      .quick-facts__item-value 9:00AM &mdash; 2:00PM
+      .quick-facts__item-value= `${convertTo12Hour(event.startTime)} — ${convertTo12Hour(event.endTime)}`
     .quick-facts__item
       .quick-facts__heading
         .quick-facts__icon-container
           svg
             use(xlink:href='/img/sprite.svg#check-icon')
         span.quick-facts__item-type Attending
-      .quick-facts__item-value 0 people
+      .quick-facts__item-value=`${event.participants.filter(participant => participant.attending).length} people`
     .quick-facts__item
       .quick-facts__heading
         .quick-facts__icon-container
           svg
             use(xlink:href='/img/sprite.svg#cross-icon')
         span.quick-facts__item-type Not Attending
-      .quick-facts__item-value 0 people
+      .quick-facts__item-value=`${event.participants.filter(participant => !participant.attending).length} people`
   .event-description
-    p.event-description__text The Chess rule when touching a piece is listed below:
-    p.event-description__text
-      | This is otherwise known as the touch move rule. Going by this rule, you will have
-      | to move the piece you actually touch. This is a rule to look out for, especially if you are a beginner. You cannot
-      | keep fiddling with your pieces and moves in a tournament. Hence, there is no undoing a careless move so be careful
-      | which piece you touch.
-    p.event-description__text
-      | However, if you touch a piece by mistake while reaching out for another piece,
-      | your opponent cannot instigate this rule.
+    each paragraph in event.description.split('\n')
+      p.event-description__text= paragraph
   .map-container.u-margin-bottom-large
-    #map.map.map--get-event
+    #map.map.map--get-event(data-lng=event.location.coordinates[0] data-lat=event.location.coordinates[1] data-address-description=event.location.addressDescription)
   .participant
     h2.heading-secondary.u-margin-bottom-tiny Participants
     .participant__container
@@ -79,30 +72,35 @@ body#get-event-page
             svg
               use(xlink:href='/img/sprite.svg#check-icon')
           span.participant__item-type Attending
-        .participant-item
-          img.participant-item__profile-picture(src='/img/users/default.jpeg' alt='$USER-NAME$')
-          span.participant-item__value
-            | Saman Fathnazarian
-        .participant-item
-          img.participant-item__profile-picture(src='/img/users/saman-user.jpg' alt='$USER-NAME$')
-          span.participant-item__value
-            | Saman
+        each participant in event.participants
+          if participant.attending
+            .participant-item
+              img.participant-item__profile-picture(src=`/img/users/${participant.picture}` alt=`${participant.name}`)
+              span.participant-item__value
+                | #{participant.name}
       .participant__not-attending
         .participant__heading
           .participant__icon-container
             svg
               use(xlink:href='/img/sprite.svg#cross-icon')
           span.participant__item-type Not Attending
-        .participant-item
-          img.participant-item__profile-picture(src='/img/users/user-UNDEFINED-ID-1668500784018.jpeg' alt='$USER-NAME$')
-          span.participant-item__value
-            | Liam
-        .participant-item
-          img.participant-item__profile-picture(src='/img/users/default.jpeg' alt='$USER-NAME$')
-          span.participant-item__value
-            | Oliver Schwarzenegger
-  .discussion
-    h2.heading-secondary Discussion
+        each participant in event.participants
+          if !participant.attending
+            .participant-item
+              img.participant-item__profile-picture(src=`/img/users/${participant.picture}` alt=`${participant.name}`)
+              span.participant-item__value
+                | #{participant.name}    
+        //- .participant-item
+        //-   img.participant-item__profile-picture(src='/img/users/user-UNDEFINED-ID-1668500784018.jpeg' alt='$USER-NAME$')
+        //-   span.participant-item__value
+        //-     | Liam
+        //- .participant-item
+        //-   img.participant-item__profile-picture(src='/img/users/default.jpeg' alt='$USER-NAME$')
+        //-   span.participant-item__value
+        //-     | Oliver Schwarzenegger
+
+  //- .discussion
+  //-   h2.heading-secondary Discussion
   // class="invite__hide"
   .invite
     .invite__description
@@ -130,19 +128,21 @@ body#get-event-page
     svg
       use(xlink:href='/img/sprite.svg#arrow-icon')
   // class="u-display-hide"
-  .overlay.u-display-hide
+  .overlay.u-display-hide(data-type-of-response='')
     .create-participant
       form.create-participant__form
         .create-participant__heading
           h5.create-participant__title Welcome!
-          p.create-participant__text Add your name and a profile picture, to respond to your invite!
+          p.create-participant__text Add your name and a profile picture, to 
+            span#respond-text
+            |  your invite!
         .create-participant__person-card
           input#upload-profile-picture.form__upload(type='file' accept='image/*' name='profilePicture')
           label#label-profile-picture(for='upload-profile-picture')
             img.create-participant__profile(src='/img/icons/add-photo-icon.jpg' alt='Profile picture')
           input#create-participant__name.create-participant__name-input(type='text' name='fname' placeholder='What is your name...' autocomplete='off' spellcheck='false' maxlength='30' required)
         .create-participant__button-container
-          button.create-participant__cancel
+          button.create-participant__cancel(type='button')
             | Go back
           button.create-participant__submit
             | Done!

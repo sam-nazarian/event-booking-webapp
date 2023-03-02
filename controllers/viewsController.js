@@ -36,9 +36,17 @@ exports.getEvent = catchAsync(async (req, res, next) => {
     return next(new AppError('No Event found with that ID', 404));
   }
 
+  const convertTo12Hour = function (time) {
+    const [hour, minute] = time.split(':').map(Number);
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const hours12 = hour % 12 || 12;
+    return `${hours12}:${minute.toString().padStart(2, '0')} ${period}`;
+  };
+
   // 2) Build & Render template using tour data from 1
   res.status(200).render('getEvent', {
     title: event.name,
     event,
+    convertTo12Hour,
   });
 });

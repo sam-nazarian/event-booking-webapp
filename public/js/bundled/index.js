@@ -4396,65 +4396,22 @@ function clipboardCopy() {
 }
 
 },{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a78JO":[function(require,module,exports) {
-var _alerts = require("../utilities/alerts");
-var _config = require("../utilities/config");
+var _initialLoad = require("./initialLoad");
+var _map = require("./map");
+var _updateProfilePic = require("./updateProfilePic");
 const getEventPageEl = document.querySelector("#get-event-page");
-const root = document.getElementsByTagName("html")[0];
-// Create participant component
-const createParticipantSubmitEl = document.querySelector(".create-participant__submit");
-const createParticipantCancelEL = document.querySelector(".create-participant__cancel");
-const overlayEl = document.querySelector(".overlay");
-// Confirm or decline btns - Invite-respond component
-const inviteConfirmBtnEl = document.querySelector("#invite__confirm-btn");
-const inviteDeclineBtnEl = document.querySelector("#invite__decline-btn");
-// Opening & closing the invite - Invite-respond component
-const inviteEl = document.querySelector(".invite");
-const inviteArrowBtnEl = document.querySelector("#invite__arrow-btn");
-const arrowOpenEl = document.querySelector(".arrow-open");
-function addEventListeners() {
-    // Event listeners for create participant component
-    createParticipantSubmitEl.addEventListener("click", (e)=>{
-        e.preventDefault();
-        (0, _alerts.showError)("Functionality not implemented!");
-    // document.body.classList.remove('u-disable-scrolling');
-    // root.classList.remove('u-disable-scrolling');
-    });
-    createParticipantCancelEL.addEventListener("click", (e)=>{
-        e.preventDefault();
-        overlayEl.classList.add("u-display-hide");
-        document.body.classList.remove("u-disable-scrolling");
-        root.classList.remove("u-disable-scrolling");
-    });
-    overlayEl.addEventListener("click", (e)=>{
-        if (e.target.classList.contains("overlay")) {
-            overlayEl.classList.add("u-display-hide");
-            document.body.classList.remove("u-disable-scrolling");
-            root.classList.remove("u-disable-scrolling");
-        }
-    });
-    // Event listeners Invite-respond component
-    inviteConfirmBtnEl.addEventListener("click", (e)=>{
-        e.preventDefault();
-        overlayEl.classList.remove("u-display-hide");
-        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
-        root.classList.add("u-disable-scrolling");
-    });
-    inviteDeclineBtnEl.addEventListener("click", (e)=>{
-        e.preventDefault();
-        overlayEl.classList.remove("u-display-hide");
-        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
-        root.classList.add("u-disable-scrolling");
-    });
-    // Close/open of Event listeners Invite-respond component
-    inviteArrowBtnEl.addEventListener("click", ()=>{
-        inviteEl.classList.toggle("invite--hide");
-        arrowOpenEl.classList.toggle("arrow-open--hide");
-    });
-    arrowOpenEl.addEventListener("click", ()=>{
-        inviteEl.classList.toggle("invite--hide");
-        arrowOpenEl.classList.toggle("arrow-open--hide");
-    });
+if (getEventPageEl) {
+    (0, _initialLoad.addInitialEventListeners)();
+    (0, _map.addMap)();
+    (0, _updateProfilePic.previewImage)();
 }
+
+},{"./map":"6jGC1","./updateProfilePic":"fBK9z","./initialLoad":"4VpqZ"}],"6jGC1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addMap", ()=>addMap);
+var _config = require("../utilities/config");
+const mapEl = document.querySelector("#map");
 function addMap() {
     const map = L.map("map", {
         scrollWheelZoom: false,
@@ -4473,19 +4430,172 @@ function addMap() {
             duration: 2
         }
     });
-}
-if (getEventPageEl) {
-    addEventListeners();
-    addMap();
+    let marker = undefined;
+    function mapSetView(lat, lng, zoom, locationName) {
+        // Remove marker
+        if (marker !== undefined) map.removeLayer(marker);
+        // Create marker
+        if (locationName !== "") marker = L.marker([
+            lat,
+            lng
+        ]).addTo(map).bindPopup(`<p>${locationName}</p>`).openPopup();
+        // Center map on location
+        map.setView([
+            lat,
+            lng
+        ], zoom, {
+            animate: true,
+            pan: {
+                duration: 2
+            }
+        });
+    }
+    mapSetView(mapEl.dataset.lat, mapEl.dataset.lng, 11, mapEl.dataset.addressDescription);
 }
 
-},{"../utilities/alerts":"jSl5m","../utilities/config":"5MSsZ"}],"5MSsZ":[function(require,module,exports) {
+},{"../utilities/config":"5MSsZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5MSsZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MAPBOX_API_KEY", ()=>MAPBOX_API_KEY);
 const MAPBOX_API_KEY = "pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w";
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c8E5S":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fBK9z":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "previewImage", ()=>previewImage) // imageCoverOptionsUploadEl.classList.add('u-display-hide');
+ // btnOptionsDeleteImageEl.classList.remove('u-display-hide');
+ // labelUploadImageCover.setAttribute('for', '');
+ // imageCoverEl.classList.add('u-cursor-none');
+ // eventInfoEl.classList.remove('u-display-hide');
+;
+const labelProfilePictureEl = document.querySelector("#upload-profile-picture");
+const profilePictureEl = document.querySelector(".create-participant__profile");
+function previewImage() {
+    labelProfilePictureEl.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            // Read file once reader has finished loading
+            reader.addEventListener("load", function() {
+                profilePictureEl.src = this.result;
+            });
+        }
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4VpqZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addInitialEventListeners", ()=>addInitialEventListeners);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alerts = require("../utilities/alerts");
+const root = document.getElementsByTagName("html")[0];
+// Opening & closing the invite - Invite-respond component
+const inviteEl = document.querySelector(".invite");
+const inviteArrowBtnEl = document.querySelector("#invite__arrow-btn");
+const arrowOpenEl = document.querySelector(".arrow-open");
+// Confirm or decline btns - Invite-respond component
+const inviteConfirmBtnEl = document.querySelector("#invite__confirm-btn");
+const inviteDeclineBtnEl = document.querySelector("#invite__decline-btn");
+// Create participant component - Participant component
+const createParticipantFormEl = document.querySelector(".create-participant__form");
+const createParticipantCancelEL = document.querySelector(".create-participant__cancel");
+const overlayEl = document.querySelector(".overlay");
+const respondTextEl = document.querySelector("#respond-text");
+function addInitialEventListeners() {
+    // Close Invite-respond component
+    inviteArrowBtnEl.addEventListener("click", ()=>{
+        inviteEl.classList.toggle("invite--hide");
+        arrowOpenEl.classList.toggle("arrow-open--hide");
+    });
+    // Open Invite-respond component
+    arrowOpenEl.addEventListener("click", ()=>{
+        inviteEl.classList.toggle("invite--hide");
+        arrowOpenEl.classList.toggle("arrow-open--hide");
+    });
+    // Confirm btn - Invite-respond component
+    inviteConfirmBtnEl.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.remove("u-display-hide");
+        overlayEl.setAttribute("data-type-of-response", "confirmInvite");
+        respondTextEl.innerHTML = "accept";
+        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
+        root.classList.add("u-disable-scrolling");
+    });
+    // Decline btn - Invite-respond component
+    inviteDeclineBtnEl.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.remove("u-display-hide");
+        overlayEl.setAttribute("data-type-of-response", "declineInvite");
+        respondTextEl.innerHTML = "decline";
+        // document.body.classList.add('u-disable-scrolling'); //causes page to reload
+        root.classList.add("u-disable-scrolling");
+    });
+    // Create participant component
+    createParticipantFormEl.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        if (overlayEl.dataset.typeOfResponse === "confirmInvite") httpCreateParticipant(true);
+        if (overlayEl.dataset.typeOfResponse === "declineInvite") httpCreateParticipant(false);
+    // document.body.classList.remove('u-disable-scrolling');
+    // root.classList.remove('u-disable-scrolling');
+    });
+    // Cancel (via clicking go back button) participant component
+    createParticipantCancelEL.addEventListener("click", (e)=>{
+        e.preventDefault();
+        overlayEl.classList.add("u-display-hide");
+        document.body.classList.remove("u-disable-scrolling");
+        root.classList.remove("u-disable-scrolling");
+    });
+    // Cancel (via clicking overlay) participant component
+    overlayEl.addEventListener("click", (e)=>{
+        if (e.target.classList.contains("overlay")) {
+            overlayEl.classList.add("u-display-hide");
+            document.body.classList.remove("u-disable-scrolling");
+            root.classList.remove("u-disable-scrolling");
+        }
+    });
+}
+/* Send http request to server to create a participant */ async function httpCreateParticipant(attending = true) {
+    const form = new FormData();
+    form.append("picture", document.querySelector("#upload-profile-picture").files[0]);
+    form.append("name", document.querySelector("#create-participant__name").value);
+    form.append("attending", attending.toString());
+    try {
+        const res = await (0, _axiosDefault.default)({
+            method: "POST",
+            url: `http://10.0.0.171:8000/api/v1/participants/${document.body.dataset.eventId}`,
+            data: form
+        });
+    // HIDE RESPOND FORM & ADD UPDATED HTML TO DOM
+    // console.log(`res`, res);
+    // console.log(res.data.data.data._id);
+    // if (res.data.status === 'success') location.assign(`/share-event/${res.data.data.data._id}`);
+    } catch (err) {
+        // console.log(`ERROR 💥`, err);
+        (0, _alerts.showError)(err.response.data.message); //accessing message property from server
+    }
+} // createParticipantFormEl.addEventListener('submit', async (e) => {
+ //   e.preventDefault();
+ //   //recreating multi-part form data
+ //   const form = new FormData();
+ //   form.append('imageCover', document.getElementById('upload-image-cover').files[0]);
+ //   form.append('name', document.getElementById('name').value);
+ //   form.append('date', document.getElementById('date').value);
+ //   form.append('startTime', document.getElementById('start-time').value);
+ //   form.append('endTime', document.getElementById('end-time').value);
+ //   form.append('description', document.getElementById('description').value);
+ //   const addressEl = document.getElementById('address');
+ //   if (addressEl.dataset.lng && addressEl.dataset.lat) {
+ //     form.append('location[coordinates][0]', addressEl.dataset.lng);
+ //     form.append('location[coordinates][1]', addressEl.dataset.lat);
+ //   }
+ //   form.append('location[addressDescription]', addressEl.dataset.addressDescription);
+ //   form.append('location[addressFull]', addressEl.dataset.addressFull);
+ //   await createEvent(form);
+
+},{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","axios":"jo6P5"}],"c8E5S":[function(require,module,exports) {
 const errorPageEl = document.querySelector("#error-page");
 if (errorPageEl) {
     let yetiTL, chatterTL, furLightColor = "#FFF", furDarkColor = "#67b1e0", skinLightColor = "#ddf1fa", skinDarkColor = "#88c9f2", lettersSideLight = "#3A7199", lettersSideDark = "#051d2c", lettersFrontLight = "#67B1E0", lettersFrontDark = "#051d2c", lettersStrokeLight = "#265D85", lettersStrokeDark = "#031219", mouthShape1 = "M149 115.7c-4.6 3.7-6.6 9.8-5 15.6.1.5.3 1.1.5 1.6.6 1.5 2.4 2.3 3.9 1.7l11.2-4.4 11.2-4.4c1.5-.6 2.3-2.4 1.7-3.9-.2-.5-.4-1-.7-1.5-2.8-5.2-8.4-8.3-14.1-7.9-3.7.2-5.9 1.1-8.7 3.2z", mouthShape2 = "M161.2 118.9c0 2.2-1.8 4-4 4s-4-1.8-4-4c0-1 .4-2 1.1-2.7.7-.8 1.8-1.3 2.9-1.3 2.2 0 4 1.7 4 4z", mouthShape3 = "M150.2 118.3c-4.6 3.7-7.5 6.4-6.3 12.3.1.5.1.6.3 1.1.6 1.5 2.4 2.3 3.9 1.7 0 0 7.9-4.3 10.7-5.5s11.6-3.3 11.6-3.3c1.5-.6 2.3-2.4 1.7-3.9-.2-.5-.2-.6-.4-1.1-2.8-5.2-7.1-4.9-12.9-4.6-3.7.4-6.3 1.5-8.6 3.3z", mouthShape4 = "M149.2 116.7c-4.6 3.7-6.7 8.8-5.2 14.6.1.3.1.5.2.8.6 1.5 2.4 2.3 3.9 1.7l11.2-4.4 11.2-4.4c1.5-.6 2.3-2.4 1.7-3.9-.1-.3-.2-.5-.4-.7-2.8-5.2-8.2-7.2-14-6.9-3.6.2-5.9 1.1-8.6 3.2z";
