@@ -40,7 +40,7 @@ exports.createParticipant = catchAsync(async (req, res, next) => {
 
   //image saving & processing
   if (req.file) {
-    await sharp(req.file.buffer).resize(400, 400).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/users/${req.body.picture}`);
+    await sharp(req.file.buffer).resize(250, 250).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/users/${req.body.picture}`);
   }
 
   res.status(201).json({
