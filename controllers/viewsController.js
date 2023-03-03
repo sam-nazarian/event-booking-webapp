@@ -28,7 +28,7 @@ exports.shareEvent = catchAsync(async (req, res, next) => {
   res.status(200).render('shareEvent', {
     title: `Share - ${event.name}`,
     event: event,
-    hostname: process.env.NODE_ENV === 'development' ? `http://127.0.0.1:8000/event/${event._id}` : `https://${req.hostname}.com/event/${event._id}`,
+    hostname: process.env.NODE_ENV === 'development' ? `http://127.0.0.1:8000/event/${event._id}` : `https://${req.hostname}/event/${event._id}`,
     imageURL,
   });
 });

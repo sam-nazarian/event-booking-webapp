@@ -108,7 +108,7 @@ const addParticipantUI = function (attending = true, formName) {
 
   // Add Attending
   if (attending) {
-    participantAttendingEl.insertAdjacentHTML('beforeend', `<div class="participant-item"><img class="participant-item__profile-picture" src="${participantContainerEl.dataset.profilePicture ? participantContainerEl.dataset.profilePicture : 'default.jpeg'}" alt=${formName}><span class="participant-item__value">${formName}</span></div>`);
+    participantAttendingEl.insertAdjacentHTML('beforeend', `<div class="participant-item"><img class="participant-item__profile-picture" src="${participantContainerEl.dataset.profilePicture ? participantContainerEl.dataset.profilePicture : '/img/users/default.jpeg'}" alt=${formName}><span class="participant-item__value">${formName}</span></div>`);
 
     // Add 1 To The Attending Total
     attendingTotalEl.innerHTML = Number(attendingTotalEl.textContent) + 1;

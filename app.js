@@ -29,7 +29,7 @@ app.use(cors());
 //allows complex requests (anything other than POST or GET is a complex request)
 app.options('*', cors()); //route is '*'. & the handler is on cors middleware
 
-// Serving static files (when there's a path in .pug files)
+// Serving static files ( go to public directory when there's a source path in html, pug or js files on the client-side )
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Security HTTP headers (causes issues with importing scripts from websites)
