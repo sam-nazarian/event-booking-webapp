@@ -58,19 +58,7 @@ exports.createEvent = catchAsync(async (req, res, next) => {
 
   // Image saving & processing
   if (req.file) {
-    // await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
-
-    await sharp(req.file.buffer)
-      .resize(2000, 1333)
-      .toFormat('jpeg')
-      .jpeg({ quality: 90 })
-      .toFile(`/public/img/events/${req.body.imageCover}`, (err, info) => {
-        if (err) {
-          console.error(`ERROR INSIDE THE FILE BUFFER💥💥💥: ${err}`);
-        } else {
-          console.log(info);
-        }
-      });
+    await sharp(req.file.buffer).resize(200, 133).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
   }
 
   res.status(201).json({
