@@ -148,7 +148,7 @@ async function httpCreateParticipant(attending = true) {
     // console.log(res.data.data.data._id);
     // if (res.data.status === 'success') location.assign(`/share-event/${res.data.data.data._id}`);
   } catch (err) {
-    console.log(`ERROR 💥`, err);
+    // console.log(`ERROR 💥`, err);
     showError(err.response.data.message); //accessing message property from server
   }
 }

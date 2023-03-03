@@ -22,7 +22,7 @@ body#get-event-page(data-event-id=event._id)
       use(xlink:href='/img/sprite.svg#exclamation-icon')
     p.err__message A custom err message
   // add a inline style for background-color
-  #image-cover.image-cover.u-cursor-none(style=`background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85)), url('/img/events/${event.imageCover}')`)
+  #image-cover.image-cover.u-cursor-none(style=`background-image: linear-gradient(to right, rgba(3, 72, 125, 0.85), rgba(3, 72, 125, 0.85))${imageURL}`)
     .event-info
       .event-info__heading
         h1.heading-primary= event.name

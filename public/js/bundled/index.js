@@ -153,7 +153,7 @@ var _indexDefault2 = parcelHelpers.interopDefault(_index2);
 var _index3 = require("./errorPage/index");
 var _indexDefault3 = parcelHelpers.interopDefault(_index3);
 
-},{"./createEvent/index":"4RC4p","./shareEvent/index":"i28Dr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./getEvent/index":"a78JO","./errorPage/index":"c8E5S"}],"4RC4p":[function(require,module,exports) {
+},{"./createEvent/index":"4RC4p","./shareEvent/index":"i28Dr","./getEvent/index":"a78JO","./errorPage/index":"c8E5S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4RC4p":[function(require,module,exports) {
 var _alerts = require("../utilities/alerts");
 var _createEvent = require("./createEvent");
 var _updateImageCover = require("./updateImageCover");
@@ -4390,7 +4390,6 @@ parcelHelpers.export(exports, "clipboardCopy", ()=>clipboardCopy);
 var _alerts = require("../utilities/alerts");
 const invitationUrlEl = document.querySelector(".invitation__url");
 function clipboardCopy() {
-    console.log(invitationUrlEl);
     navigator.clipboard.writeText(invitationUrlEl.dataset.url);
     (0, _alerts.showError)("Copied to clipboard!");
 }
@@ -4406,87 +4405,7 @@ if (getEventPageEl) {
     (0, _updateProfilePic.previewImage)();
 }
 
-},{"./map":"6jGC1","./updateProfilePic":"fBK9z","./initialLoad":"4VpqZ"}],"6jGC1":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addMap", ()=>addMap);
-var _config = require("../utilities/config");
-const mapEl = document.querySelector("#map");
-function addMap() {
-    const map = L.map("map", {
-        scrollWheelZoom: false,
-        dragging: !L.Browser.mobile
-    }).setView([
-        49.883226,
-        -97.155884
-    ], 2);
-    L.tileLayer(`https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=${(0, _config.MAPBOX_API_KEY)}`).addTo(map);
-    map.setView([
-        49.883226,
-        -97.155884
-    ], 2, {
-        animate: true,
-        pan: {
-            duration: 2
-        }
-    });
-    let marker = undefined;
-    function mapSetView(lat, lng, zoom, locationName) {
-        // Remove marker
-        if (marker !== undefined) map.removeLayer(marker);
-        // Create marker
-        if (locationName !== "") marker = L.marker([
-            lat,
-            lng
-        ]).addTo(map).bindPopup(`<p>${locationName}</p>`).openPopup();
-        // Center map on location
-        map.setView([
-            lat,
-            lng
-        ], zoom, {
-            animate: true,
-            pan: {
-                duration: 2
-            }
-        });
-    }
-    mapSetView(mapEl.dataset.lat, mapEl.dataset.lng, 11, mapEl.dataset.addressDescription);
-}
-
-},{"../utilities/config":"5MSsZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5MSsZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MAPBOX_API_KEY", ()=>MAPBOX_API_KEY);
-const MAPBOX_API_KEY = "pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w";
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fBK9z":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "previewImage", ()=>previewImage) // imageCoverOptionsUploadEl.classList.add('u-display-hide');
- // btnOptionsDeleteImageEl.classList.remove('u-display-hide');
- // labelUploadImageCover.setAttribute('for', '');
- // imageCoverEl.classList.add('u-cursor-none');
- // eventInfoEl.classList.remove('u-display-hide');
-;
-const labelProfilePictureEl = document.querySelector("#upload-profile-picture");
-const profilePictureEl = document.querySelector(".create-participant__profile");
-const participantContainerEl = document.querySelector(".participant__container");
-function previewImage() {
-    labelProfilePictureEl.addEventListener("change", function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            // Read file once reader has finished loading
-            reader.addEventListener("load", function() {
-                profilePictureEl.src = this.result;
-                participantContainerEl.setAttribute("data-profile-picture", this.result);
-            });
-        }
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4VpqZ":[function(require,module,exports) {
+},{"./initialLoad":"4VpqZ","./map":"6jGC1","./updateProfilePic":"fBK9z"}],"4VpqZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "addInitialEventListeners", ()=>addInitialEventListeners);
@@ -4608,12 +4527,92 @@ const formNameEl = document.querySelector("#create-participant__name");
     // console.log(res.data.data.data._id);
     // if (res.data.status === 'success') location.assign(`/share-event/${res.data.data.data._id}`);
     } catch (err) {
-        console.log(`ERROR 💥`, err);
+        // console.log(`ERROR 💥`, err);
         (0, _alerts.showError)(err.response.data.message); //accessing message property from server
     }
 }
 
-},{"../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","axios":"jo6P5"}],"c8E5S":[function(require,module,exports) {
+},{"axios":"jo6P5","../utilities/alerts":"jSl5m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6jGC1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addMap", ()=>addMap);
+var _config = require("../utilities/config");
+const mapEl = document.querySelector("#map");
+function addMap() {
+    const map = L.map("map", {
+        scrollWheelZoom: false,
+        dragging: !L.Browser.mobile
+    }).setView([
+        49.883226,
+        -97.155884
+    ], 2);
+    L.tileLayer(`https://api.mapbox.com/styles/v1/saman2111/cl79xjeka001714n0hqhmd9mg/tiles/256/{z}/{x}/{y}@2x?access_token=${(0, _config.MAPBOX_API_KEY)}`).addTo(map);
+    map.setView([
+        49.883226,
+        -97.155884
+    ], 2, {
+        animate: true,
+        pan: {
+            duration: 2
+        }
+    });
+    let marker = undefined;
+    function mapSetView(lat, lng, zoom, locationName) {
+        // Remove marker
+        if (marker !== undefined) map.removeLayer(marker);
+        // Create marker
+        if (locationName !== "") marker = L.marker([
+            lat,
+            lng
+        ]).addTo(map).bindPopup(`<p>${locationName}</p>`).openPopup();
+        // Center map on location
+        map.setView([
+            lat,
+            lng
+        ], zoom, {
+            animate: true,
+            pan: {
+                duration: 2
+            }
+        });
+    }
+    mapSetView(mapEl.dataset.lat, mapEl.dataset.lng, 11, mapEl.dataset.addressDescription);
+}
+
+},{"../utilities/config":"5MSsZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5MSsZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MAPBOX_API_KEY", ()=>MAPBOX_API_KEY);
+const MAPBOX_API_KEY = "pk.eyJ1Ijoic2FtYW4yMTExIiwiYSI6ImNsMHR2bXo2ZjBmM2ozZG11aDVhejF1MncifQ.3KrUHjHh3FoNFafvfPba_w";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fBK9z":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "previewImage", ()=>previewImage) // imageCoverOptionsUploadEl.classList.add('u-display-hide');
+ // btnOptionsDeleteImageEl.classList.remove('u-display-hide');
+ // labelUploadImageCover.setAttribute('for', '');
+ // imageCoverEl.classList.add('u-cursor-none');
+ // eventInfoEl.classList.remove('u-display-hide');
+;
+const labelProfilePictureEl = document.querySelector("#upload-profile-picture");
+const profilePictureEl = document.querySelector(".create-participant__profile");
+const participantContainerEl = document.querySelector(".participant__container");
+function previewImage() {
+    labelProfilePictureEl.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            // Read file once reader has finished loading
+            reader.addEventListener("load", function() {
+                profilePictureEl.src = this.result;
+                participantContainerEl.setAttribute("data-profile-picture", this.result);
+            });
+        }
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c8E5S":[function(require,module,exports) {
 const errorPageEl = document.querySelector("#error-page");
 if (errorPageEl) {
     let yetiTL, chatterTL, furLightColor = "#FFF", furDarkColor = "#67b1e0", skinLightColor = "#ddf1fa", skinDarkColor = "#88c9f2", lettersSideLight = "#3A7199", lettersSideDark = "#051d2c", lettersFrontLight = "#67B1E0", lettersFrontDark = "#051d2c", lettersStrokeLight = "#265D85", lettersStrokeDark = "#031219", mouthShape1 = "M149 115.7c-4.6 3.7-6.6 9.8-5 15.6.1.5.3 1.1.5 1.6.6 1.5 2.4 2.3 3.9 1.7l11.2-4.4 11.2-4.4c1.5-.6 2.3-2.4 1.7-3.9-.2-.5-.4-1-.7-1.5-2.8-5.2-8.4-8.3-14.1-7.9-3.7.2-5.9 1.1-8.7 3.2z", mouthShape2 = "M161.2 118.9c0 2.2-1.8 4-4 4s-4-1.8-4-4c0-1 .4-2 1.1-2.7.7-.8 1.8-1.3 2.9-1.3 2.2 0 4 1.7 4 4z", mouthShape3 = "M150.2 118.3c-4.6 3.7-7.5 6.4-6.3 12.3.1.5.1.6.3 1.1.6 1.5 2.4 2.3 3.9 1.7 0 0 7.9-4.3 10.7-5.5s11.6-3.3 11.6-3.3c1.5-.6 2.3-2.4 1.7-3.9-.2-.5-.2-.6-.4-1.1-2.8-5.2-7.1-4.9-12.9-4.6-3.7.4-6.3 1.5-8.6 3.3z", mouthShape4 = "M149.2 116.7c-4.6 3.7-6.7 8.8-5.2 14.6.1.3.1.5.2.8.6 1.5 2.4 2.3 3.9 1.7l11.2-4.4 11.2-4.4c1.5-.6 2.3-2.4 1.7-3.9-.1-.3-.2-.5-.4-.7-2.8-5.2-8.2-7.2-14-6.9-3.6.2-5.9 1.1-8.6 3.2z";

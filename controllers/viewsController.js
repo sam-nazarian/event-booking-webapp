@@ -20,11 +20,16 @@ exports.shareEvent = catchAsync(async (req, res, next) => {
     return next(new AppError('No Event found with that ID', 404));
   }
 
+  // if no imageCover then it will be set to a string named "undefined"
+  let imageURL = ''; //if image undefined
+  if (event.imageCover !== 'undefined') imageURL = `, url(/img/events/${event.imageCover})`;
+
   // 2) Build & Render template using tour data from 1
   res.status(200).render('shareEvent', {
     title: `Share - ${event.name}`,
     event: event,
     hostname: process.env.NODE_ENV === 'development' ? `http://127.0.0.1:8000/event/${event._id}` : `https://${req.hostname}.com/event/${event._id}`,
+    imageURL,
   });
 });
 
@@ -35,6 +40,10 @@ exports.getEvent = catchAsync(async (req, res, next) => {
   if (!event) {
     return next(new AppError('No Event found with that ID', 404));
   }
+
+  // if no imageCover then it will be set to a string named "undefined"
+  let imageURL = ''; //if image undefined
+  if (event.imageCover !== 'undefined') imageURL = `, url(/img/events/${event.imageCover})`;
 
   const convertTo12Hour = function (time) {
     const [hour, minute] = time.split(':').map(Number);
@@ -48,5 +57,6 @@ exports.getEvent = catchAsync(async (req, res, next) => {
     title: event.name,
     event,
     convertTo12Hour,
+    imageURL,
   });
 });
