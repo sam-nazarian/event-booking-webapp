@@ -59,7 +59,7 @@ exports.createEvent = catchAsync(async (req, res, next) => {
   // Image saving & processing
   if (req.file) {
     // original ratio: 2000, 1333
-    await sharp(req.file.buffer).resize(2000, 1333).toFormat('jpeg').jpeg({ quality: 90 }).toFile(`public/img/events/${req.body.imageCover}`);
+    await sharp(req.file.buffer).resize(1200, 800).toFormat('jpeg').jpeg({ quality: 85 }).toFile(`public/img/events/${req.body.imageCover}`);
   }
 
   res.status(201).json({
