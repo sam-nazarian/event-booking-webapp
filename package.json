@@ -12,6 +12,7 @@
     "watch:sass-error-page": "sass templates/sass/pages/errorPage.scss public/css/errorPage.css -w",
     "watch:sass-get-event-page": "sass templates/sass/pages/getEventPage.scss public/css/getEventPage.css -w",
     "watch:sass-share-event-page": "sass templates/sass/pages/shareEventPage.scss public/css/shareEventPage.css -w",
+    "start:server": "NODE_ENV=development node server.js",
     "COMMENT:2": "BELOW IS FOR BUILDING THE SVG SPRITE FILE FOR ICONS",
     "build:svg": "svg-sprite-generate -d ./public/img/svg -o ./public/img/sprite.svg",
     "COMMENT:3": "BELOW IS FOR BUILDING THE WEBAPP IN PRODUCTION MODE",
