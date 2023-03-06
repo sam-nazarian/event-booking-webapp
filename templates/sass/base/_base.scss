@@ -37,3 +37,20 @@ body {
   background-color: var(--color-secondary);
   color: var(--color-text-primary);
 }
+
+// Custom Scrollbar
+::-webkit-scrollbar-track {
+  background-color: #c6def6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  background-color: #a1c7ef;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #90b4d6;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
