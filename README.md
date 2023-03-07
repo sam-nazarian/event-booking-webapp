@@ -1,7 +1,5 @@
 # Event Booking Web Application
 
-## Application Demo Video
-
 [![Demo Video](./public/img/github/app-thumbnail.jpg)](https://youtu.be/OofnrkXZzFo)
 
 ## Application Architecture
